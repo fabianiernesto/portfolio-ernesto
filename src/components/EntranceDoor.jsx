@@ -48,9 +48,8 @@ const EntranceDoor = ({ onOpen }) => {
         alt=""
         style={{
           position: "absolute",
-          top: "50%",
+          bottom: 0,
           left: 0,
-          transform: "translateY(-50%)",
           width: "100%",
           height: "auto",
           pointerEvents: "none",
