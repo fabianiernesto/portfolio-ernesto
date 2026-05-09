@@ -81,7 +81,7 @@ const Stage3_DenseYear = () => {
 
             <motion.h2
               className="font-display"
-              style={{ color: "#fffce8", margin: "32px 0 0 0", fontSize: "clamp(40px, 5vw, 64px)", textTransform: "none", lineHeight: 1.0 }}
+              style={{ color: CREAM, margin: "32px 0 0 0", fontSize: "clamp(40px, 5vw, 64px)", textTransform: "none", lineHeight: 1.0 }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
@@ -91,7 +91,7 @@ const Stage3_DenseYear = () => {
             </motion.h2>
 
             <motion.div
-              style={{ height: 1, backgroundColor: "#a9170b", marginTop: 16, transformOrigin: "left" }}
+              style={{ height: 1, backgroundColor: "rgba(255,252,232,0.25)", marginTop: 16, transformOrigin: "left" }}
               initial={{ width: 0 }}
               whileInView={{ width: 120 }}
               viewport={{ once: true, margin: "-10%" }}
@@ -136,9 +136,12 @@ const Stage3_DenseYear = () => {
 
         <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.60)", zIndex: 1 }} />
 
-        <button
+        <motion.button
           onClick={openModal}
           data-hover="true"
+          whileHover={{ borderColor: "rgba(255,252,232,0.70)", color: "rgba(255,252,232,0.90)" }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ duration: 0.18 }}
           style={{
             position: "absolute", bottom: 32, left: PL, zIndex: 3,
             display: "flex", alignItems: "center", gap: 8,
@@ -151,7 +154,7 @@ const Stage3_DenseYear = () => {
             <path d="M1 4.5V1h3.5M7.5 1H11v3.5M11 7.5V11H7.5M4.5 11H1V7.5" />
           </svg>
           FULL SCREEN
-        </button>
+        </motion.button>
 
         <div style={{ position: "relative", zIndex: 2, paddingTop: 100, paddingBottom: 100, paddingRight: PL, paddingLeft: "6vw", maxWidth: 760, marginLeft: "auto" }}>
 
@@ -215,8 +218,11 @@ const Stage3_DenseYear = () => {
           >
             <source src="/erasmove_bg.mp4" type="video/mp4" />
           </video>
-          <button
+          <motion.button
             onClick={closeModal}
+            whileHover={{ borderColor: "rgba(255,252,232,0.70)", color: "rgba(255,252,232,1)" }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ duration: 0.18 }}
             style={{
               position: "absolute", top: 24, right: 24,
               background: "transparent", border: "1px solid rgba(255,252,232,0.30)",
@@ -225,7 +231,7 @@ const Stage3_DenseYear = () => {
             }}
           >
             ✕ CLOSE
-          </button>
+          </motion.button>
         </div>
       )}
 

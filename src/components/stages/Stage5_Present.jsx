@@ -1,37 +1,62 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const Stage5_Present = () => {
+  const heroRef = useRef(null);
+  const aboutRef = useRef(null);
+
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const { scrollYProgress: aboutProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "end start"],
+  });
+
+  const videoY = useTransform(heroProgress, [0, 1], ["0%", "22%"]);
+  const textY = useTransform(heroProgress, [0, 1], ["0%", "-7%"]);
+  const portraitY = useTransform(aboutProgress, [0, 1], ["-6%", "6%"]);
+
   return (
     <section id="stage-5">
 
       {/* ── BEFORE THE CIRCUIT — video background ─────────────────── */}
-      <div style={{ position: "relative", overflow: "hidden", minHeight: "100vh", display: "flex", alignItems: "center" }}>
+      <div
+        ref={heroRef}
+        style={{ position: "relative", overflow: "hidden", minHeight: "100vh", display: "flex", alignItems: "center" }}
+      >
 
-        {/* Background video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        {/* Background video — parallax layer (taller than container for room to move) */}
+        <motion.video
+          autoPlay muted loop playsInline
           style={{
-            position: "absolute", inset: 0,
-            width: "100%", height: "100%",
-            objectFit: "cover", objectPosition: "center",
+            position: "absolute",
+            left: 0, right: 0,
+            top: "-20%",
+            width: "100%",
+            height: "140%",
+            objectFit: "cover",
+            objectPosition: "center",
             zIndex: 0,
+            y: videoY,
           }}
         >
           <source src="/hero_bg.mp4" type="video/mp4" />
-        </video>
+        </motion.video>
 
         {/* Dark overlay 55% */}
         <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1 }} />
 
-        {/* Content */}
-        <div style={{
-          position: "relative", zIndex: 2,
-          paddingTop: "14vh", paddingBottom: "18vh",
-          paddingLeft: "clamp(80px, 12vw, 180px)", paddingRight: "6vw",
-        }}>
+        {/* Content — counter-parallax (moves slightly opposite to video) */}
+        <motion.div
+          style={{
+            position: "relative", zIndex: 2,
+            paddingTop: "14vh", paddingBottom: "18vh",
+            paddingLeft: "clamp(80px, 12vw, 180px)", paddingRight: "6vw",
+            y: textY,
+          }}
+        >
           <motion.h2
             className="font-display text-anton-80"
             style={{ color: "#fffce8" }}
@@ -79,7 +104,7 @@ const Stage5_Present = () => {
               All of it pulling toward the same place: the motor industry. Motorsport, automotive, the business behind both. That's where I'm going. This is where I've been.
             </motion.p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Scroll indicator — bottom center */}
         <div style={{
@@ -87,7 +112,7 @@ const Stage5_Present = () => {
           zIndex: 3, display: "flex", flexDirection: "column",
           alignItems: "center", gap: 6,
         }}>
-          <span className="font-body" style={{ fontSize: 11, color: "rgba(255,252,232,0.35)", letterSpacing: "0.08em", textTransform: "lowercase" }}>
+          <span className="font-body" style={{ fontSize: 11, color: "rgba(255,252,232,0.85)", letterSpacing: "0.08em", textTransform: "lowercase", fontWeight: 600 }}>
             scroll to explore
           </span>
           <svg
@@ -101,31 +126,31 @@ const Stage5_Present = () => {
       </div>
 
       {/* ── ABOUT / IDENTITY SECTION ──────────────────────────────── */}
-      <div style={{ position: "relative", height: "100vh", overflow: "hidden", display: "flex", backgroundColor: "#a9170b" }}>
+      <div
+        ref={aboutRef}
+        style={{ position: "relative", height: "100vh", overflow: "hidden", display: "flex", backgroundColor: "#a9170b" }}
+      >
 
         {/* Two-column content */}
-        <div style={{
-          display: "flex", width: "100%", alignItems: "center",
-        }}>
+        <div style={{ display: "flex", width: "100%", alignItems: "center" }}>
 
-          {/* LEFT HALF — portrait photo */}
-          <div style={{
-            flex: "0 0 50%", display: "flex",
-            alignItems: "center", justifyContent: "center",
-          }}>
-            <motion.img
-              src="/ernesto_portrait.jpg"
-              alt="Ernesto Fabiani"
-              style={{
-                width: 320, height: 320,
-                objectFit: "cover", objectPosition: "top center",
-                display: "block", borderRadius: "50%",
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            />
+          {/* LEFT HALF — portrait photo with parallax */}
+          <div style={{ flex: "0 0 50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <motion.div style={{ y: portraitY }}>
+              <motion.img
+                src="/ernesto_portrait.jpg"
+                alt="Ernesto Fabiani"
+                style={{
+                  width: 320, height: 320,
+                  objectFit: "cover", objectPosition: "top center",
+                  display: "block", borderRadius: "50%",
+                }}
+                initial={{ opacity: 0, scale: 1.04 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </motion.div>
           </div>
 
           {/* RIGHT HALF — text */}
@@ -218,7 +243,7 @@ const Stage5_Present = () => {
                 { label: "Instagram", href: null },
                 { label: "Contact", href: null },
               ].map(({ label, href }) => (
-                <a
+                <motion.a
                   key={label}
                   href={href || "#"}
                   target={href ? "_blank" : undefined}
@@ -227,11 +252,24 @@ const Stage5_Present = () => {
                   style={{
                     fontSize: 12, color: "rgba(255,252,232,0.55)",
                     letterSpacing: "0.05em", textDecoration: "none",
+                    position: "relative", display: "inline-block",
                   }}
+                  whileHover="hover"
                   data-hover="true"
                 >
                   {label}
-                </a>
+                  <motion.span
+                    variants={{
+                      hover: { scaleX: 1, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } },
+                    }}
+                    initial={{ scaleX: 0 }}
+                    style={{
+                      display: "block", height: 1,
+                      backgroundColor: "rgba(255,252,232,0.40)",
+                      transformOrigin: "left", marginTop: 3,
+                    }}
+                  />
+                </motion.a>
               ))}
             </motion.div>
 

@@ -21,6 +21,7 @@ const EntranceDoor = ({ onOpen }) => {
     <motion.div
       onClick={handleClick}
       animate={isOpening ? { y: "-100vh" } : { y: 0 }}
+      whileHover={isOpening ? {} : { filter: "brightness(1.06)" }}
       transition={
         isOpening
           ? { duration: 1.2, ease: [0.76, 0, 0.24, 1] }
@@ -41,21 +42,58 @@ const EntranceDoor = ({ onOpen }) => {
         overflow: "hidden",
       }}
     >
-      {/* Garage door image — covers viewport, pinned to bottom */}
+      {/* Garage door image — full width, vertically centered, no side bars */}
       <img
         src="/garage_door.png"
         alt=""
         style={{
           position: "absolute",
-          inset: 0,
+          top: "50%",
+          left: 0,
+          transform: "translateY(-50%)",
           width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "bottom center",
+          height: "auto",
           pointerEvents: "none",
           userSelect: "none",
         }}
       />
+
+      {/* Click hint — bottom center, pulses until clicked */}
+      {!isOpening && (
+        <motion.div
+          style={{
+            position: "absolute",
+            bottom: 40,
+            left: 0,
+            right: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 8,
+            pointerEvents: "none",
+            zIndex: 2,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 1 }}
+        >
+          <motion.span
+            className="font-body"
+            style={{ fontSize: 11, color: "rgba(255,252,232,0.9)", letterSpacing: "0.15em", fontWeight: 700 }}
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            CLICK TO ENTER
+          </motion.span>
+          <motion.svg
+            width="12" height="8" viewBox="0 0 12 8" fill="none"
+            animate={{ y: [0, 4, 0], opacity: [0.35, 0.65, 0.35] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <path d="M1 1L6 7L11 1" stroke="rgba(255,252,232,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </motion.svg>
+        </motion.div>
+      )}
 
       {/* Light strip at the bottom edge — appears and fades as door rises */}
       <motion.div
