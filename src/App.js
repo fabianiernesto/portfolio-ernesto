@@ -9,17 +9,19 @@ import Stage5_Present from "./components/stages/Stage5_Present";
 import StageSheffield from "./components/stages/StageSheffield";
 import Stage4_Unno from "./components/stages/Stage4_Unno";
 import Stage3_DenseYear from "./components/stages/Stage3_DenseYear";
+import StagePodcast from "./components/stages/StagePodcast";
+import StageBarcelona from "./components/stages/StageBarcelona";
+import StageHackathon from "./components/stages/StageHackathon";
+import StageClosing from "./components/stages/StageClosing";
 import Stage2_Paris from "./components/stages/Stage2_Paris";
-import Stage1_FirstYear from "./components/stages/Stage1_FirstYear";
-import Stage0_Origin from "./components/stages/Stage0_Origin";
 
 const STAGES = [
   { id: "stage-5", year: "2026" },
   { id: "stage-4", year: "2025—26" },
   { id: "stage-3", year: "2024—25" },
+  { id: "stage-podcast", year: "podcast" },
   { id: "stage-2", year: "2023—24" },
-  { id: "stage-1", year: "2022—23" },
-  { id: "stage-0", year: "2022" },
+  { id: "stage-barcelona", year: "2022—23" },
 ];
 
 function App() {
@@ -61,8 +63,10 @@ function App() {
             <Stage4_Unno />
             <Stage3_DenseYear />
             <Stage2_Paris />
-            <Stage1_FirstYear />
-            <Stage0_Origin />
+            <StagePodcast />
+            <StageBarcelona />
+            <StageHackathon />
+            <StageClosing />
           </main>
         </div>
       </SmoothScroll>

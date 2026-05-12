@@ -28,10 +28,10 @@ const Stage3_DenseYear = () => {
     <section id="stage-3" style={{ position: "relative", overflow: "hidden" }}>
 
       {/* ── SECTION HEADLINE ──────────────────────────────────────── */}
-      <div style={{ backgroundColor: CREAM, minHeight: "30vh", display: "flex", alignItems: "center", paddingLeft: PL, paddingRight: "6vw" }}>
+      <div style={{ backgroundColor: RED, minHeight: "30vh", display: "flex", alignItems: "center", paddingLeft: PL, paddingRight: "6vw" }}>
         <motion.h2
           className="font-display"
-          style={{ fontSize: 72, lineHeight: 0.9, margin: 0, color: RED }}
+          style={{ fontSize: 72, lineHeight: 0.9, margin: 0, color: CREAM }}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
@@ -42,22 +42,34 @@ const Stage3_DenseYear = () => {
       </div>
 
       {/* ── AURAX BLOCK ───────────────────────────────────────────── */}
-      <div id="aurax-block" style={{ position: "relative", overflow: "hidden", backgroundColor: RED }}>
+      <div id="aurax-block" style={{ position: "relative", overflow: "hidden", backgroundColor: CREAM }}>
 
         {/* Year inscription — top right */}
         <motion.div
           className="font-display text-anton-140 absolute pointer-events-none select-none"
-          style={{ top: "6vh", right: "4vw", color: CREAM, zIndex: 2, lineHeight: 0.9, textAlign: "right" }}
+          style={{ top: "6vh", right: "4vw", color: "#000", zIndex: 2, lineHeight: 0.9, textAlign: "right" }}
           initial={{ opacity: 0, x: 60 }}
-          whileInView={{ opacity: 0.20, x: 0 }}
+          whileInView={{ opacity: 0.06, x: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           2024 — 2025
         </motion.div>
 
-        <div style={{ position: "relative", zIndex: 3, paddingTop: 80, paddingBottom: 80, paddingLeft: PL, paddingRight: "max(80px, 6vw)" }}>
-          <div style={{ maxWidth: 600 }}>
+        <div style={{ position: "relative", zIndex: 3, paddingTop: 80, paddingBottom: 80, paddingLeft: PL, paddingRight: "max(80px, 6vw)", display: "flex", alignItems: "center", gap: 64 }}>
+
+          {/* Left — text */}
+          <div style={{ flex: 1, minWidth: 0, marginTop: 80 }}>
+
+            <motion.img
+              src="/aurax_logo.png"
+              alt="Aurax"
+              style={{ height: 48, width: "auto", display: "block", mixBlendMode: "multiply" }}
+              initial={{ opacity: 0, scale: 1.05 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            />
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -65,33 +77,22 @@ const Stage3_DenseYear = () => {
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <span className="font-display text-anton-20" style={{ color: CREAM, display: "block" }}>AURAX</span>
-              <span className="font-body" style={{ fontSize: 12, color: CREAM, opacity: 0.5, letterSpacing: "0.04em", marginTop: 4, display: "block" }}>Oct 2024 — Oct 2025</span>
+              <span className="font-display" style={{ fontSize: 20, color: RED, display: "block", marginTop: 31 }}>OCT 2024 — OCT 2025</span>
             </motion.div>
-
-            <motion.img
-              src="/aurax_logo.png"
-              alt="Aurax"
-              style={{ height: 48, width: "auto", display: "block", marginTop: 16 }}
-              initial={{ opacity: 0, scale: 1.05 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            />
 
             <motion.h2
               className="font-display"
-              style={{ color: CREAM, margin: "32px 0 0 0", fontSize: "clamp(40px, 5vw, 64px)", textTransform: "none", lineHeight: 1.0 }}
+              style={{ color: "#000", margin: "17px 0 0 0", fontSize: "clamp(40px, 5vw, 64px)", lineHeight: 1.0 }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              From Intern to<br />Project Manager
+              FROM INTERN TO<br />PROJECT MANAGER
             </motion.h2>
 
             <motion.div
-              style={{ height: 1, backgroundColor: "rgba(255,252,232,0.25)", marginTop: 16, transformOrigin: "left" }}
+              style={{ height: 1, backgroundColor: "rgba(0,0,0,0.15)", marginTop: 16, transformOrigin: "left" }}
               initial={{ width: 0 }}
               whileInView={{ width: 120 }}
               viewport={{ once: true, margin: "-10%" }}
@@ -105,18 +106,58 @@ const Stage3_DenseYear = () => {
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.4, delay: 0.2 }}
             >
-              <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(255,252,232,0.85)", margin: 0 }}>
+              <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(0,0,0,0.75)", margin: 0 }}>
                 Started as an intern. Three months later I was running three things at once that nobody had run before inside that company.
               </p>
-              <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-                The <span style={{ color: CREAM, fontWeight: 700 }}>tester programme</span> for MouthX, coordinating logistics, user communication, feedback loops across real patients. The entire <span style={{ color: CREAM, fontWeight: 700 }}>dental sector vertical</span>, from zero, market research to B2B partnerships to closing a deal with one of the largest dental clinic groups in Spain... alone, start to finish.
+              <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(0,0,0,0.75)", margin: 0 }}>
+                The tester programme for MouthX, coordinating logistics, user communication, feedback loops across real patients. The entire dental sector vertical, from zero, market research to B2B partnerships to closing a deal with one of the largest dental clinic groups in Spain... alone, start to finish.
               </p>
-              <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-                And the <span style={{ color: CREAM, fontWeight: 700 }}>ERP system</span>, sitting with engineers and figuring out, mostly self-taught, how internal operations should actually be structured. I don't know exactly when the intern title stopped making sense. But at some point it did.
+              <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(0,0,0,0.75)", margin: 0 }}>
+                And the ERP system, sitting with engineers and figuring out, mostly self-taught, how internal operations should actually be structured. I don't know exactly when the intern title stopped making sense. But at some point it did.
               </p>
             </motion.div>
 
           </div>
+
+          {/* Right — MouthX product image + link below */}
+          <motion.div
+            style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}
+            initial={{ opacity: 0, scale: 1.04 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <img
+              src="/mouthx_device.webp"
+              alt="MouthX device"
+              style={{ width: 460, height: "auto", display: "block", mixBlendMode: "multiply", marginTop: 80, marginLeft: -5 }}
+            />
+            <motion.a
+              href="https://auraxtechnology.com/es"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-body"
+              data-hover="true"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                fontSize: 12,
+                letterSpacing: "0.1em",
+                color: RED,
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(169,23,11,0.40)",
+                paddingBottom: 3,
+              }}
+              whileHover={{ opacity: 0.7 }}
+            >
+              auraxtechnology.com
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" />
+              </svg>
+            </motion.a>
+          </motion.div>
+
         </div>
       </div>
 
@@ -156,7 +197,7 @@ const Stage3_DenseYear = () => {
           FULL SCREEN
         </motion.button>
 
-        <div style={{ position: "relative", zIndex: 2, paddingTop: 100, paddingBottom: 100, paddingRight: PL, paddingLeft: "6vw", maxWidth: 760, marginLeft: "auto" }}>
+        <div style={{ position: "relative", zIndex: 2, paddingTop: 100, paddingBottom: 100, paddingRight: PL, paddingLeft: "calc(6vw - 30px)", maxWidth: 820, marginLeft: "auto" }}>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -170,7 +211,7 @@ const Stage3_DenseYear = () => {
           </motion.div>
 
           <motion.div
-            style={{ display: "flex", flexDirection: "column", gap: 20, maxWidth: 520 }}
+            style={{ display: "flex", flexDirection: "column", gap: 20, maxWidth: 660 }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -194,10 +235,9 @@ const Stage3_DenseYear = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.4 }}
           >
-            <span className="font-body" style={{ fontSize: 11, color: CREAM, letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: 6, opacity: 0.5 }}>AWARDED</span>
-            <span className="font-display" style={{ fontSize: 20, color: CREAM, display: "block", lineHeight: 1.0 }}>Best Pitch Award</span>
-            <span className="font-body" style={{ fontSize: 13, color: "rgba(255,252,232,0.55)", marginTop: 8, display: "block", maxWidth: 380, lineHeight: 1.6 }}>
-              IQS Startup Challenge 2025 · Every project that entered. Ours walked out with it.
+            <span className="font-display text-anton-48" style={{ color: CREAM, display: "block", lineHeight: 0.95 }}>Best Pitch Award</span>
+            <span className="font-body" style={{ fontSize: 13, color: "rgba(255,252,232,0.55)", marginTop: 12, display: "block", maxWidth: 480, lineHeight: 1.6 }}>
+              From all projects, my pitch and project was the most valued in front of the judges and business angels.
             </span>
           </motion.div>
 

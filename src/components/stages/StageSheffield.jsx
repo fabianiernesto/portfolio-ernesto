@@ -2,35 +2,41 @@ import { motion } from "framer-motion";
 
 const StageSheffield = () => {
   return (
-    <section id="stage-sheffield" style={{ position: "relative", backgroundColor: "#fffce8", overflow: "hidden" }}>
+    <section id="stage-sheffield" style={{ backgroundColor: "#fffce8", position: "relative" }}>
 
-      {/* Year marker — background inscription */}
-      <div
-        className="font-display text-anton-140 absolute pointer-events-none select-none"
-        style={{ top: "6vh", right: "4vw", color: "#000", opacity: 0.06, lineHeight: 0.9, textAlign: "right", zIndex: 1 }}
-      >
-        2025 — 2026
+      {/* Top area — watermark year, full width, above the columns */}
+      <div style={{
+        paddingLeft: "clamp(80px, 12vw, 180px)",
+        paddingRight: "clamp(60px, 8vw, 120px)",
+        paddingTop: 48,
+        overflow: "hidden",
+        lineHeight: 1,
+      }}>
+        <motion.div
+          className="font-display text-anton-140 pointer-events-none select-none"
+          style={{ color: "#000", opacity: 0.06, lineHeight: 1, whiteSpace: "nowrap" }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.06 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          2025 — 2026
+        </motion.div>
       </div>
 
-      {/* Two columns */}
-      <div style={{ display: "flex", position: "relative", zIndex: 2 }}>
+      {/* Two-column row */}
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        paddingLeft: "clamp(80px, 12vw, 180px)",
+        paddingRight: "clamp(60px, 8vw, 120px)",
+        paddingTop: 32,
+        paddingBottom: 100,
+        gap: 80,
+      }}>
 
-        {/* Left column — breathing space */}
-        <div style={{ flex: "0 0 40%" }} />
-
-        {/* Right column — content */}
-        <div style={{ flex: "0 0 60%", paddingTop: 120, paddingBottom: 120, paddingRight: 80 }}>
-
-          {/* Logo */}
-          <motion.img
-            src="/sheffield_logo.png"
-            alt="Sheffield Hallam University"
-            style={{ height: 80, width: "auto", display: "block", marginBottom: 32 }}
-            initial={{ opacity: 0, scale: 1.05 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          />
+        {/* Left — text content */}
+        <div style={{ flex: 1, minWidth: 0 }}>
 
           {/* Year label */}
           <motion.span
@@ -58,24 +64,61 @@ const StageSheffield = () => {
 
           {/* Body */}
           <motion.div
-            style={{ maxWidth: 520, display: "flex", flexDirection: "column", gap: 24 }}
+            style={{ maxWidth: 480, display: "flex", flexDirection: "column", gap: 24 }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
           >
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              Sheffield is not what you expect. Grey, industrial, cold most of the year, and quiet in a way that either breaks you or forces you to figure something out.
+              Sheffield is not what you expect. Grey, industrial, cold most of the year, and with a quietness that gets under your skin in a way that's hard to describe... it's not peaceful quiet, it's the kind that forces you to sit with yourself whether you want to or not.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              Most people took the easy version, nights out, the same pubs, the same routine every week. I get it, when the city doesn't give you much you take what's there.
+              Most people found their own version of autopilot to deal with it, same pubs, same faces, same weekend on repeat. And I get it, when a city doesn't give you much stimulation you take whatever's there. But there's something that happens when you strip all the noise away and you're left with just yourself and a lot of empty hours, you either drift or you build something.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              A month in I called Nico and we started <strong>UNNO®STUDIO</strong>, not as a university project or something to put on a CV, but as an actual company with actual clients and actual responsibility... and the grey city ended up being the best place it could have happened. No distractions. No excuses. Just the work.
+              A month in I called Nico. And we started building.
             </p>
           </motion.div>
 
         </div>
+
+        {/* Right — circular city photo + logo */}
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, marginTop: 15 }}>
+
+          <motion.div
+            style={{
+              width: 380,
+              height: 380,
+              borderRadius: "50%",
+              overflow: "hidden",
+              flexShrink: 0,
+            }}
+            initial={{ opacity: 0, scale: 1.04 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <img
+              src="/Sheffield_city.png"
+              alt="Sheffield"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            />
+          </motion.div>
+
+          {/* SHU logo below the circle */}
+          <motion.img
+            src="/sheffield_logo.png"
+            alt="Sheffield Hallam University"
+            style={{ height: 66, width: "auto", display: "block", marginTop: 10 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          />
+
+        </div>
+
       </div>
 
     </section>

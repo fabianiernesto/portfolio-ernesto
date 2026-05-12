@@ -32,22 +32,6 @@ const Stage4_Unno = () => {
         }}
       />
 
-      {/* Year inscription — top right, behind content */}
-      <div
-        className="font-display text-anton-140 absolute pointer-events-none select-none"
-        style={{
-          top: "8vh",
-          right: "4vw",
-          color: "#fffce8",
-          opacity: 0.20,
-          zIndex: 2,
-          lineHeight: 0.9,
-          textAlign: "right",
-        }}
-      >
-        2025 — 2026
-      </div>
-
       {/* Floor lines */}
       <div className="floor-line" style={{ top: 0, zIndex: 3 }} aria-hidden="true" />
 
@@ -99,9 +83,7 @@ const Stage4_Unno = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.9, delay: 0.15 }}
           >
-            Nico and I started{" "}
-            <span style={{ color: "#fffce8", fontWeight: 700 }}>UNNO®STUDIO</span>{" "}
-            with no clients, no system, nothing... and the first call we had was to close one.
+            I don't think anyone really understands what building something from zero with another person feels like until they've done it... it's that permanent background feeling that nothing is guaranteed, that the next client might not come, that what you built yesterday could fall apart tomorrow, and you just keep going anyway because stopping feels worse than the uncertainty.
           </motion.p>
 
           <motion.p
@@ -112,10 +94,7 @@ const Stage4_Unno = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.9, delay: 0.3 }}
           >
-            I don't really know how to explain what it's like to build something from scratch with another person. There's something strange about having to decide{" "}
-            <span style={{ color: "#fffce8", fontWeight: 700 }}>EVERYTHING</span>{" "}
-            at once, the price, how it gets delivered, what we're promising, how we actually do it... while simultaneously trying to make it work. It's not what people picture when they hear{" "}
-            <span style={{ color: "#fffce8", fontWeight: 700 }}>'co-founder' at 21</span>.
+            Nico and I went through all of it, the weeks where everything clicked and the weeks where nothing did, calls that went well and ones that didn't, having to make decisions about EVERYTHING with no reference point for what the right answer was.
           </motion.p>
 
           <motion.p
@@ -126,8 +105,7 @@ const Stage4_Unno = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.9, delay: 0.45 }}
           >
-            But{" "}
-            <span style={{ color: "#fffce8", fontWeight: 700 }}>it worked</span>. And that still feels a little unreal to me.
+            It worked. And I still don't know exactly how.
           </motion.p>
         </div>
       </div>
