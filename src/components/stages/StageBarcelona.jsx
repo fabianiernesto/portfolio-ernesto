@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const StageBarcelona = () => {
+  const isMobile = useIsMobile();
   return (
     <section id="stage-barcelona" style={{ backgroundColor: "#fffce8", position: "relative" }}>
 
       {/* Top area — watermark year, full width, above the columns */}
       <div style={{
-        paddingLeft: "clamp(80px, 12vw, 180px)",
-        paddingRight: "clamp(60px, 8vw, 120px)",
+        paddingLeft: isMobile ? "24px" : "clamp(80px, 12vw, 180px)",
+        paddingRight: isMobile ? "24px" : "clamp(60px, 8vw, 120px)",
         paddingTop: 48,
         overflow: "hidden",
         lineHeight: 1,
@@ -27,16 +29,17 @@ const StageBarcelona = () => {
       {/* Two-column row */}
       <div style={{
         display: "flex",
-        alignItems: "center",
-        paddingLeft: "clamp(80px, 12vw, 180px)",
-        paddingRight: "clamp(60px, 8vw, 120px)",
-        paddingTop: 49,
-        paddingBottom: 100,
-        gap: 80,
+        flexDirection: isMobile ? "column" : "row",
+        alignItems: isMobile ? "flex-start" : "center",
+        paddingLeft: isMobile ? "24px" : "clamp(80px, 12vw, 180px)",
+        paddingRight: isMobile ? "24px" : "clamp(60px, 8vw, 120px)",
+        paddingTop: isMobile ? 24 : 49,
+        paddingBottom: isMobile ? 60 : 100,
+        gap: isMobile ? 40 : 80,
       }}>
 
         {/* Left — text content */}
-        <div style={{ flex: 1, minWidth: 0, marginTop: -145 }}>
+        <div style={{ flex: 1, minWidth: 0, marginTop: isMobile ? 0 : -145 }}>
 
           <motion.span
             className="font-display"
@@ -51,7 +54,7 @@ const StageBarcelona = () => {
 
           <motion.h2
             className="font-display"
-            style={{ fontSize: 64, color: "#000", margin: "12px 0 40px 0", lineHeight: 0.95 }}
+            style={{ fontSize: isMobile ? 40 : 64, color: "#000", margin: "12px 0 40px 0", lineHeight: 0.95 }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -78,12 +81,12 @@ const StageBarcelona = () => {
         </div>
 
         {/* Right — circular city photo + IQS logo */}
-        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, marginTop: 10 }}>
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, marginTop: isMobile ? 0 : 10 }}>
 
           <motion.div
             style={{
-              width: 380,
-              height: 380,
+              width: isMobile ? 240 : 380,
+              height: isMobile ? 240 : 380,
               borderRadius: "50%",
               overflow: "hidden",
               flexShrink: 0,
@@ -103,7 +106,7 @@ const StageBarcelona = () => {
           <motion.img
             src="/iqs_logo.png"
             alt="IQS Tech Factory"
-            style={{ height: 166, width: "auto", display: "block", mixBlendMode: "multiply", marginTop: -45 }}
+            style={{ height: isMobile ? 100 : 166, width: "auto", display: "block", mixBlendMode: "multiply", marginTop: isMobile ? -20 : -45 }}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}

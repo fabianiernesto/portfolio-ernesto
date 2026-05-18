@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const Stage4_Unno = () => {
+  const isMobile = useIsMobile();
   return (
     <section
       id="stage-4"
@@ -40,17 +42,17 @@ const Stage4_Unno = () => {
         style={{
           position: "relative",
           zIndex: 4,
-          paddingTop: "140px",
-          paddingBottom: "140px",
-          paddingLeft: "clamp(80px, 12vw, 180px)",
-          paddingRight: "6vw",
+          paddingTop: isMobile ? "80px" : "140px",
+          paddingBottom: isMobile ? "80px" : "140px",
+          paddingLeft: isMobile ? "24px" : "clamp(80px, 12vw, 180px)",
+          paddingRight: isMobile ? "24px" : "6vw",
           maxWidth: "760px",
         }}
       >
         {/* Headline */}
         <motion.h2
           className="font-display"
-          style={{ color: "#fffce8", margin: 0, fontSize: "64px", textTransform: "none" }}
+          style={{ color: "#fffce8", margin: 0, fontSize: isMobile ? "36px" : "64px", textTransform: "none" }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}

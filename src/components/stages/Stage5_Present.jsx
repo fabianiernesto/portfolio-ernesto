@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const Stage5_Present = () => {
   const heroRef = useRef(null);
@@ -18,6 +19,7 @@ const Stage5_Present = () => {
   const textY = useTransform(heroProgress, [0, 1], ["0%", "-7%"]);
   const portraitY = useTransform(aboutProgress, [0, 1], ["-6%", "6%"]);
 
+  const isMobile = useIsMobile();
   const [contactOpen, setContactOpen] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
@@ -69,8 +71,10 @@ const Stage5_Present = () => {
         <motion.div
           style={{
             position: "relative", zIndex: 2,
-            paddingTop: "14vh", paddingBottom: "18vh",
-            paddingLeft: "clamp(80px, 12vw, 180px)", paddingRight: "6vw",
+            paddingTop: isMobile ? "12vh" : "14vh",
+            paddingBottom: isMobile ? "14vh" : "18vh",
+            paddingLeft: isMobile ? "24px" : "clamp(80px, 12vw, 180px)",
+            paddingRight: isMobile ? "24px" : "6vw",
             y: textY,
           }}
         >
@@ -145,20 +149,40 @@ const Stage5_Present = () => {
       {/* ── ABOUT / IDENTITY SECTION ──────────────────────────────── */}
       <div
         ref={aboutRef}
-        style={{ position: "relative", height: "100vh", overflow: "hidden", display: "flex", backgroundColor: "#a9170b" }}
+        style={{
+          position: "relative",
+          height: isMobile ? "auto" : "100vh",
+          overflow: "hidden",
+          display: "flex",
+          backgroundColor: "#a9170b",
+          paddingTop: isMobile ? 60 : 0,
+          paddingBottom: isMobile ? 60 : 0,
+        }}
       >
 
         {/* Two-column content */}
-        <div style={{ display: "flex", width: "100%", alignItems: "center" }}>
+        <div style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          width: "100%",
+          alignItems: isMobile ? "flex-start" : "center",
+        }}>
 
-          {/* LEFT HALF — portrait photo with parallax */}
-          <div style={{ flex: "0 0 50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <motion.div style={{ y: portraitY }}>
+          {/* Portrait photo */}
+          <div style={{
+            flex: isMobile ? "none" : "0 0 50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingBottom: isMobile ? 32 : 0,
+          }}>
+            <motion.div style={{ y: isMobile ? 0 : portraitY }}>
               <motion.img
                 src="/ernesto_portrait.jpg"
                 alt="Ernesto Fabiani"
                 style={{
-                  width: 320, height: 320,
+                  width: isMobile ? 200 : 320,
+                  height: isMobile ? 200 : 320,
                   objectFit: "cover", objectPosition: "top center",
                   display: "block", borderRadius: "50%",
                 }}
@@ -170,9 +194,11 @@ const Stage5_Present = () => {
             </motion.div>
           </div>
 
-          {/* RIGHT HALF — text */}
+          {/* Text */}
           <div style={{
-            flex: "0 0 50%", paddingRight: 80,
+            flex: isMobile ? "none" : "0 0 50%",
+            paddingRight: isMobile ? 24 : 80,
+            paddingLeft: isMobile ? 24 : 0,
             display: "flex", flexDirection: "column", justifyContent: "center",
           }}>
 
@@ -195,7 +221,7 @@ const Stage5_Present = () => {
             {/* Name */}
             <motion.h1
               className="font-display"
-              style={{ fontSize: 72, color: "#fffce8", lineHeight: 1, margin: 0 }}
+              style={{ fontSize: isMobile ? 40 : 72, color: "#fffce8", lineHeight: 1, margin: 0 }}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
@@ -301,7 +327,7 @@ const Stage5_Present = () => {
               initial={{ opacity: 0, y: 32, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.97 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              style={{ backgroundColor: "#fffce8", padding: "48px 52px", width: "100%", maxWidth: 520, position: "relative" }}
+              style={{ backgroundColor: "#fffce8", padding: isMobile ? "32px 24px" : "48px 52px", width: "100%", maxWidth: 520, position: "relative", margin: isMobile ? "0 16px" : 0 }}
             >
               <button onClick={() => setContactOpen(false)}
                 style={{ position: "absolute", top: 20, right: 24, background: "none", border: "none", cursor: "pointer", fontSize: 11, letterSpacing: "0.1em", color: "rgba(0,0,0,0.40)", fontFamily: "inherit" }}>

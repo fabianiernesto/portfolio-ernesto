@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const CREAM = "#fffce8";
 const RED = "#a9170b";
 const PL = "clamp(80px, 12vw, 180px)";
 
 const StageClosing = () => {
+  const isMobile = useIsMobile();
   return (
     <section
       id="stage-closing"
@@ -13,8 +15,8 @@ const StageClosing = () => {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        paddingLeft: PL,
-        paddingRight: "clamp(60px, 8vw, 120px)",
+        paddingLeft: isMobile ? "24px" : PL,
+        paddingRight: isMobile ? "24px" : "clamp(60px, 8vw, 120px)",
         paddingTop: 100,
         paddingBottom: 100,
       }}

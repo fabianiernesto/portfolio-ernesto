@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const StagePodcast = () => {
+  const isMobile = useIsMobile();
   return (
     <section
       id="stage-podcast"
@@ -37,10 +39,10 @@ const StagePodcast = () => {
         style={{
           position: "relative",
           zIndex: 3,
-          paddingTop: 120,
-          paddingBottom: 120,
-          paddingLeft: 220,
-          paddingRight: "6vw",
+          paddingTop: isMobile ? 80 : 120,
+          paddingBottom: isMobile ? 80 : 120,
+          paddingLeft: isMobile ? 24 : 220,
+          paddingRight: isMobile ? 24 : "6vw",
           maxWidth: 900,
         }}
       >
@@ -60,7 +62,7 @@ const StagePodcast = () => {
         <motion.h2
           className="font-display"
           style={{
-            fontSize: 72,
+            fontSize: isMobile ? 38 : 72,
             color: "#fffce8",
             margin: "24px 0 40px 0",
             lineHeight: 1,

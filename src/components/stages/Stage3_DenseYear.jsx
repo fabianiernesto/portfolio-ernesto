@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const RED = "#a9170b";
 const CREAM = "#fffce8";
 const PL = "clamp(80px, 12vw, 180px)";
 
 const Stage3_DenseYear = () => {
+  const isMobile = useIsMobile();
   const videoRef = useRef(null);
   const modalVideoRef = useRef(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,10 +30,10 @@ const Stage3_DenseYear = () => {
     <section id="stage-3" style={{ position: "relative", overflow: "hidden" }}>
 
       {/* ── SECTION HEADLINE ──────────────────────────────────────── */}
-      <div style={{ backgroundColor: RED, minHeight: "30vh", display: "flex", alignItems: "center", paddingLeft: PL, paddingRight: "6vw" }}>
+      <div style={{ backgroundColor: RED, minHeight: "30vh", display: "flex", alignItems: "center", paddingLeft: isMobile ? "24px" : PL, paddingRight: isMobile ? "24px" : "6vw" }}>
         <motion.h2
           className="font-display"
-          style={{ fontSize: 72, lineHeight: 0.9, margin: 0, color: CREAM }}
+          style={{ fontSize: isMobile ? 40 : 72, lineHeight: 0.9, margin: 0, color: CREAM }}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
@@ -56,7 +58,7 @@ const Stage3_DenseYear = () => {
           2024 — 2025
         </motion.div>
 
-        <div style={{ position: "relative", zIndex: 3, paddingTop: 80, paddingBottom: 80, paddingLeft: PL, paddingRight: "max(80px, 6vw)", display: "flex", alignItems: "center", gap: 64 }}>
+        <div style={{ position: "relative", zIndex: 3, paddingTop: isMobile ? 40 : 80, paddingBottom: isMobile ? 40 : 80, paddingLeft: isMobile ? "24px" : PL, paddingRight: isMobile ? "24px" : "max(80px, 6vw)", display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center", gap: isMobile ? 32 : 64 }}>
 
           {/* Left — text */}
           <div style={{ flex: 1, minWidth: 0, marginTop: 80 }}>
@@ -82,7 +84,7 @@ const Stage3_DenseYear = () => {
 
             <motion.h2
               className="font-display"
-              style={{ color: "#000", margin: "17px 0 0 0", fontSize: "clamp(40px, 5vw, 64px)", lineHeight: 1.0 }}
+              style={{ color: "#000", margin: "17px 0 0 0", fontSize: isMobile ? 32 : "clamp(40px, 5vw, 64px)", lineHeight: 1.0 }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
@@ -130,7 +132,7 @@ const Stage3_DenseYear = () => {
             <img
               src="/mouthx_device.webp"
               alt="MouthX device"
-              style={{ width: 460, height: "auto", display: "block", mixBlendMode: "multiply", marginTop: 80, marginLeft: -5 }}
+              style={{ width: isMobile ? 260 : 460, height: "auto", display: "block", mixBlendMode: "multiply", marginTop: isMobile ? 0 : 80, marginLeft: isMobile ? 0 : -5 }}
             />
             <motion.a
               href="https://auraxtechnology.com/es"
@@ -184,7 +186,7 @@ const Stage3_DenseYear = () => {
           whileTap={{ scale: 0.96 }}
           transition={{ duration: 0.18 }}
           style={{
-            position: "absolute", bottom: 32, left: PL, zIndex: 3,
+            position: "absolute", bottom: 32, left: isMobile ? "24px" : PL, zIndex: 3,
             display: "flex", alignItems: "center", gap: 8,
             background: "transparent", border: "1px solid rgba(255,252,232,0.30)",
             color: "rgba(255,252,232,0.60)", padding: "8px 16px", cursor: "pointer",
@@ -197,7 +199,7 @@ const Stage3_DenseYear = () => {
           FULL SCREEN
         </motion.button>
 
-        <div style={{ position: "relative", zIndex: 2, paddingTop: 100, paddingBottom: 100, paddingRight: PL, paddingLeft: "calc(6vw - 30px)", maxWidth: 820, marginLeft: "auto" }}>
+        <div style={{ position: "relative", zIndex: 2, paddingTop: isMobile ? 60 : 100, paddingBottom: isMobile ? 60 : 100, paddingRight: isMobile ? "24px" : PL, paddingLeft: isMobile ? "24px" : "calc(6vw - 30px)", maxWidth: 820, marginLeft: isMobile ? 0 : "auto" }}>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}

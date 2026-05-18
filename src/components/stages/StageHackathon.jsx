@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const CREAM = "#fffce8";
 const PL = "clamp(80px, 12vw, 180px)";
 
 const StageHackathon = () => {
+  const isMobile = useIsMobile();
   const videoRef = useRef(null);
   const modalVideoRef = useRef(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,7 +48,7 @@ const StageHackathon = () => {
         whileTap={{ scale: 0.96 }}
         transition={{ duration: 0.18 }}
         style={{
-          position: "absolute", bottom: 32, left: PL, zIndex: 3,
+          position: "absolute", bottom: 32, left: isMobile ? "24px" : PL, zIndex: 3,
           display: "flex", alignItems: "center", gap: 8,
           background: "transparent", border: "1px solid rgba(255,252,232,0.30)",
           color: "rgba(255,252,232,0.60)", padding: "8px 16px", cursor: "pointer",
@@ -60,7 +62,7 @@ const StageHackathon = () => {
       </motion.button>
 
       {/* Content */}
-      <div style={{ position: "relative", zIndex: 2, paddingTop: 100, paddingBottom: 100, paddingRight: PL, paddingLeft: "calc(6vw - 30px)", maxWidth: 820, marginLeft: "auto" }}>
+      <div style={{ position: "relative", zIndex: 2, paddingTop: isMobile ? 60 : 100, paddingBottom: isMobile ? 80 : 100, paddingRight: isMobile ? "24px" : PL, paddingLeft: isMobile ? "24px" : "calc(6vw - 30px)", maxWidth: 820, marginLeft: isMobile ? 0 : "auto" }}>
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}

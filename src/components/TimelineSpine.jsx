@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import useIsMobile from "../hooks/useIsMobile";
 
 const TimelineSpine = ({ stages }) => {
+  const isMobile = useIsMobile();
   const [pulse, setPulse] = useState(false);
 
   useEffect(() => {
@@ -22,6 +24,8 @@ const TimelineSpine = ({ stages }) => {
     sections.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [stages]);
+
+  if (isMobile) return null;
 
   return (
     <div
