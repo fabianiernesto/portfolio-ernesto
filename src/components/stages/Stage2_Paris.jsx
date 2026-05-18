@@ -68,13 +68,13 @@ const Stage2_Paris = () => {
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
           >
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              Paris was my first Erasmus, the first time I'd ever gone somewhere completely alone, and I think I understood pretty quickly that the city was going to give me EXACTLY what I put into it, nothing more.
+              Paris was my first Erasmus, the first time I'd ever gone somewhere completely alone, and I understood pretty quickly that the city was going to give me EXACTLY what I put into it, nothing more.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              So every weekend, without exception, I walked. Solo, hours through the centre, the same streets and different ones, the same museums visited again and again until I stopped looking at things like a tourist and started actually seeing them. I don't know how to explain what that kind of solitude does to you when you're 19 and you let it in properly... it's uncomfortable at first and then it becomes the thing you look forward to most.
+              So every weekend, without exception, I walked. Solo, hours through the centre, the same streets and different ones, the same museums again and again until I stopped looking like a tourist and started actually seeing things... I don't know what that kind of solitude does to you when you're 19 and you let it in properly, but somewhere in the middle of all those walks something started forming that I hadn't planned.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              It ended up being the happiest year of my life. And somewhere in the middle of all those walks something started forming that I hadn't planned, a need to say things out loud, to think through a microphone. That became the podcast.
+              That became a podcast.
             </p>
           </motion.div>
 

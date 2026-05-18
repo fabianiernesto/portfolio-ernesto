@@ -218,13 +218,13 @@ const Stage3_DenseYear = () => {
             transition={{ duration: 0.4, delay: 0.2 }}
           >
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-              I built ERASMOVE because I'd been through the Erasmus process twice and knew exactly where it broke. The information is scattered, the deadlines are unclear, the housing search is chaos, and nobody tells you what actually matters until you've already made the mistake.
+              I built ERASMOVE because I'd been through the Erasmus process twice and knew exactly where it broke, the information scattered across a hundred different places, deadlines that appear out of nowhere, a housing search that nobody prepares you for, and the general feeling that you're supposed to figure it all out alone.
             </p>
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-              So I designed a structured support service. Housing, paperwork, insurance, communication with host institutions. Everything that nobody explains, packaged in a way that actually works.
+              So I designed a service that actually explained it, housing, paperwork, insurance, communication with host institutions, everything packaged in a way that worked for someone going through it for the first time.
             </p>
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-              Months of concept, user research, business model definition. Then a pitch in front of every entrepreneurship project at IQS.
+              Months of concept development, user research, business model definition, and then a pitch in front of every entrepreneurship project at IQS.
             </p>
           </motion.div>
 
@@ -236,7 +236,7 @@ const Stage3_DenseYear = () => {
             transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.4 }}
           >
             <span className="font-display text-anton-48" style={{ color: CREAM, display: "block", lineHeight: 0.95 }}>Best Pitch Award</span>
-            <span className="font-body" style={{ fontSize: 13, color: "rgba(255,252,232,0.55)", marginTop: 12, display: "block", maxWidth: 480, lineHeight: 1.6 }}>
+            <span className="font-body" style={{ fontSize: 16, color: "rgba(255,252,232,0.85)", marginTop: 12, display: "block", maxWidth: 480, lineHeight: 1.6 }}>
               From all projects, my pitch and project was the most valued in front of the judges and business angels.
             </span>
           </motion.div>

@@ -59,20 +59,6 @@ const Stage4_Unno = () => {
           Co-Founder at 21
         </motion.h2>
 
-        {/* Red underline */}
-        <motion.div
-          style={{
-            height: 1,
-            backgroundColor: "#a9170b",
-            marginTop: "16px",
-            transformOrigin: "left",
-          }}
-          initial={{ width: 0 }}
-          whileInView={{ width: 120 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        />
-
         {/* Paragraphs */}
         <div style={{ marginTop: "64px", display: "flex", flexDirection: "column", gap: "40px" }}>
           <motion.p
@@ -94,7 +80,7 @@ const Stage4_Unno = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.9, delay: 0.3 }}
           >
-            Nico and I went through all of it, the weeks where everything clicked and the weeks where nothing did, calls that went well and ones that didn't, having to make decisions about EVERYTHING with no reference point for what the right answer was.
+            We acquired the first clients directly, built the full delivery system from scratch, audit to deployment, and positioned UNNO®STUDIO in the DTC retention space. Everything you see at unnostudio.com we built from zero.
           </motion.p>
 
           <motion.p
@@ -105,8 +91,38 @@ const Stage4_Unno = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.9, delay: 0.45 }}
           >
-            It worked. And I still don't know exactly how.
+            My role sat across the commercial and operational side, client acquisition, closing calls alongside Nico where we made a natural duo, him with the technical depth and me with the human connection, and building the systems underneath that made it possible to deliver at quality without breaking when things scaled.
           </motion.p>
+
+          <motion.a
+            href="https://www.unnostudio.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body"
+            data-hover="true"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 12,
+              letterSpacing: "0.1em",
+              color: "#fffce8",
+              textDecoration: "none",
+              borderBottom: "1px solid rgba(255,252,232,0.50)",
+              paddingBottom: 3,
+              width: "fit-content",
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.9, delay: 0.6 }}
+            whileHover={{ opacity: 0.7 }}
+          >
+            unnostudio.com
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" />
+            </svg>
+          </motion.a>
         </div>
       </div>
 

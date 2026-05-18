@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 
 const Stage5_Present = () => {
   const heroRef = useRef(null);
@@ -17,6 +17,23 @@ const Stage5_Present = () => {
   const videoY = useTransform(heroProgress, [0, 1], ["0%", "22%"]);
   const textY = useTransform(heroProgress, [0, 1], ["0%", "-7%"]);
   const portraitY = useTransform(aboutProgress, [0, 1], ["-6%", "6%"]);
+
+  const [contactOpen, setContactOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Portfolio contact from ${form.name}`);
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
+    window.location.href = `mailto:fabianicolladoernesto@gmail.com?subject=${subject}&body=${body}`;
+    setSent(true);
+    setTimeout(() => {
+      setContactOpen(false);
+      setSent(false);
+      setForm({ name: "", email: "", message: "" });
+    }, 1500);
+  };
 
   return (
     <section id="stage-5">
@@ -90,7 +107,7 @@ const Stage5_Present = () => {
               viewport={{ once: true, margin: "-15%" }}
               transition={{ duration: 0.9, delay: 0.3 }}
             >
-              Scroll through and you'll find two years of building things from scratch inside startups, a co-founded studio, two Erasmus exchanges, a hackathon win, and a pitch that walked out with Best Pitch Award at IQS 2025.
+              Scroll through and you'll find four years of building things from scratch inside startups, a co-founded studio, two Erasmus exchanges, a hackathon win, and a pitch that walked out with Best Pitch Award at IQS 2025.
             </motion.p>
 
             <motion.p
@@ -217,66 +234,101 @@ const Stage5_Present = () => {
               transition={{ duration: 1, delay: 1.0 }}
             >
               <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-                I've never been good at waiting until I'm ready, and I'm not starting now. Just graduated, zero experience in the motor industry, and completely pulled toward it anyway...
+                21 years old, just graduated, zero experience in the motor industry... and I've never wanted something this clearly in my life.
               </p>
               <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-                Junior Project Manager at a startup in Barcelona at 19, thrown into things I had no business doing at that age. Co-founded UNNO®STUDIO at 20, built growth systems for eCommerce brands from scratch. Two experiences, same pattern: figure it out by doing it, learn fast, don't wait.
+                I've spent the last three years throwing myself into things I had no business doing at that age, a HealthTech startup at 19, co-founding my own studio at 20, two Erasmus exchanges, a hackathon win, a pitch that walked out with Best Pitch Award at IQS. Not because I had a plan, but because sitting still has never been an option for me.
               </p>
               <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-                Motorsport kept pulling me back through all of it, so here I am, writing about it every week and building toward working inside it.
-              </p>
-              <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-                If that sounds worth following, stick around ;)
+                Motorsport has been there through all of it. The business behind the sport, the decisions that happen away from the circuit, the strategy, the operations, the people who make it run. That's where I'm going, and I'm not particularly good at giving up on things.
               </p>
             </motion.div>
 
             {/* Links */}
             <motion.div
               style={{ display: "flex", gap: 24, marginTop: 28 }}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 1, delay: 1.2 }}
-            >
-              {[
-                { label: "LinkedIn", href: "https://www.linkedin.com/in/ernestofabiani/" },
-                { label: "Instagram", href: null },
-                { label: "Contact", href: null },
-              ].map(({ label, href }) => (
-                <motion.a
-                  key={label}
-                  href={href || "#"}
-                  target={href ? "_blank" : undefined}
-                  rel={href ? "noopener noreferrer" : undefined}
-                  className="font-body"
-                  style={{
-                    fontSize: 12, color: "rgba(255,252,232,0.55)",
-                    letterSpacing: "0.05em", textDecoration: "none",
-                    position: "relative", display: "inline-block",
-                  }}
-                  whileHover="hover"
-                  data-hover="true"
-                >
-                  {label}
-                  <motion.span
-                    variants={{
-                      hover: { scaleX: 1, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } },
-                    }}
-                    initial={{ scaleX: 0 }}
-                    style={{
-                      display: "block", height: 1,
-                      backgroundColor: "rgba(255,252,232,0.40)",
-                      transformOrigin: "left", marginTop: 3,
-                    }}
-                  />
-                </motion.a>
-              ))}
+              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1, delay: 1.2 }}>
+
+              {/* LinkedIn */}
+              <motion.a
+                href="https://www.linkedin.com/in/ernestofabiani/"
+                target="_blank" rel="noopener noreferrer"
+                className="font-body"
+                style={{ fontSize: 12, color: "rgba(255,252,232,0.90)", letterSpacing: "0.05em", textDecoration: "none", position: "relative", display: "inline-block" }}
+                whileHover="hover" data-hover="true"
+              >
+                LinkedIn
+                <motion.span variants={{ hover: { scaleX: 1, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } } }}
+                  initial={{ scaleX: 0 }}
+                  style={{ display: "block", height: 1, backgroundColor: "rgba(255,252,232,0.40)", transformOrigin: "left", marginTop: 3 }} />
+              </motion.a>
+
+              {/* Contact */}
+              <motion.button
+                onClick={() => setContactOpen(true)}
+                className="font-body"
+                data-hover="true"
+                style={{
+                  fontSize: 12, color: "rgba(255,252,232,0.90)", letterSpacing: "0.05em",
+                  background: "none", border: "none", cursor: "pointer", padding: 0,
+                  position: "relative", display: "inline-block",
+                }}
+                whileHover="hover"
+              >
+                Contact
+                <motion.span variants={{ hover: { scaleX: 1, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } } }}
+                  initial={{ scaleX: 0 }}
+                  style={{ display: "block", height: 1, backgroundColor: "rgba(255,252,232,0.40)", transformOrigin: "left", marginTop: 3 }} />
+              </motion.button>
             </motion.div>
 
           </div>
         </div>
 
       </div>
+
+      {/* ── CONTACT MODAL ─────────────────────────────────────────── */}
+      <AnimatePresence>
+        {contactOpen && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setContactOpen(false)}
+            style={{ position: "fixed", inset: 0, zIndex: 9999, backgroundColor: "rgba(0,0,0,0.70)", display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 32, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.97 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              style={{ backgroundColor: "#fffce8", padding: "48px 52px", width: "100%", maxWidth: 520, position: "relative" }}
+            >
+              <button onClick={() => setContactOpen(false)}
+                style={{ position: "absolute", top: 20, right: 24, background: "none", border: "none", cursor: "pointer", fontSize: 11, letterSpacing: "0.1em", color: "rgba(0,0,0,0.40)", fontFamily: "inherit" }}>
+                ✕ CLOSE
+              </button>
+              <h2 className="font-display" style={{ fontSize: 36, color: "#000", margin: "0 0 8px 0", lineHeight: 1 }}>GET IN TOUCH</h2>
+              <p className="font-body" style={{ fontSize: 13, color: "rgba(0,0,0,0.50)", margin: "0 0 32px 0", lineHeight: 1.6 }}>Write me a message and I'll get back to you.</p>
+              {sent ? (
+                <p className="font-body" style={{ fontSize: 15, color: "#a9170b", textAlign: "center", padding: "24px 0" }}>Opening your email client...</p>
+              ) : (
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  <input required placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="font-body"
+                    style={{ padding: "12px 16px", border: "1px solid rgba(0,0,0,0.20)", background: "transparent", fontSize: 14, color: "#000", outline: "none", fontFamily: "inherit" }} />
+                  <input required type="email" placeholder="Your email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="font-body"
+                    style={{ padding: "12px 16px", border: "1px solid rgba(0,0,0,0.20)", background: "transparent", fontSize: 14, color: "#000", outline: "none", fontFamily: "inherit" }} />
+                  <textarea required placeholder="Your message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="font-body"
+                    style={{ padding: "12px 16px", border: "1px solid rgba(0,0,0,0.20)", background: "transparent", fontSize: 14, color: "#000", outline: "none", resize: "none", fontFamily: "inherit" }} />
+                  <motion.button type="submit" className="font-display" whileHover={{ backgroundColor: "#8a1208" }} transition={{ duration: 0.2 }}
+                    style={{ marginTop: 8, padding: "14px 0", backgroundColor: "#a9170b", color: "#fffce8", border: "none", cursor: "pointer", fontSize: 14, letterSpacing: "0.08em", fontFamily: "inherit" }}>
+                    SEND MESSAGE
+                  </motion.button>
+                </form>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </section>
   );

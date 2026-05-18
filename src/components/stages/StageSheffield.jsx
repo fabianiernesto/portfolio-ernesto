@@ -77,7 +77,16 @@ const StageSheffield = () => {
               Most people found their own version of autopilot to deal with it, same pubs, same faces, same weekend on repeat. And I get it, when a city doesn't give you much stimulation you take whatever's there. But there's something that happens when you strip all the noise away and you're left with just yourself and a lot of empty hours, you either drift or you build something.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              A month in I called Nico. And we started building.
+              A month in I called Nico and I joined{" "}
+              <a
+                href="https://www.unnostudio.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#a9170b", textDecoration: "none", borderBottom: "1px solid rgba(169,23,11,0.40)" }}
+              >
+                UNNO®STUDIO
+              </a>{" "}
+              as Co-Founder.
             </p>
           </motion.div>
 
