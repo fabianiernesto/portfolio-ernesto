@@ -48,8 +48,9 @@ const Stage3_DenseYear = () => {
 
         {/* Year inscription — top right */}
         <motion.div
-          className="font-display text-anton-140 absolute pointer-events-none select-none"
-          style={{ top: "6vh", right: "4vw", color: "#000", zIndex: 2, lineHeight: 0.9, textAlign: "right" }}
+          className="font-display absolute pointer-events-none select-none"
+
+          style={{ top: "6vh", right: "4vw", color: "#000", zIndex: 2, lineHeight: 0.9, textAlign: "right", fontSize: isMobile ? "clamp(40px, 12vw, 60px)" : "clamp(72px, 9.5vw, 140px)" }}
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 0.06, x: 0 }}
           viewport={{ once: true, margin: "-10%" }}

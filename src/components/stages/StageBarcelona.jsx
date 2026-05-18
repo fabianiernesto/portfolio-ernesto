@@ -15,8 +15,8 @@ const StageBarcelona = () => {
         lineHeight: 1,
       }}>
         <motion.div
-          className="font-display text-anton-140 pointer-events-none select-none"
-          style={{ color: "#000", opacity: 0.06, lineHeight: 1, whiteSpace: "nowrap" }}
+          className="font-display pointer-events-none select-none"
+          style={{ color: "#000", opacity: 0.06, lineHeight: 1, whiteSpace: "nowrap", fontSize: isMobile ? "clamp(40px, 12vw, 60px)" : "clamp(72px, 9.5vw, 140px)" }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.06 }}
           viewport={{ once: true, margin: "-10%" }}
