@@ -171,6 +171,7 @@ const Stage5_Present = () => {
           {/* Portrait photo */}
           <div style={{
             flex: isMobile ? "none" : "0 0 50%",
+            width: isMobile ? "100%" : "auto",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

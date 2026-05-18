@@ -124,7 +124,7 @@ const Stage3_DenseYear = () => {
 
           {/* Right — MouthX product image + link below */}
           <motion.div
-            style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}
+            style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}
             initial={{ opacity: 0, scale: 1.04 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -200,7 +200,7 @@ const Stage3_DenseYear = () => {
           FULL SCREEN
         </motion.button>
 
-        <div style={{ position: "relative", zIndex: 2, paddingTop: isMobile ? 60 : 100, paddingBottom: isMobile ? 60 : 100, paddingRight: isMobile ? "24px" : PL, paddingLeft: isMobile ? "24px" : "calc(6vw - 30px)", maxWidth: 820, marginLeft: isMobile ? 0 : "auto" }}>
+        <div style={{ position: "relative", zIndex: 2, paddingTop: isMobile ? 60 : 100, paddingBottom: isMobile ? 140 : 100, paddingRight: isMobile ? "24px" : PL, paddingLeft: isMobile ? "24px" : "calc(6vw - 30px)", maxWidth: 820, marginLeft: isMobile ? 0 : "auto" }}>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}

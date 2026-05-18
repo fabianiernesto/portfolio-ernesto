@@ -96,7 +96,7 @@ const StageSheffield = () => {
         </div>
 
         {/* Right — circular city photo + logo */}
-        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, marginTop: isMobile ? 0 : 15 }}>
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, marginTop: isMobile ? 0 : 15, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
 
           <motion.div
             style={{

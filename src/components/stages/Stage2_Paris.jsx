@@ -84,7 +84,7 @@ const Stage2_Paris = () => {
         </div>
 
         {/* Right — circular city photo + IESEG logo */}
-        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24 }}>
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
 
           <motion.div
             style={{

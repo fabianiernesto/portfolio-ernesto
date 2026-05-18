@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 /**
@@ -6,10 +6,19 @@ import { motion } from "framer-motion";
  * Black background with garage_door.png covering the viewport (anchored to bottom).
  * Click → door animates upward out of view over 1.2s.
  * A light strip appears at the bottom edge as the door rises, then fades.
+ * On mobile: skipped entirely.
  */
 const EntranceDoor = ({ onOpen }) => {
   const [isOpening, setIsOpening] = useState(false);
   const [isDone, setIsDone] = useState(false);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  useEffect(() => {
+    if (isMobile) {
+      onOpen?.();
+      setIsDone(true);
+    }
+  }, []);
 
   if (isDone) return null;
 

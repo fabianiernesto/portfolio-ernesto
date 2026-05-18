@@ -81,7 +81,7 @@ const StageBarcelona = () => {
         </div>
 
         {/* Right — circular city photo + IQS logo */}
-        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, marginTop: isMobile ? 0 : 10 }}>
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, marginTop: isMobile ? 0 : 10, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
 
           <motion.div
             style={{

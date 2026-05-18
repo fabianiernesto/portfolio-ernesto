@@ -62,7 +62,7 @@ const StageHackathon = () => {
       </motion.button>
 
       {/* Content */}
-      <div style={{ position: "relative", zIndex: 2, paddingTop: isMobile ? 60 : 100, paddingBottom: isMobile ? 80 : 100, paddingRight: isMobile ? "24px" : PL, paddingLeft: isMobile ? "24px" : "calc(6vw - 30px)", maxWidth: 820, marginLeft: isMobile ? 0 : "auto" }}>
+      <div style={{ position: "relative", zIndex: 2, paddingTop: isMobile ? 60 : 100, paddingBottom: isMobile ? 140 : 100, paddingRight: isMobile ? "24px" : PL, paddingLeft: isMobile ? "24px" : "calc(6vw - 30px)", maxWidth: 820, marginLeft: isMobile ? 0 : "auto" }}>
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
