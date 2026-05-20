@@ -92,7 +92,7 @@ html.lenis body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--signal);
+  background-color: #000000;
   pointer-events: none;
   z-index: 9999;
   transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
@@ -107,7 +107,7 @@ html.lenis body {
   width: 32px;
   height: 32px;
   background-color: transparent;
-  border: 2px solid var(--signal);
+  border: 2px solid #000000;
 }
 @media (max-width: 767px) {
   .cursor-dot {
