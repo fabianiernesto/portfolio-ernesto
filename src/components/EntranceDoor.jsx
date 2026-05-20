@@ -1,24 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 /**
  * Garage door entrance screen.
- * Black background with garage_door.png covering the viewport (anchored to bottom).
+ * Desktop: garage_door.png — full width, anchored to bottom.
+ * Mobile: garage_door_mobile.png — full screen cover.
  * Click → door animates upward out of view over 1.2s.
- * A light strip appears at the bottom edge as the door rises, then fades.
- * On mobile: skipped entirely.
  */
 const EntranceDoor = ({ onOpen }) => {
   const [isOpening, setIsOpening] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-
-  useEffect(() => {
-    if (isMobile) {
-      onOpen?.();
-      setIsDone(true);
-    }
-  }, []);
 
   if (isDone) return null;
 
@@ -51,20 +43,37 @@ const EntranceDoor = ({ onOpen }) => {
         overflow: "hidden",
       }}
     >
-      {/* Garage door image — full width, vertically centered, no side bars */}
-      <img
-        src="/garage_door.png"
-        alt=""
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          height: "auto",
-          pointerEvents: "none",
-          userSelect: "none",
-        }}
-      />
+      {/* Garage door image */}
+      {isMobile ? (
+        <img
+          src="/garage_door_mobile.png"
+          alt=""
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        />
+      ) : (
+        <img
+          src="/garage_door.png"
+          alt=""
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            height: "auto",
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        />
+      )}
 
       {/* Click hint — bottom center, pulses until clicked */}
       {!isOpening && (
