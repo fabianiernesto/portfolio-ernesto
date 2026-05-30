@@ -59,6 +59,7 @@ html.lenis body {
   letter-spacing: 0.005em;
   line-height: 0.9;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
 /* Body font */
@@ -67,6 +68,7 @@ html.lenis body {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.55;
+  text-wrap: pretty;
 }
 
 .tracking-nav {

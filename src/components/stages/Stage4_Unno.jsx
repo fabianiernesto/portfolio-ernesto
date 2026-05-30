@@ -9,7 +9,7 @@ const Stage4_Unno = () => {
       style={{
         position: "relative",
         overflow: "hidden",
-        minHeight: "100vh",
+        minHeight: "100dvh",
       }}
     >
       {/* Full-bleed background photo */}

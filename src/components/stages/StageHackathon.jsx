@@ -26,7 +26,7 @@ const StageHackathon = () => {
   }, [modalOpen]);
 
   return (
-    <section id="stage-hackathon" style={{ position: "relative", overflow: "hidden", minHeight: "100vh" }}>
+    <section id="stage-hackathon" style={{ position: "relative", overflow: "hidden", minHeight: "100dvh" }}>
 
       {/* Full-bleed background video */}
       <video

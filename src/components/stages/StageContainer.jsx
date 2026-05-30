@@ -5,7 +5,7 @@ const StageContainer = ({
   id,
   children,
   yearInscription,
-  minHeight = "100vh",
+  minHeight = "100dvh",
   floorLine = true,
   className = "",
   parallaxBg = -120,
