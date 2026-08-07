@@ -29,20 +29,6 @@ const Stage3_DenseYear = () => {
   return (
     <section id="stage-3" style={{ position: "relative", overflow: "hidden" }}>
 
-      {/* ── SECTION HEADLINE ──────────────────────────────────────── */}
-      <div style={{ backgroundColor: RED, minHeight: "30vh", display: "flex", alignItems: "center", paddingLeft: isMobile ? "24px" : PL, paddingRight: isMobile ? "24px" : "6vw" }}>
-        <motion.h2
-          className="font-display"
-          style={{ fontSize: isMobile ? 40 : 72, lineHeight: 0.9, margin: 0, color: CREAM }}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          TWO THINGS AT ONCE
-        </motion.h2>
-      </div>
-
       {/* ── AURAX BLOCK ───────────────────────────────────────────── */}
       <div id="aurax-block" style={{ position: "relative", overflow: "hidden", backgroundColor: CREAM }}>
 
