@@ -1,32 +1,42 @@
 /* eslint-disable */
 import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import EntranceDoor from "./components/EntranceDoor";
 import SmoothScroll from "./components/SmoothScroll";
 import CustomCursor from "./components/CustomCursor";
-import TimelineSpine from "./components/TimelineSpine";
+import GarageHub from "./components/GarageHub";
 
-import Stage5_Present from "./components/stages/Stage5_Present";
-import StageSheffield from "./components/stages/StageSheffield";
-import Stage4_Unno from "./components/stages/Stage4_Unno";
-import Stage3_DenseYear from "./components/stages/Stage3_DenseYear";
-import StagePodcast from "./components/stages/StagePodcast";
-import StageBarcelona from "./components/stages/StageBarcelona";
-import StageHackathon from "./components/stages/StageHackathon";
-import StageClosing from "./components/stages/StageClosing";
-import Stage2_Paris from "./components/stages/Stage2_Paris";
+import StoryPage from "./pages/StoryPage";
+import WhyPage from "./pages/WhyPage";
+import NowPage from "./pages/NowPage";
+import ContactPage from "./pages/ContactPage";
 
-const STAGES = [
-  { id: "stage-5", year: "2026" },
-  { id: "stage-4", year: "2025—26" },
-  { id: "stage-3", year: "2024—25" },
-  { id: "stage-podcast", year: "podcast" },
-  { id: "stage-2", year: "2023—24" },
-  { id: "stage-barcelona", year: "2022—23" },
-];
+/* Reset scroll to top on every route change (Lenis-aware) */
+const ScrollReset = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
+/* Home = garage door (first visit only) + hub menu behind it */
+const Home = ({ entered, setEntered }) => {
+  return (
+    <>
+      {!entered && <EntranceDoor onOpen={() => setEntered(true)} />}
+      <GarageHub entered={entered} />
+    </>
+  );
+};
 
 function App() {
-  const [entered, setEntered] = useState(false);
+  // Door only greets visitors landing on the hub; deep links skip it
+  const [entered, setEntered] = useState(
+    () => typeof window !== "undefined" && window.location.pathname !== "/"
+  );
 
   useEffect(() => {
     // Lock scroll until the door has opened
@@ -82,28 +92,21 @@ function App() {
   }, []);
 
   return (
-    <>
-      <EntranceDoor onOpen={() => setEntered(true)} />
+    <BrowserRouter>
+      <ScrollReset />
+      <CustomCursor />
 
       <SmoothScroll>
-        <div className="relative min-h-screen">
-          <TimelineSpine stages={STAGES} />
-          <CustomCursor />
-
-          <main className="relative z-10">
-            <Stage5_Present />
-            <StageSheffield />
-            <Stage4_Unno />
-            <Stage3_DenseYear />
-            <Stage2_Paris />
-            <StagePodcast />
-            <StageBarcelona />
-            <StageHackathon />
-            <StageClosing />
-          </main>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home entered={entered} setEntered={setEntered} />} />
+          <Route path="/story" element={<StoryPage />} />
+          <Route path="/why-motorsport" element={<WhyPage />} />
+          <Route path="/building-now" element={<NowPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<Home entered={entered} setEntered={setEntered} />} />
+        </Routes>
       </SmoothScroll>
-    </>
+    </BrowserRouter>
   );
 }
 
