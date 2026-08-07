@@ -49,6 +49,38 @@ function App() {
     return () => window.removeEventListener("resize", setSpineOffset);
   }, []);
 
+  // iOS Low Power Mode blocks video autoplay. Force-play all background
+  // videos on the first user gesture (touch / scroll / click) so they start
+  // immediately instead of showing the native play-button overlay.
+  useEffect(() => {
+    const playAll = () => {
+      document.querySelectorAll("video").forEach((v) => {
+        v.muted = true;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      });
+    };
+
+    playAll(); // attempt immediately
+
+    const onFirstGesture = () => {
+      playAll();
+      window.removeEventListener("touchstart", onFirstGesture);
+      window.removeEventListener("click", onFirstGesture);
+      window.removeEventListener("scroll", onFirstGesture);
+    };
+
+    window.addEventListener("touchstart", onFirstGesture, { passive: true });
+    window.addEventListener("click", onFirstGesture, { passive: true });
+    window.addEventListener("scroll", onFirstGesture, { passive: true });
+
+    return () => {
+      window.removeEventListener("touchstart", onFirstGesture);
+      window.removeEventListener("click", onFirstGesture);
+      window.removeEventListener("scroll", onFirstGesture);
+    };
+  }, []);
+
   return (
     <>
       <EntranceDoor onOpen={() => setEntered(true)} />
