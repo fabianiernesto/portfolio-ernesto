@@ -45,34 +45,25 @@ const WhyPage = () => {
         </motion.h1>
       </div>
 
-      {/* ── BLOCK 1 — CARS ────────────────────────────────────────── */}
-      <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: 48, overflow: "hidden", lineHeight: 1 }}>
-        <motion.div
-          className="font-display pointer-events-none select-none"
-          style={{ color: "#000", opacity: 0.06, lineHeight: 1, whiteSpace: "nowrap", fontSize: watermarkSize }}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.06 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          SINCE 2006
-        </motion.div>
-      </div>
+      {/* ── BLOCK 1 — CARS (dark, McQueen bg) ─────────────────────── */}
+      <div style={{ position: "relative", overflow: "hidden", minHeight: "100dvh", display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "#0d0d0b",
+            backgroundImage: "url('/why_cars.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            zIndex: 0,
+          }}
+        />
+        <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1 }} />
 
-      <div style={{
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        alignItems: isMobile ? "flex-start" : "center",
-        paddingLeft: PL,
-        paddingRight: PR,
-        paddingTop: isMobile ? 24 : 48,
-        paddingBottom: isMobile ? 60 : 100,
-        gap: isMobile ? 40 : 80,
-      }}>
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ position: "relative", zIndex: 2, paddingTop: 120, paddingBottom: 120, paddingLeft: PL, paddingRight: PR, maxWidth: 900 }}>
           <motion.span
             className="font-display"
-            style={{ fontSize: 20, color: RED, display: "block" }}
+            style={{ fontSize: 20, color: "rgba(255,252,232,0.60)", display: "block" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -83,7 +74,7 @@ const WhyPage = () => {
 
           <motion.h2
             className="font-display"
-            style={{ fontSize: titleSize, color: "#000", margin: "12px 0 40px 0", lineHeight: 0.95 }}
+            style={{ fontSize: isMobile ? 38 : 72, color: CREAM, margin: "24px 0 40px 0", lineHeight: 1 }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -93,54 +84,39 @@ const WhyPage = () => {
           </motion.h2>
 
           <motion.div
-            style={{ maxWidth: 600, display: "flex", flexDirection: "column", gap: 24 }}
+            style={{ maxWidth: 700, display: "flex", flexDirection: "column", gap: 24 }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
           >
-            <p className="font-body" style={bodyStyle}>
+            <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
               My mother still tells it the same way... three straight months of
               CARS, day after day, a two-year-old glued to the same film without
               ever getting tired of it.
             </p>
-            <p className="font-body" style={bodyStyle}>
+            <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
               It is, to this day, the film I've watched the most times in my
               life. Nobody in the house understood it back then. Turns out it
               was just the first symptom.
             </p>
           </motion.div>
-        </div>
 
-        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
           <motion.div
-            style={{ width: isMobile ? 240 : 380, height: isMobile ? 240 : 380, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}
-            initial={{ opacity: 0, scale: 1.04 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <img
-              src="/why_cars.jpg"
-              alt="Lightning McQueen from the film CARS"
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
-            />
-          </motion.div>
-          <motion.div
-            style={{ display: "flex", alignItems: "center", gap: 14 }}
+            style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 48 }}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           >
-            <div style={{ width: isMobile ? 72 : 96, height: isMobile ? 72 : 96, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}>
+            <div style={{ width: isMobile ? 72 : 96, height: isMobile ? 72 : 96, borderRadius: "50%", overflow: "hidden", flexShrink: 0, border: "1px solid rgba(255,252,232,0.25)" }}>
               <img
                 src="/why_kid.jpg"
                 alt="Ernesto around age two"
                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
               />
             </div>
-            <span className="font-body" style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", maxWidth: 180 }}>
+            <span className="font-body" style={{ fontSize: 12, color: "rgba(255,252,232,0.60)", letterSpacing: "0.04em", maxWidth: 180 }}>
               Me, right around the CARS years
             </span>
           </motion.div>
