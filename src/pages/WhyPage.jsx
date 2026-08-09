@@ -265,7 +265,7 @@ const WhyPage = () => {
 
           <motion.p
             className="font-quote"
-            style={{ fontSize: isMobile ? 32 : "clamp(38px, 4.4vw, 62px)", color: CREAM, margin: "56px 0 56px 0", maxWidth: 800 }}
+            style={{ fontSize: isMobile ? 24 : "clamp(28px, 3vw, 40px)", color: CREAM, margin: "48px 0 48px 0", maxWidth: 720 }}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
