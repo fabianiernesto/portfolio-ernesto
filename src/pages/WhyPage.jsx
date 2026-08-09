@@ -5,6 +5,45 @@ import useIsMobile from "../hooks/useIsMobile";
 const CREAM = "#fffce8";
 const RED = "#a9170b";
 
+/* A photograph as a physical object: paper border, soft shadow, resting
+   at a slight angle like a print left on a table. Straightens on hover. */
+const ArchivePrint = ({ src, alt, caption, tilt = -2.2, isMobile }) => (
+  <motion.figure
+    initial={{ opacity: 0, y: 34, rotate: tilt * 2.4 }}
+    whileInView={{ opacity: 1, y: 0, rotate: tilt }}
+    viewport={{ once: true, margin: "-10%" }}
+    transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+    whileHover={{ rotate: 0, y: -6 }}
+    style={{
+      margin: 0,
+      width: isMobile ? "100%" : 440,
+      maxWidth: 440,
+      backgroundColor: "#ffffff",
+      padding: isMobile ? "12px 12px 0 12px" : "16px 16px 0 16px",
+      boxShadow:
+        "0 22px 44px rgba(30,20,10,0.20), 0 3px 8px rgba(30,20,10,0.10)",
+    }}
+  >
+    <img
+      src={src}
+      alt={alt}
+      style={{ width: "100%", height: "auto", display: "block" }}
+    />
+    <figcaption
+      className="font-body"
+      style={{
+        fontSize: 12,
+        lineHeight: 1.5,
+        color: "rgba(0,0,0,0.50)",
+        letterSpacing: "0.02em",
+        padding: isMobile ? "12px 2px 14px 2px" : "16px 2px 18px 2px",
+      }}
+    >
+      {caption}
+    </figcaption>
+  </motion.figure>
+);
+
 const WhyPage = () => {
   const isMobile = useIsMobile();
 
@@ -160,20 +199,14 @@ const WhyPage = () => {
           </motion.div>
         </div>
 
-        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
-          <motion.div
-            style={{ width: isMobile ? 240 : 380, height: isMobile ? 240 : 380, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}
-            initial={{ opacity: 0, scale: 1.04 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <img
-              src="/why_dad.jpg"
-              alt="Ernesto as a toddler with his father"
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
-            />
-          </motion.div>
+        <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center", alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
+          <ArchivePrint
+            src="/why_dad.jpg"
+            alt="Ernesto as a toddler with his father"
+            caption="My dad and me."
+            tilt={-2.4}
+            isMobile={isMobile}
+          />
         </div>
       </div>
 
@@ -337,30 +370,14 @@ const WhyPage = () => {
           </motion.div>
         </div>
 
-        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
-          <motion.div
-            style={{ width: isMobile ? 240 : 380, height: isMobile ? 240 : 380, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}
-            initial={{ opacity: 0, scale: 1.04 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <img
-              src="/why_tintore.png"
-              alt="The red and yellow Maserati of Enrique Tintoré, Penya Rhin era"
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
-            />
-          </motion.div>
-          <motion.span
-            className="font-body"
-            style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", textAlign: "center", maxWidth: 320 }}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          >
-            The photo she sent — Enrique Tintoré's Maserati, Penya Rhin era
-          </motion.span>
+        <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center", alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
+          <ArchivePrint
+            src="/why_tintore.png"
+            alt="The red and yellow Maserati of Enrique Tintoré, Penya Rhin era"
+            caption="The photo she sent me. Enrique Tintoré's Maserati."
+            tilt={2.6}
+            isMobile={isMobile}
+          />
         </div>
       </div>
 
