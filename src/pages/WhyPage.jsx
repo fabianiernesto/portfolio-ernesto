@@ -8,63 +8,432 @@ const RED = "#a9170b";
 const WhyPage = () => {
   const isMobile = useIsMobile();
 
+  const PL = isMobile ? "24px" : "clamp(80px, 12vw, 180px)";
+  const PR = isMobile ? "24px" : "clamp(60px, 8vw, 120px)";
+  const watermarkSize = isMobile ? "clamp(40px, 12vw, 60px)" : "clamp(72px, 9.5vw, 140px)";
+  const titleSize = isMobile ? 40 : 64;
+  const bodyStyle = {
+    fontSize: 15,
+    lineHeight: 1.8,
+    color: "rgba(0,0,0,0.75)",
+    margin: 0,
+  };
+
   return (
-    <div
-      style={{
-        minHeight: "100dvh",
-        backgroundColor: "#0d0d0b",
-        display: "flex",
-        alignItems: "center",
-        paddingLeft: isMobile ? 24 : "clamp(80px, 12vw, 180px)",
-        paddingRight: isMobile ? 24 : "6vw",
-        paddingTop: 100,
-        paddingBottom: 100,
-      }}
-    >
+    <div style={{ backgroundColor: CREAM, position: "relative" }}>
       <BackToGarage />
 
-      <div style={{ maxWidth: 760 }}>
+      {/* ── HERO ──────────────────────────────────────────────────── */}
+      <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 100 : 140, paddingBottom: isMobile ? 24 : 40 }}>
         <motion.span
           className="font-body"
-          style={{ fontSize: 12, color: "rgba(255,252,232,0.50)", display: "block", marginBottom: 28, letterSpacing: "0.1em", textTransform: "uppercase" }}
+          style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", display: "block", marginBottom: 24, letterSpacing: "0.1em", textTransform: "uppercase" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           02 — The origin
         </motion.span>
-
         <motion.h1
           className="font-display"
-          style={{ fontSize: isMobile ? 52 : "clamp(64px, 9vw, 120px)", color: CREAM, lineHeight: 0.92, margin: 0 }}
+          style={{ fontSize: isMobile ? 52 : "clamp(64px, 9vw, 120px)", color: "#000", lineHeight: 0.92, margin: 0 }}
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
           WHY<br />MOTORSPORT
         </motion.h1>
-
-        <motion.p
-          className="font-body"
-          style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.8, color: "rgba(255,252,232,0.80)", margin: "40px 0 0 0", maxWidth: 560 }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
-        >
-          This one deserves to be told properly... it starts with my father, a
-          paddock, and a Sunday that never really ended.
-        </motion.p>
-
-        <motion.span
-          className="font-display"
-          style={{ display: "inline-block", fontSize: 15, color: RED, letterSpacing: "0.08em", marginTop: 44, borderBottom: "1px solid rgba(169,23,11,0.4)", paddingBottom: 4 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-        >
-          IN THE WORKSHOP — COMING SOON
-        </motion.span>
       </div>
+
+      {/* ── BLOCK 1 — CARS ────────────────────────────────────────── */}
+      <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: 48, overflow: "hidden", lineHeight: 1 }}>
+        <motion.div
+          className="font-display pointer-events-none select-none"
+          style={{ color: "#000", opacity: 0.06, lineHeight: 1, whiteSpace: "nowrap", fontSize: watermarkSize }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.06 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          SINCE 2006
+        </motion.div>
+      </div>
+
+      <div style={{
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        alignItems: isMobile ? "flex-start" : "center",
+        paddingLeft: PL,
+        paddingRight: PR,
+        paddingTop: isMobile ? 24 : 48,
+        paddingBottom: isMobile ? 60 : 100,
+        gap: isMobile ? 40 : 80,
+      }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <motion.span
+            className="font-display"
+            style={{ fontSize: 20, color: RED, display: "block" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            AGE 2
+          </motion.span>
+
+          <motion.h2
+            className="font-display"
+            style={{ fontSize: titleSize, color: "#000", margin: "12px 0 40px 0", lineHeight: 0.95 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            FIRST LOVE:<br />A CARTOON CAR.
+          </motion.h2>
+
+          <motion.div
+            style={{ maxWidth: 600, display: "flex", flexDirection: "column", gap: 24 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
+          >
+            <p className="font-body" style={bodyStyle}>
+              My mother still tells it the same way... three straight months of
+              CARS, day after day, a two-year-old glued to the same film without
+              ever getting tired of it.
+            </p>
+            <p className="font-body" style={bodyStyle}>
+              It is, to this day, the film I've watched the most times in my
+              life. Nobody in the house understood it back then. Turns out it
+              was just the first symptom.
+            </p>
+          </motion.div>
+        </div>
+
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
+          <motion.div
+            style={{ width: isMobile ? 240 : 380, height: isMobile ? 240 : 380, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}
+            initial={{ opacity: 0, scale: 1.04 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <img
+              src="/why_kid.jpg"
+              alt="Ernesto around age two"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            />
+          </motion.div>
+          <motion.span
+            className="font-body"
+            style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", textAlign: "center", maxWidth: 320 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          >
+            Me, right around the CARS years
+          </motion.span>
+        </div>
+      </div>
+
+      {/* ── BLOCK 2 — MY FATHER AND A TUBE TV ─────────────────────── */}
+      <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: 48, overflow: "hidden", lineHeight: 1 }}>
+        <motion.div
+          className="font-display pointer-events-none select-none"
+          style={{ color: "#000", opacity: 0.06, lineHeight: 1, whiteSpace: "nowrap", fontSize: watermarkSize }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.06 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          CIRCA 2010
+        </motion.div>
+      </div>
+
+      <div style={{
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        alignItems: isMobile ? "flex-start" : "center",
+        paddingLeft: PL,
+        paddingRight: PR,
+        paddingTop: isMobile ? 24 : 48,
+        paddingBottom: isMobile ? 60 : 100,
+        gap: isMobile ? 40 : 80,
+      }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <motion.span
+            className="font-display"
+            style={{ fontSize: 20, color: RED, display: "block" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            A LIVING ROOM IN MALLORCA
+          </motion.span>
+
+          <motion.h2
+            className="font-display"
+            style={{ fontSize: titleSize, color: "#000", margin: "12px 0 40px 0", lineHeight: 0.95 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            MY FATHER<br />AND A TUBE TV.
+          </motion.h2>
+
+          <motion.div
+            style={{ maxWidth: 600, display: "flex", flexDirection: "column", gap: 24 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
+          >
+            <p className="font-body" style={bodyStyle}>
+              I still remember it on one of those old tube TVs. Vettel in the
+              Red Bull, the engines roaring, Antonio Lobato's voice commentating
+              over all of it... and me lying on top of my dad, completely glued
+              to the screen, not able to move. I couldn't tell you a single
+              thing about the result. I just remember being right there next to
+              him.
+            </p>
+            <p className="font-body" style={bodyStyle}>
+              My dad and I understand each other better inside a paddock or
+              watching a race than almost anywhere else. And there are moments
+              when I wonder if without motorsport we would have ever really got
+              to know each other the way we do.
+            </p>
+          </motion.div>
+        </div>
+
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
+          <motion.div
+            style={{ width: isMobile ? 240 : 380, height: isMobile ? 240 : 380, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}
+            initial={{ opacity: 0, scale: 1.04 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <img
+              src="/why_dad.jpg"
+              alt="Ernesto as a toddler with his father"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ── BLOCK 3 — THE SAME LANGUAGE (dark, photo bg) ──────────── */}
+      <div style={{ position: "relative", overflow: "hidden", minHeight: "100dvh", display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "#0d0d0b",
+            backgroundImage: "url('/why_drive.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            zIndex: 0,
+          }}
+        />
+        <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.60)", zIndex: 1 }} />
+
+        <div style={{ position: "relative", zIndex: 2, paddingTop: 120, paddingBottom: 120, paddingLeft: PL, paddingRight: PR, maxWidth: 900 }}>
+          <motion.span
+            className="font-display"
+            style={{ fontSize: 20, color: "rgba(255,252,232,0.60)", display: "block" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            TODAY
+          </motion.span>
+
+          <motion.h2
+            className="font-display"
+            style={{ fontSize: isMobile ? 38 : 72, color: CREAM, margin: "24px 0 40px 0", lineHeight: 1 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            THE SAME<br />LANGUAGE, STILL.
+          </motion.h2>
+
+          <motion.div
+            style={{ maxWidth: 700, display: "flex", flexDirection: "column", gap: 24 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
+          >
+            <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
+              It's not that we don't talk about other things. It's that
+              something happens when it's cars that doesn't happen anywhere
+              else, a way of both actually being there at the same time without
+              either of us trying.
+            </p>
+            <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
+              The strangest part is that this connection has made me want to be
+              in this world in a way I can no longer separate from him. I don't
+              know where the passion for the sport ends and where what I feel
+              when I'm with my dad talking about it begins... and honestly, I'm
+              not sure I want to know.
+            </p>
+          </motion.div>
+
+          <motion.p
+            className="font-display"
+            style={{ fontSize: isMobile ? 26 : "clamp(30px, 3.4vw, 44px)", lineHeight: 1.1, color: CREAM, margin: "56px 0 0 0", maxWidth: 760 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+          >
+            MOTORSPORT HANDED US A LANGUAGE BEFORE WE KNEW WE WERE MISSING ONE.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* ── BLOCK 4 — TINTORÉ ─────────────────────────────────────── */}
+      <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: 48, overflow: "hidden", lineHeight: 1 }}>
+        <motion.div
+          className="font-display pointer-events-none select-none"
+          style={{ color: "#000", opacity: 0.06, lineHeight: 1, whiteSpace: "nowrap", fontSize: watermarkSize }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.06 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          BARCELONA 1913
+        </motion.div>
+      </div>
+
+      <div style={{
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        alignItems: isMobile ? "flex-start" : "center",
+        paddingLeft: PL,
+        paddingRight: PR,
+        paddingTop: isMobile ? 24 : 48,
+        paddingBottom: isMobile ? 60 : 100,
+        gap: isMobile ? 40 : 80,
+      }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <motion.span
+            className="font-display"
+            style={{ fontSize: 20, color: RED, display: "block" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            A FEW DAYS AGO
+          </motion.span>
+
+          <motion.h2
+            className="font-display"
+            style={{ fontSize: titleSize, color: "#000", margin: "12px 0 40px 0", lineHeight: 0.95 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            IT WAS ALREADY<br />IN THE BLOOD.
+          </motion.h2>
+
+          <motion.div
+            style={{ maxWidth: 600, display: "flex", flexDirection: "column", gap: 24 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
+          >
+            <p className="font-body" style={bodyStyle}>
+              "Ernesto, that man you see in the photo is your great-uncle. This
+              motor thing, you carry it in your blood." That's what my
+              great-aunt told me a few days ago, when I mentioned I wanted to
+              build a career in motorsport. And then she sent me the photo... a
+              red and yellow Maserati, a man leaning on the bonnet, straight out
+              of a world I've been clawing at from the outside without knowing
+              it was already mine.
+            </p>
+            <p className="font-body" style={bodyStyle}>
+              Enrique Tintoré. Barcelona, 1913. A textile industrialist and
+              member of the legendary Penya Rhin, one of the very few people who
+              ever shared a grid with Fangio and Nuvolari... the F1 from before
+              the World Championship even existed. And he wasn't the star of it
+              either, more the man putting his own money in and running the
+              whole thing from the inside than the one collecting the wins.
+            </p>
+            <p className="font-body" style={bodyStyle}>
+              And now there's me, 80 years later, obsessed with this exact
+              world, learning the business behind it and chasing a way in, with
+              no clue the pull already had a name in the family.
+            </p>
+          </motion.div>
+        </div>
+
+        <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
+          <motion.div
+            style={{ width: isMobile ? 240 : 380, height: isMobile ? 240 : 380, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}
+            initial={{ opacity: 0, scale: 1.04 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <img
+              src="/why_tintore.png"
+              alt="The red and yellow Maserati of Enrique Tintoré, Penya Rhin era"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            />
+          </motion.div>
+          <motion.span
+            className="font-body"
+            style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", textAlign: "center", maxWidth: 320 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          >
+            The photo she sent — Enrique Tintoré's Maserati, Penya Rhin era
+          </motion.span>
+        </div>
+      </div>
+
+      {/* ── CLOSING (red) ─────────────────────────────────────────── */}
+      <div
+        style={{
+          backgroundColor: RED,
+          minHeight: isMobile ? "60dvh" : "80dvh",
+          display: "flex",
+          alignItems: "center",
+          paddingLeft: PL,
+          paddingRight: PR,
+          paddingTop: 100,
+          paddingBottom: 100,
+        }}
+      >
+        <div style={{ maxWidth: 900 }}>
+          <motion.h2
+            className="font-display"
+            style={{ fontSize: isMobile ? 44 : "clamp(52px, 6.5vw, 88px)", color: CREAM, lineHeight: 1.1, margin: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            SOME THINGS<br />YOU CHOOSE.<br />
+            <em>THIS ONE<br />CHOSE FIRST.</em>
+          </motion.h2>
+        </div>
+      </div>
+
     </div>
   );
 };
