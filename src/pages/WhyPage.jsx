@@ -25,15 +25,6 @@ const WhyPage = () => {
 
       {/* ── HERO ──────────────────────────────────────────────────── */}
       <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 100 : 140, paddingBottom: isMobile ? 24 : 40 }}>
-        <motion.span
-          className="font-body"
-          style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", display: "block", marginBottom: 24, letterSpacing: "0.1em", textTransform: "uppercase" }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          02 — The origin
-        </motion.span>
         <motion.h1
           className="font-display"
           style={{ fontSize: isMobile ? 52 : "clamp(64px, 9vw, 120px)", color: "#000", lineHeight: 0.92, margin: 0 }}
@@ -61,20 +52,9 @@ const WhyPage = () => {
         <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1 }} />
 
         <div style={{ position: "relative", zIndex: 2, paddingTop: 120, paddingBottom: 120, paddingLeft: PL, paddingRight: PR, maxWidth: 900 }}>
-          <motion.span
-            className="font-display"
-            style={{ fontSize: 20, color: "rgba(255,252,232,0.60)", display: "block" }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            AGE 2
-          </motion.span>
-
           <motion.h2
             className="font-display"
-            style={{ fontSize: isMobile ? 38 : 72, color: CREAM, margin: "24px 0 40px 0", lineHeight: 1 }}
+            style={{ fontSize: isMobile ? 38 : 72, color: CREAM, margin: "0 0 40px 0", lineHeight: 1 }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -91,34 +71,17 @@ const WhyPage = () => {
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
           >
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-              My mother still tells it the same way... three straight months of
-              CARS, day after day, a two-year-old glued to the same film without
-              ever getting tired of it.
+              My mother swears she can still hear it. Three straight months of
+              the same film, a two-year-old planted in front of the screen
+              watching a red cartoon car go round in circles... and the second
+              it ended, asking for it again like it was the first time.
             </p>
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-              It is, to this day, the film I've watched the most times in my
-              life. Nobody in the house understood it back then. Turns out it
-              was just the first symptom.
+              Twenty years later CARS is still the most-watched film of my
+              life, and nobody in my house has ever managed to explain it (my
+              mother just rolls her eyes when it comes up). Some things move in
+              before you have words for them, and this one never left.
             </p>
-          </motion.div>
-
-          <motion.div
-            style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 48 }}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          >
-            <div style={{ width: isMobile ? 72 : 96, height: isMobile ? 72 : 96, borderRadius: "50%", overflow: "hidden", flexShrink: 0, border: "1px solid rgba(255,252,232,0.25)" }}>
-              <img
-                src="/why_kid.jpg"
-                alt="Ernesto around age two"
-                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
-              />
-            </div>
-            <span className="font-body" style={{ fontSize: 12, color: "rgba(255,252,232,0.60)", letterSpacing: "0.04em", maxWidth: 180 }}>
-              Me, right around the CARS years
-            </span>
           </motion.div>
         </div>
       </div>
