@@ -18,25 +18,31 @@ const ArchivePrint = ({ src, alt, caption, tilt = -2.2, isMobile }) => (
       margin: 0,
       width: isMobile ? "100%" : 440,
       maxWidth: 440,
-      backgroundColor: "#ffffff",
-      padding: isMobile ? "12px 12px 0 12px" : "16px 16px 0 16px",
+      background:
+        "linear-gradient(158deg, #f6f0e1 0%, #efe7d4 52%, #e7dcc4 100%)",
+      padding: isMobile ? "13px 13px 0 13px" : "18px 18px 0 18px",
       boxShadow:
-        "0 22px 44px rgba(30,20,10,0.20), 0 3px 8px rgba(30,20,10,0.10)",
+        "inset 0 0 26px rgba(122,96,50,0.13), 0 22px 44px rgba(40,28,12,0.22), 0 3px 8px rgba(40,28,12,0.12)",
     }}
   >
     <img
       src={src}
       alt={alt}
-      style={{ width: "100%", height: "auto", display: "block" }}
+      style={{
+        width: "100%",
+        height: "auto",
+        display: "block",
+        filter: "sepia(0.12) saturate(0.94)",
+      }}
     />
     <figcaption
       className="font-body"
       style={{
         fontSize: 12,
         lineHeight: 1.5,
-        color: "rgba(0,0,0,0.50)",
+        color: "rgba(74,58,32,0.62)",
         letterSpacing: "0.02em",
-        padding: isMobile ? "12px 2px 14px 2px" : "16px 2px 18px 2px",
+        padding: isMobile ? "13px 2px 15px 2px" : "18px 2px 20px 2px",
       }}
     >
       {caption}
