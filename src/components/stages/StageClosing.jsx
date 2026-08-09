@@ -15,24 +15,24 @@ const StageClosing = () => {
         backgroundColor: CREAM,
         minHeight: "100dvh",
         display: "flex",
-        alignItems: "center",
-        paddingLeft: isMobile ? "24px" : PL,
-        paddingRight: isMobile ? "24px" : "clamp(60px, 8vw, 120px)",
-        paddingTop: isMobile ? 90 : 100,
-        paddingBottom: isMobile ? 90 : 100,
+        flexDirection: isMobile ? "column" : "row",
+        alignItems: "stretch",
+        overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          alignItems: "center",
-          gap: isMobile ? 48 : "clamp(48px, 6vw, 96px)",
-          width: "100%",
-        }}
-      >
         {/* ── Copy ──────────────────────────────────────────────── */}
-        <div style={{ flex: 1, minWidth: 0, maxWidth: 620 }}>
+        <div style={{
+          flex: 1,
+          minWidth: 0,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          paddingLeft: isMobile ? "24px" : PL,
+          paddingRight: isMobile ? "24px" : "clamp(40px, 5vw, 80px)",
+          paddingTop: isMobile ? 90 : 100,
+          paddingBottom: isMobile ? 56 : 100,
+          maxWidth: isMobile ? "none" : 760,
+        }}>
           <motion.span
             className="font-display"
             style={{ fontSize: 20, color: RED, display: "block" }}
@@ -150,34 +150,61 @@ const StageClosing = () => {
 
         {/* ── Still waiting ─────────────────────────────────────── */}
         <motion.figure
-          initial={{ opacity: 0, y: 34 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           style={{
             margin: 0,
-            flex: "0 0 auto",
-            width: isMobile ? "100%" : "clamp(360px, 40vw, 620px)",
+            position: "relative",
+            flex: isMobile ? "0 0 auto" : "0 0 46%",
+            width: isMobile ? "100%" : "auto",
+            height: isMobile ? "58vh" : "auto",
+            alignSelf: "stretch",
+            overflow: "hidden",
           }}
         >
           <img
             src="/contact_waiting.jpg"
             alt="Fernando Alonso sitting trackside in a folding chair, waiting"
-            style={{ width: "100%", height: "auto", display: "block" }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "32% center",
+            }}
           />
+
+          {/* legibility wash under the note */}
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              height: "34%",
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.22) 55%, rgba(0,0,0,0) 100%)",
+            }}
+          />
+
           <figcaption
             className="font-hand"
             style={{
-              fontSize: isMobile ? 19 : 22,
-              color: "rgba(46,38,28,0.72)",
-              paddingTop: 12,
-              transform: "rotate(-0.5deg)",
+              position: "absolute",
+              left: isMobile ? 24 : 32,
+              right: isMobile ? 24 : 32,
+              bottom: isMobile ? 24 : 34,
+              fontSize: isMobile ? 22 : 26,
+              color: "rgba(255,252,232,0.96)",
+              transform: "rotate(-0.7deg)",
             }}
           >
-            Me, waiting for that email.
+            “Me, waiting for that email or DM.”
           </figcaption>
         </motion.figure>
-      </div>
     </section>
   );
 };
