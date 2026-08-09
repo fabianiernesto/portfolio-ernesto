@@ -264,14 +264,14 @@ const WhyPage = () => {
           </motion.div>
 
           <motion.p
-            className="font-display"
-            style={{ fontSize: isMobile ? 26 : "clamp(30px, 3.4vw, 44px)", lineHeight: 1.1, color: CREAM, margin: "56px 0 56px 0", maxWidth: 760 }}
+            className="font-quote"
+            style={{ fontSize: isMobile ? 32 : "clamp(38px, 4.4vw, 62px)", color: CREAM, margin: "56px 0 56px 0", maxWidth: 800 }}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
           >
-            MOTORSPORT HANDED US A LANGUAGE BEFORE WE KNEW WE WERE MISSING ONE.
+            “Motorsport handed us a language before we knew we were missing one.”
           </motion.p>
 
           <motion.p
