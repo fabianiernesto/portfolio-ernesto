@@ -77,6 +77,12 @@ const WhyPage = () => {
               it ended, asking for it again like it was the first time.
             </p>
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
+              It was the engines. Even then, the sound of them put goosebumps
+              on a kid who could barely talk... and when I rewatched the film a
+              month ago (literally, a month ago) my skin did the EXACT same
+              thing. Same shiver, same kid.
+            </p>
+            <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
               Twenty years later CARS is still the most-watched film of my
               life, and nobody in my house has ever managed to explain it (my
               mother just rolls her eyes when it comes up). Some things move in
