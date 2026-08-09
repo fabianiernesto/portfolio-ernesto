@@ -121,21 +121,29 @@ const WhyPage = () => {
             transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
           >
             <img
-              src="/why_kid.jpg"
-              alt="Ernesto around age two"
+              src="/why_cars.jpg"
+              alt="Lightning McQueen from the film CARS"
               style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
             />
           </motion.div>
-          <motion.span
-            className="font-body"
-            style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", textAlign: "center", maxWidth: 320 }}
+          <motion.div
+            style={{ display: "flex", alignItems: "center", gap: 14 }}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           >
-            Me, right around the CARS years
-          </motion.span>
+            <div style={{ width: isMobile ? 72 : 96, height: isMobile ? 72 : 96, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}>
+              <img
+                src="/why_kid.jpg"
+                alt="Ernesto around age two"
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+              />
+            </div>
+            <span className="font-body" style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", maxWidth: 180 }}>
+              Me, right around the CARS years
+            </span>
+          </motion.div>
         </div>
       </div>
 
