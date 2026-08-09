@@ -15,8 +15,7 @@ const StageClosing = () => {
         backgroundColor: CREAM,
         minHeight: "100dvh",
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
+        alignItems: "center",
         paddingLeft: isMobile ? "24px" : PL,
         paddingRight: isMobile ? "24px" : "clamp(60px, 8vw, 120px)",
         paddingTop: isMobile ? 90 : 100,
@@ -28,12 +27,12 @@ const StageClosing = () => {
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
           alignItems: "center",
-          gap: isMobile ? 48 : "clamp(48px, 7vw, 110px)",
+          gap: isMobile ? 48 : "clamp(48px, 6vw, 96px)",
           width: "100%",
         }}
       >
         {/* ── Copy ──────────────────────────────────────────────── */}
-        <div style={{ flex: 1, minWidth: 0, maxWidth: 640 }}>
+        <div style={{ flex: 1, minWidth: 0, maxWidth: 620 }}>
           <motion.span
             className="font-display"
             style={{ fontSize: 20, color: RED, display: "block" }}
@@ -48,7 +47,7 @@ const StageClosing = () => {
           <motion.h2
             className="font-display"
             style={{
-              fontSize: isMobile ? 56 : "clamp(64px, 8vw, 110px)",
+              fontSize: isMobile ? 56 : "clamp(60px, 7.2vw, 100px)",
               color: "#000",
               lineHeight: 0.92,
               margin: "14px 0 0 0",
@@ -62,7 +61,7 @@ const StageClosing = () => {
           </motion.h2>
 
           <motion.div
-            style={{ display: "flex", flexDirection: "column", gap: 20, margin: "36px 0 0 0", maxWidth: 560 }}
+            style={{ display: "flex", flexDirection: "column", gap: 20, margin: "34px 0 0 0", maxWidth: 540 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -72,21 +71,21 @@ const StageClosing = () => {
               className="font-body"
               style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.8, color: "rgba(0,0,0,0.78)", margin: 0 }}
             >
-              Max is not calling. He never has and he never will, and I've made
-              my peace with that.
+              If you're in motorsport or automotive, or you know someone who is,
+              write me. An email and a LinkedIn message land in the same place,
+              and I answer every single one.
             </p>
             <p
               className="font-body"
               style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.8, color: "rgba(0,0,0,0.78)", margin: 0 }}
             >
-              My inbox does work though, so if you're in motorsport or
-              automotive, or you know someone who is, write me or find me on
-              LinkedIn... I answer everything ;)
+              No pitch needed, no formalities... I just really like talking to
+              people who live in this world ;)
             </p>
           </motion.div>
 
           <motion.div
-            style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? 14 : 20, marginTop: 40 }}
+            style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? 14 : 20, marginTop: 38 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -149,65 +148,36 @@ const StageClosing = () => {
           </motion.div>
         </div>
 
-        {/* ── Incoming call ─────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 40, rotate: -3 }}
-          whileInView={{ opacity: 1, y: 0, rotate: -1.6 }}
+        {/* ── Still waiting ─────────────────────────────────────── */}
+        <motion.figure
+          initial={{ opacity: 0, y: 34 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          whileHover={{ rotate: 0, y: -8 }}
           style={{
+            margin: 0,
             flex: "0 0 auto",
-            width: isMobile ? "min(78vw, 300px)" : "clamp(280px, 26vw, 370px)",
-            padding: isMobile ? 8 : 10,
-            borderRadius: isMobile ? 30 : 38,
-            backgroundColor: "#111110",
-            boxShadow:
-              "0 26px 56px rgba(30,20,10,0.28), 0 4px 12px rgba(30,20,10,0.16)",
+            width: isMobile ? "100%" : "clamp(360px, 40vw, 620px)",
           }}
         >
           <img
-            src="/contact_call.jpg"
-            alt="An incoming call screen, as a joke"
-            style={{
-              width: "100%",
-              height: "auto",
-              display: "block",
-              borderRadius: isMobile ? 22 : 29,
-            }}
+            src="/contact_waiting.jpg"
+            alt="Fernando Alonso sitting trackside in a folding chair, waiting"
+            style={{ width: "100%", height: "auto", display: "block" }}
           />
-        </motion.div>
+          <figcaption
+            className="font-hand"
+            style={{
+              fontSize: isMobile ? 19 : 22,
+              color: "rgba(46,38,28,0.72)",
+              paddingTop: 12,
+              transform: "rotate(-0.5deg)",
+            }}
+          >
+            Me, waiting for that email.
+          </figcaption>
+        </motion.figure>
       </div>
-
-      {/* ── Still waiting ───────────────────────────────────────── */}
-      <motion.figure
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10%" }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        style={{
-          margin: isMobile ? "56px 0 0 0" : "80px 0 0 0",
-          width: "100%",
-          maxWidth: 735,
-        }}
-      >
-        <img
-          src="/contact_waiting.jpg"
-          alt="Fernando Alonso sitting trackside in a folding chair, waiting"
-          style={{ width: "100%", height: "auto", display: "block" }}
-        />
-        <figcaption
-          className="font-hand"
-          style={{
-            fontSize: isMobile ? 19 : 22,
-            color: "rgba(46,38,28,0.72)",
-            paddingTop: 12,
-            transform: "rotate(-0.5deg)",
-          }}
-        >
-          Me, waiting for that email.
-        </figcaption>
-      </motion.figure>
     </section>
   );
 };
