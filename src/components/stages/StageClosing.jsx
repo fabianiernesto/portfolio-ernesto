@@ -15,7 +15,8 @@ const StageClosing = () => {
         backgroundColor: CREAM,
         minHeight: "100dvh",
         display: "flex",
-        alignItems: "center",
+        flexDirection: "column",
+        justifyContent: "center",
         paddingLeft: isMobile ? "24px" : PL,
         paddingRight: isMobile ? "24px" : "clamp(60px, 8vw, 120px)",
         paddingTop: isMobile ? 90 : 100,
@@ -177,6 +178,36 @@ const StageClosing = () => {
           />
         </motion.div>
       </div>
+
+      {/* ── Still waiting ───────────────────────────────────────── */}
+      <motion.figure
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10%" }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          margin: isMobile ? "56px 0 0 0" : "80px 0 0 0",
+          width: "100%",
+          maxWidth: 735,
+        }}
+      >
+        <img
+          src="/contact_waiting.jpg"
+          alt="Fernando Alonso sitting trackside in a folding chair, waiting"
+          style={{ width: "100%", height: "auto", display: "block" }}
+        />
+        <figcaption
+          className="font-hand"
+          style={{
+            fontSize: isMobile ? 19 : 22,
+            color: "rgba(46,38,28,0.72)",
+            paddingTop: 12,
+            transform: "rotate(-0.5deg)",
+          }}
+        >
+          Me, waiting for that email.
+        </figcaption>
+      </motion.figure>
     </section>
   );
 };
