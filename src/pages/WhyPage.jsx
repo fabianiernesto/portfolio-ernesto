@@ -36,13 +36,12 @@ const ArchivePrint = ({ src, alt, caption, tilt = -2.2, isMobile }) => (
       }}
     />
     <figcaption
-      className="font-body"
+      className="font-hand"
       style={{
-        fontSize: 12,
-        lineHeight: 1.5,
-        color: "rgba(74,58,32,0.62)",
-        letterSpacing: "0.02em",
-        padding: isMobile ? "13px 2px 15px 2px" : "18px 2px 20px 2px",
+        fontSize: isMobile ? 19 : 22,
+        color: "rgba(46,38,28,0.78)",
+        padding: isMobile ? "11px 4px 13px 4px" : "14px 6px 16px 6px",
+        transform: "rotate(-0.6deg)",
       }}
     >
       {caption}
