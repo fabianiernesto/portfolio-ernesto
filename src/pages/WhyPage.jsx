@@ -100,26 +100,13 @@ const WhyPage = () => {
       </div>
 
       {/* ── BLOCK 2 — MY FATHER AND A TUBE TV ─────────────────────── */}
-      <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: 48, overflow: "hidden", lineHeight: 1 }}>
-        <motion.div
-          className="font-display pointer-events-none select-none"
-          style={{ color: "#000", opacity: 0.06, lineHeight: 1, whiteSpace: "nowrap", fontSize: watermarkSize }}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.06 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          CIRCA 2010
-        </motion.div>
-      </div>
-
       <div style={{
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
         alignItems: isMobile ? "flex-start" : "center",
         paddingLeft: PL,
         paddingRight: PR,
-        paddingTop: isMobile ? 24 : 48,
+        paddingTop: isMobile ? 80 : 140,
         paddingBottom: isMobile ? 60 : 100,
         gap: isMobile ? 40 : 80,
       }}>
@@ -154,16 +141,19 @@ const WhyPage = () => {
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
           >
             <p className="font-body" style={bodyStyle}>
-              I still remember it on one of those old tube TVs. Vettel in the
-              Red Bull, the engines roaring, Antonio Lobato's voice commentating
-              over all of it... and me lying on top of my dad, completely glued
-              to the screen, not able to move. I couldn't tell you a single
-              thing about the result. I just remember being right there next to
-              him.
+              A few years later the engines stopped being cartoons, and I wasn't
+              watching alone anymore. One of those old tube TVs, Vettel in the
+              Red Bull, Antonio Lobato's voice commentating over the roar of all
+              of it... and me lying on top of my dad, completely glued to the
+              screen, not able to move.
+            </p>
+            <p className="font-body" style={bodyStyle}>
+              I couldn't tell you a single thing about the result. I just
+              remember being right there next to him.
             </p>
             <p className="font-body" style={bodyStyle}>
               My dad and I understand each other better inside a paddock or
-              watching a race than almost anywhere else. And there are moments
+              watching a race than almost anywhere else, and there are moments
               when I wonder if without motorsport we would have ever really got
               to know each other the way we do.
             </p>
@@ -238,24 +228,32 @@ const WhyPage = () => {
               else, a way of both actually being there at the same time without
               either of us trying.
             </p>
-            <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-              The strangest part is that this connection has made me want to be
-              in this world in a way I can no longer separate from him. I don't
-              know where the passion for the sport ends and where what I feel
-              when I'm with my dad talking about it begins... and honestly, I'm
-              not sure I want to know.
-            </p>
           </motion.div>
 
           <motion.p
             className="font-display"
-            style={{ fontSize: isMobile ? 26 : "clamp(30px, 3.4vw, 44px)", lineHeight: 1.1, color: CREAM, margin: "56px 0 0 0", maxWidth: 760 }}
+            style={{ fontSize: isMobile ? 26 : "clamp(30px, 3.4vw, 44px)", lineHeight: 1.1, color: CREAM, margin: "56px 0 56px 0", maxWidth: 760 }}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
           >
             MOTORSPORT HANDED US A LANGUAGE BEFORE WE KNEW WE WERE MISSING ONE.
+          </motion.p>
+
+          <motion.p
+            className="font-body"
+            style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0, maxWidth: 700 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+          >
+            The strangest part is that this connection has made me want to be in
+            this world in a way I can no longer separate from him. I don't know
+            where the passion for the sport ends and where what I feel when I'm
+            with my dad talking about it begins... and honestly, I'm not sure I
+            want to know.
           </motion.p>
         </div>
       </div>
