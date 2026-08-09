@@ -23,18 +23,25 @@ const WhyPage = () => {
     <div style={{ backgroundColor: CREAM, position: "relative" }}>
       <BackToGarage />
 
-      {/* ── HERO ──────────────────────────────────────────────────── */}
-      <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 100 : 140, paddingBottom: isMobile ? 24 : 40 }}>
-        <motion.h1
-          className="font-display"
-          style={{ fontSize: isMobile ? 52 : "clamp(64px, 9vw, 120px)", color: "#000", lineHeight: 0.92, margin: 0 }}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-        >
-          WHY<br />MOTORSPORT
-        </motion.h1>
-      </div>
+      {/* ── Section marker — fixed top right ──────────────────────── */}
+      <motion.span
+        className="font-display"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        style={{
+          position: "fixed",
+          top: 20,
+          right: 20,
+          zIndex: 8000,
+          mixBlendMode: "difference",
+          color: "#ffffff",
+          fontSize: isMobile ? 12 : 14,
+          letterSpacing: "0.1em",
+        }}
+      >
+        WHY MOTORSPORT
+      </motion.span>
 
       {/* ── BLOCK 1 — CARS (dark, McQueen bg) ─────────────────────── */}
       <div style={{ position: "relative", overflow: "hidden", minHeight: "100dvh", display: "flex", alignItems: "center" }}>
