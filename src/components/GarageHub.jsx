@@ -21,7 +21,7 @@ const ITEMS = [
     desc: "Where the obsession comes from.",
     to: "/why-motorsport",
     img: "/hub_why.jpg",
-    alt: "Classic McLaren Formula 1 car against a blue sky",
+    alt: "Renault F1 pit stop with the crew swarming the car",
   },
   {
     index: "03",
