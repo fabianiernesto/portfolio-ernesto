@@ -164,9 +164,6 @@ const NowPage = () => {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(null);
 
-  const PL = isMobile ? "24px" : "clamp(80px, 12vw, 180px)";
-  const PR = isMobile ? "24px" : "clamp(60px, 10vw, 160px)";
-
   return (
     <div style={{ backgroundColor: CREAM, position: "relative", minHeight: "100dvh" }}>
       <BackToGarage />
