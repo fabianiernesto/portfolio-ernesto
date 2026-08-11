@@ -67,25 +67,27 @@ const WhyPage = () => {
     <div style={{ backgroundColor: CREAM, position: "relative" }}>
       <BackToGarage />
 
-      {/* ── Section marker — fixed top right ──────────────────────── */}
-      <motion.span
-        className="font-display"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        style={{
-          position: "fixed",
-          top: 20,
-          right: 20,
-          zIndex: 8000,
-          mixBlendMode: "difference",
-          color: "#ffffff",
-          fontSize: isMobile ? 12 : 14,
-          letterSpacing: "0.1em",
-        }}
-      >
-        WHY MOTORSPORT
-      </motion.span>
+      {/* ── Section marker — fixed top right, desktop only ────────── */}
+      {!isMobile && (
+        <motion.span
+          className="font-display"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          style={{
+            position: "fixed",
+            top: 20,
+            right: 20,
+            zIndex: 8000,
+            mixBlendMode: "difference",
+            color: "#ffffff",
+            fontSize: 14,
+            letterSpacing: "0.1em",
+          }}
+        >
+          WHY MOTORSPORT
+        </motion.span>
+      )}
 
       {/* ── BLOCK 1 — CARS (dark, McQueen bg) ─────────────────────── */}
       <div style={{ position: "relative", overflow: "hidden", minHeight: "100dvh", display: "flex", alignItems: "center" }}>
