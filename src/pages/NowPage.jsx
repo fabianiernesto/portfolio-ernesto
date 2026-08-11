@@ -5,6 +5,9 @@ import useIsMobile from "../hooks/useIsMobile";
 
 const CREAM = "#fffce8";
 const RED = "#a9170b";
+const CARD = "#ffffff";
+const TILE = "#efe9d6";
+const INK = "#111110";
 
 /* ── Project data ──────────────────────────────────────────────── */
 const PROJECTS = [
@@ -63,9 +66,9 @@ const StatusChip = ({ label, live }) => (
       letterSpacing: "0.14em",
       padding: "5px 11px",
       whiteSpace: "nowrap",
-      color: live ? CREAM : "rgba(255,252,232,0.72)",
+      color: live ? CREAM : RED,
       backgroundColor: live ? RED : "transparent",
-      border: `1px solid ${live ? RED : "rgba(255,252,232,0.32)"}`,
+      border: `1px solid ${live ? RED : "rgba(169,23,11,0.45)"}`,
     }}
   >
     {label}
@@ -80,15 +83,16 @@ const Card = ({ project, onOpen, isMobile }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-8%" }}
     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-    whileHover={{ y: -8 }}
+    whileHover={{ y: -8, boxShadow: "0 26px 50px rgba(40,28,12,0.18)" }}
     style={{
       display: "flex",
       flexDirection: "column",
       textAlign: "left",
       padding: 0,
       cursor: "pointer",
-      background: "#151512",
-      border: "1px solid rgba(255,252,232,0.14)",
+      background: CARD,
+      border: "1px solid rgba(0,0,0,0.12)",
+      boxShadow: "0 14px 30px rgba(40,28,12,0.10)",
       overflow: "hidden",
       fontFamily: "inherit",
     }}
@@ -100,7 +104,7 @@ const Card = ({ project, onOpen, isMobile }) => (
         width: "100%",
         aspectRatio: "4 / 3",
         overflow: "hidden",
-        backgroundColor: "#0e0e0c",
+        backgroundColor: TILE,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -116,7 +120,7 @@ const Card = ({ project, onOpen, isMobile }) => (
       ) : (
         <span
           className="font-display"
-          style={{ fontSize: "clamp(80px, 10vw, 140px)", color: "rgba(255,252,232,0.06)", lineHeight: 1 }}
+          style={{ fontSize: "clamp(80px, 10vw, 140px)", color: "rgba(0,0,0,0.07)", lineHeight: 1 }}
         >
           {project.index}
         </span>
@@ -127,19 +131,19 @@ const Card = ({ project, onOpen, isMobile }) => (
     <div style={{ padding: isMobile ? "20px 20px 24px" : "24px 24px 28px", display: "flex", flexDirection: "column", gap: 14, flex: 1 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
         <StatusChip label={project.status} live={project.live} />
-        <span className="font-body" style={{ fontSize: 13, color: "rgba(255,252,232,0.35)", letterSpacing: "0.1em" }}>
+        <span className="font-body" style={{ fontSize: 13, color: "rgba(0,0,0,0.35)", letterSpacing: "0.1em" }}>
           {project.index}
         </span>
       </div>
 
       <h2
         className="font-display"
-        style={{ fontSize: isMobile ? 26 : "clamp(24px, 1.9vw, 32px)", color: CREAM, lineHeight: 1.02, margin: 0 }}
+        style={{ fontSize: isMobile ? 26 : "clamp(24px, 1.9vw, 32px)", color: INK, lineHeight: 1.02, margin: 0 }}
       >
         {project.title}
       </h2>
 
-      <p className="font-body" style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(255,252,232,0.62)", margin: 0 }}>
+      <p className="font-body" style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(0,0,0,0.60)", margin: 0 }}>
         {project.teaser}
       </p>
 
@@ -164,7 +168,7 @@ const NowPage = () => {
   const PR = isMobile ? "24px" : "clamp(60px, 10vw, 160px)";
 
   return (
-    <div style={{ backgroundColor: "#0d0d0b", position: "relative", minHeight: "100dvh" }}>
+    <div style={{ backgroundColor: CREAM, position: "relative", minHeight: "100dvh" }}>
       <BackToGarage />
 
       {!isMobile && (
@@ -199,7 +203,7 @@ const NowPage = () => {
         {/* ── Header ────────────────────────────────────────────── */}
         <motion.h1
           className="font-display"
-          style={{ fontSize: isMobile ? 52 : "clamp(64px, 9vw, 120px)", color: CREAM, lineHeight: 0.92, margin: 0 }}
+          style={{ fontSize: isMobile ? 52 : "clamp(64px, 9vw, 120px)", color: INK, lineHeight: 0.92, margin: 0 }}
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
@@ -209,7 +213,7 @@ const NowPage = () => {
 
         <motion.p
           className="font-body"
-          style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.8, color: "rgba(255,252,232,0.78)", margin: "32px 0 0 0", maxWidth: 560 }}
+          style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: "32px 0 0 0", maxWidth: 560 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
@@ -246,7 +250,7 @@ const NowPage = () => {
               position: "fixed",
               inset: 0,
               zIndex: 9999,
-              backgroundColor: "rgba(0,0,0,0.78)",
+              backgroundColor: "rgba(20,14,6,0.55)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -260,8 +264,9 @@ const NowPage = () => {
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
               style={{
-                backgroundColor: "#151512",
-                border: "1px solid rgba(255,252,232,0.16)",
+                backgroundColor: CARD,
+                border: "1px solid rgba(0,0,0,0.12)",
+                boxShadow: "0 30px 70px rgba(20,14,6,0.35)",
                 width: "100%",
                 maxWidth: 680,
                 maxHeight: "88dvh",
@@ -278,12 +283,12 @@ const NowPage = () => {
                   top: 16,
                   right: 18,
                   zIndex: 2,
-                  background: "rgba(0,0,0,0.4)",
-                  border: "none",
+                  background: "rgba(255,252,232,0.85)",
+                  border: "1px solid rgba(0,0,0,0.12)",
                   cursor: "pointer",
                   fontSize: 11,
                   letterSpacing: "0.1em",
-                  color: "rgba(255,252,232,0.7)",
+                  color: "rgba(0,0,0,0.55)",
                   fontFamily: "inherit",
                   padding: "8px 12px",
                 }}
@@ -296,7 +301,7 @@ const NowPage = () => {
                 style={{
                   width: "100%",
                   aspectRatio: "16 / 9",
-                  backgroundColor: "#0e0e0c",
+                  backgroundColor: TILE,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -306,7 +311,7 @@ const NowPage = () => {
                 {open.img ? (
                   <img src={open.img} alt={open.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 ) : (
-                  <span className="font-display" style={{ fontSize: 120, color: "rgba(255,252,232,0.06)" }}>
+                  <span className="font-display" style={{ fontSize: 120, color: "rgba(0,0,0,0.07)" }}>
                     {open.index}
                   </span>
                 )}
@@ -320,7 +325,7 @@ const NowPage = () => {
 
                 <h2
                   className="font-display"
-                  style={{ fontSize: isMobile ? 34 : 48, color: CREAM, lineHeight: 0.98, margin: "0 0 24px 0" }}
+                  style={{ fontSize: isMobile ? 34 : 48, color: INK, lineHeight: 0.98, margin: "0 0 24px 0" }}
                 >
                   {open.title}
                 </h2>
@@ -330,7 +335,7 @@ const NowPage = () => {
                     <p
                       key={i}
                       className="font-body"
-                      style={{ fontSize: isMobile ? 15 : 16, lineHeight: 1.75, color: "rgba(255,252,232,0.82)", margin: 0 }}
+                      style={{ fontSize: isMobile ? 15 : 16, lineHeight: 1.75, color: "rgba(0,0,0,0.78)", margin: 0 }}
                     >
                       {para}
                     </p>
@@ -352,9 +357,9 @@ const NowPage = () => {
                       marginTop: 32,
                       fontSize: 12,
                       letterSpacing: "0.1em",
-                      color: CREAM,
+                      color: RED,
                       textDecoration: "none",
-                      borderBottom: "1px solid rgba(255,252,232,0.45)",
+                      borderBottom: "1px solid rgba(169,23,11,0.4)",
                       paddingBottom: 3,
                     }}
                   >
