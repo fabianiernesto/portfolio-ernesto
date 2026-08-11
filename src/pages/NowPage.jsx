@@ -18,7 +18,7 @@ const PROJECTS = [
     live: true,
     title: "THE BUSINESS OF RACING",
     teaser: "Two weekly series on LinkedIn.",
-    img: null, // -> pending
+    img: "/now_writing.jpg",
     link: { label: "Read it on LinkedIn", href: "https://www.linkedin.com/in/ernestofabiani/" },
     body: [
       "Every week I publish two series on LinkedIn, and both come from the same place... this sport is far more interesting underneath than the highlights ever make it look.",
@@ -33,7 +33,7 @@ const PROJECTS = [
     live: true,
     title: "THIS GARAGE",
     teaser: "Coded from scratch, no template.",
-    img: null,
+    img: "/now_garage.jpg",
     link: null,
     body: [
       "You're standing inside it. I built this whole thing myself with Claude Code, no template and no agency, shaped as a garage because that's the only honest way to lay out a story where every turn ends up back at the motor world.",
@@ -47,7 +47,7 @@ const PROJECTS = [
     live: false,
     title: "A RACE, WORTH WATCHING",
     teaser: "Making a Grand Prix hold your attention.",
-    img: null,
+    img: "/now_f1.jpg",
     link: null,
     body: [
       "Watching a Grand Prix asks you to already know everything, and if you don't, the whole thing turns into cars going round while someone shouts numbers at you.",
