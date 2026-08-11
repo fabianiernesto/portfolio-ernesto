@@ -102,7 +102,7 @@ const Card = ({ project, onOpen, isMobile }) => (
       style={{
         position: "relative",
         width: "100%",
-        aspectRatio: "4 / 3",
+        aspectRatio: "3 / 4",
         overflow: "hidden",
         backgroundColor: TILE,
         display: "flex",
@@ -128,7 +128,7 @@ const Card = ({ project, onOpen, isMobile }) => (
     </div>
 
     {/* meta */}
-    <div style={{ padding: isMobile ? "20px 20px 24px" : "24px 24px 28px", display: "flex", flexDirection: "column", gap: 14, flex: 1 }}>
+    <div style={{ padding: isMobile ? "24px 22px 26px" : "28px 28px 30px", display: "flex", flexDirection: "column", gap: 16, flex: 1 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
         <StatusChip label={project.status} live={project.live} />
         <span className="font-body" style={{ fontSize: 13, color: "rgba(0,0,0,0.35)", letterSpacing: "0.1em" }}>
@@ -138,18 +138,18 @@ const Card = ({ project, onOpen, isMobile }) => (
 
       <h2
         className="font-display"
-        style={{ fontSize: isMobile ? 26 : "clamp(24px, 1.9vw, 32px)", color: INK, lineHeight: 1.02, margin: 0 }}
+        style={{ fontSize: isMobile ? 28 : "clamp(26px, 2.1vw, 36px)", color: INK, lineHeight: 1.02, margin: 0 }}
       >
         {project.title}
       </h2>
 
-      <p className="font-body" style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(0,0,0,0.60)", margin: 0 }}>
+      <p className="font-body" style={{ fontSize: 15, lineHeight: 1.6, color: "rgba(0,0,0,0.60)", margin: 0 }}>
         {project.teaser}
       </p>
 
       <span
         className="font-body"
-        style={{ marginTop: "auto", fontSize: 12, letterSpacing: "0.08em", color: RED, display: "inline-flex", alignItems: "center", gap: 7 }}
+        style={{ marginTop: "auto", paddingTop: 6, fontSize: 12, letterSpacing: "0.08em", color: RED, display: "inline-flex", alignItems: "center", gap: 7 }}
       >
         OPEN
         <svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -194,32 +194,28 @@ const NowPage = () => {
 
       <div
         style={{
-          paddingLeft: PL,
-          paddingRight: PR,
-          paddingTop: isMobile ? 100 : 150,
-          paddingBottom: isMobile ? 80 : 130,
+          paddingLeft: isMobile ? "24px" : "clamp(40px, 5vw, 80px)",
+          paddingRight: isMobile ? "24px" : "clamp(40px, 5vw, 80px)",
+          paddingTop: isMobile ? 96 : 120,
+          paddingBottom: isMobile ? 72 : 90,
         }}
       >
-        {/* ── Header ────────────────────────────────────────────── */}
-        <motion.h1
-          className="font-display"
-          style={{ fontSize: isMobile ? 52 : "clamp(64px, 9vw, 120px)", color: INK, lineHeight: 0.92, margin: 0 }}
-          initial={{ opacity: 0, y: 40 }}
+        {/* ── Intro ─────────────────────────────────────────────── */}
+        <motion.p
+          className="font-quote"
+          style={{
+            fontSize: isMobile ? 24 : "clamp(28px, 3vw, 42px)",
+            color: INK,
+            margin: 0,
+            maxWidth: 820,
+          }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          BUILDING<br />NOW
-        </motion.h1>
-
-        <motion.p
-          className="font-body"
-          style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: "32px 0 0 0", maxWidth: 560 }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-        >
           Wanting in is not a plan, so this is the part I can actually control.
-          Three things running right now, all pointing at the same place.
+          Three things running right now, all pointing at the same place... pick
+          one.
         </motion.p>
 
         {/* ── Cards ─────────────────────────────────────────────── */}
@@ -227,8 +223,8 @@ const NowPage = () => {
           style={{
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-            gap: isMobile ? 20 : "clamp(16px, 2vw, 28px)",
-            marginTop: isMobile ? 48 : 72,
+            gap: isMobile ? 24 : "clamp(20px, 2.2vw, 34px)",
+            marginTop: isMobile ? 44 : 64,
           }}
         >
           {PROJECTS.map((p) => (
