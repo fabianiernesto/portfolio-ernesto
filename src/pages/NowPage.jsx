@@ -162,37 +162,56 @@ const NowPage = () => {
               style={{
                 display: "flex",
                 flexDirection: isMobile ? "column" : "row",
-                gap: isMobile ? 24 : 40,
-                marginTop: 32,
+                gap: isMobile ? 36 : 40,
+                marginTop: 36,
               }}
             >
-              <div style={{ flex: 1, minWidth: 0, borderLeft: `2px solid ${RED}`, paddingLeft: 18 }}>
-                <span
-                  className="font-display"
-                  style={{ display: "block", fontSize: 17, color: CREAM, marginBottom: 10, letterSpacing: "0.02em" }}
+              {[
+                {
+                  img: "/series_simplified.png",
+                  alt: "Motorsport Simplified cover: PACE NOTES, World Rally Championship",
+                  name: "MOTORSPORT SIMPLIFIED",
+                  text: "One idea from the motor world explained the way you'd explain it to a mate at a bar. F1, WEC, WRC, NASCAR, the Indy 500... no jargon, no paddock pass required.",
+                },
+                {
+                  img: "/series_stories.png",
+                  alt: "Motorsport Stories cover: Oscar Piastri",
+                  name: "MOTORSPORT STORIES",
+                  text: "A driver, a real moment, and the contract or the money or the team politics sitting underneath it that the highlight reel never shows you.",
+                },
+              ].map((s) => (
+                <motion.div
+                  key={s.name}
+                  style={{ flex: 1, minWidth: 0 }}
+                  whileHover={isMobile ? undefined : { y: -6 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  MOTORSPORT SIMPLIFIED
-                </span>
-                <p className="font-body" style={{ ...body, fontSize: 14, lineHeight: 1.7 }}>
-                  One idea from the motor world explained the way you'd explain
-                  it to a mate at a bar. F1, WEC, WRC, NASCAR, the Indy 500...
-                  no jargon, no paddock pass required.
-                </p>
-              </div>
-
-              <div style={{ flex: 1, minWidth: 0, borderLeft: `2px solid ${RED}`, paddingLeft: 18 }}>
-                <span
-                  className="font-display"
-                  style={{ display: "block", fontSize: 17, color: CREAM, marginBottom: 10, letterSpacing: "0.02em" }}
-                >
-                  MOTORSPORT STORIES
-                </span>
-                <p className="font-body" style={{ ...body, fontSize: 14, lineHeight: 1.7 }}>
-                  A driver, a real moment, and the contract or the money or the
-                  team politics sitting underneath it that the highlight reel
-                  never shows you.
-                </p>
-              </div>
+                  <div
+                    style={{
+                      overflow: "hidden",
+                      border: "1px solid rgba(255,252,232,0.14)",
+                      boxShadow: "0 18px 40px rgba(0,0,0,0.45)",
+                      lineHeight: 0,
+                    }}
+                  >
+                    <img
+                      src={s.img}
+                      alt={s.alt}
+                      loading="lazy"
+                      style={{ width: "100%", height: "auto", display: "block" }}
+                    />
+                  </div>
+                  <span
+                    className="font-display"
+                    style={{ display: "block", fontSize: 17, color: CREAM, margin: "18px 0 10px 0", letterSpacing: "0.02em" }}
+                  >
+                    {s.name}
+                  </span>
+                  <p className="font-body" style={{ ...body, fontSize: 14, lineHeight: 1.7 }}>
+                    {s.text}
+                  </p>
+                </motion.div>
+              ))}
             </div>
 
             <motion.a
