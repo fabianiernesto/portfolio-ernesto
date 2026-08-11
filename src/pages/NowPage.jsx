@@ -1,15 +1,58 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import BackToGarage from "../components/BackToGarage";
 import useIsMobile from "../hooks/useIsMobile";
 
 const CREAM = "#fffce8";
 const RED = "#a9170b";
 
-const fadeUp = {
-  initial: { opacity: 0, y: 26 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-10%" },
-};
+/* ── Project data ──────────────────────────────────────────────── */
+const PROJECTS = [
+  {
+    id: "writing",
+    index: "01",
+    status: "LIVE, EVERY WEEK",
+    live: true,
+    title: "THE BUSINESS OF RACING",
+    teaser: "Two weekly series on LinkedIn.",
+    img: null, // -> pending
+    link: { label: "Read it on LinkedIn", href: "https://www.linkedin.com/in/ernestofabiani/" },
+    body: [
+      "Every week I publish two series on LinkedIn, and both come from the same place... this sport is far more interesting underneath than the highlights ever make it look.",
+      "MOTORSPORT SIMPLIFIED takes one idea from the motor world and explains it the way you'd explain it to a mate at a bar. F1, WEC, WRC, NASCAR, the Indy 500... no jargon, no paddock pass required.",
+      "MOTORSPORT STORIES takes a driver and a real moment, and digs out the contract, the money or the team politics sitting underneath it that the highlight reel never shows you.",
+    ],
+  },
+  {
+    id: "garage",
+    index: "02",
+    status: "LIVE, YOU'RE IN IT",
+    live: true,
+    title: "THIS GARAGE",
+    teaser: "Coded from scratch, no template.",
+    img: null,
+    link: null,
+    body: [
+      "You're standing inside it. I built this whole thing myself with Claude Code, no template and no agency, shaped as a garage because that's the only honest way to lay out a story where every turn ends up back at the motor world.",
+      "I could have written \"I learn fast and I build things\" on a CV instead. This felt like the better argument.",
+    ],
+  },
+  {
+    id: "f1",
+    index: "03",
+    status: "IN THE WORKSHOP",
+    live: false,
+    title: "A RACE, WORTH WATCHING",
+    teaser: "Making a Grand Prix hold your attention.",
+    img: null,
+    link: null,
+    body: [
+      "Watching a Grand Prix asks you to already know everything, and if you don't, the whole thing turns into cars going round while someone shouts numbers at you.",
+      "So I'm building a way to live a race weekend that actually holds your attention, put together from real timing data and told the way the friend who watches every session would tell it to you.",
+      "Still in pieces on the workbench... but this one I'm genuinely obsessed with.",
+    ],
+  },
+];
 
 const StatusChip = ({ label, live }) => (
   <span
@@ -20,74 +63,105 @@ const StatusChip = ({ label, live }) => (
       letterSpacing: "0.14em",
       padding: "5px 11px",
       whiteSpace: "nowrap",
-      color: live ? CREAM : "rgba(255,252,232,0.70)",
+      color: live ? CREAM : "rgba(255,252,232,0.72)",
       backgroundColor: live ? RED : "transparent",
-      border: `1px solid ${live ? RED : "rgba(255,252,232,0.30)"}`,
+      border: `1px solid ${live ? RED : "rgba(255,252,232,0.32)"}`,
     }}
   >
     {label}
   </span>
 );
 
+const Card = ({ project, onOpen, isMobile }) => (
+  <motion.button
+    onClick={() => onOpen(project)}
+    data-hover="true"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-8%" }}
+    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+    whileHover={{ y: -8 }}
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      textAlign: "left",
+      padding: 0,
+      cursor: "pointer",
+      background: "#151512",
+      border: "1px solid rgba(255,252,232,0.14)",
+      overflow: "hidden",
+      fontFamily: "inherit",
+    }}
+  >
+    {/* image / placeholder */}
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: "4 / 3",
+        overflow: "hidden",
+        backgroundColor: "#0e0e0c",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {project.img ? (
+        <img
+          src={project.img}
+          alt={project.title}
+          loading="lazy"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+        />
+      ) : (
+        <span
+          className="font-display"
+          style={{ fontSize: "clamp(80px, 10vw, 140px)", color: "rgba(255,252,232,0.06)", lineHeight: 1 }}
+        >
+          {project.index}
+        </span>
+      )}
+    </div>
+
+    {/* meta */}
+    <div style={{ padding: isMobile ? "20px 20px 24px" : "24px 24px 28px", display: "flex", flexDirection: "column", gap: 14, flex: 1 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+        <StatusChip label={project.status} live={project.live} />
+        <span className="font-body" style={{ fontSize: 13, color: "rgba(255,252,232,0.35)", letterSpacing: "0.1em" }}>
+          {project.index}
+        </span>
+      </div>
+
+      <h2
+        className="font-display"
+        style={{ fontSize: isMobile ? 26 : "clamp(24px, 1.9vw, 32px)", color: CREAM, lineHeight: 1.02, margin: 0 }}
+      >
+        {project.title}
+      </h2>
+
+      <p className="font-body" style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(255,252,232,0.62)", margin: 0 }}>
+        {project.teaser}
+      </p>
+
+      <span
+        className="font-body"
+        style={{ marginTop: "auto", fontSize: 12, letterSpacing: "0.08em", color: RED, display: "inline-flex", alignItems: "center", gap: 7 }}
+      >
+        OPEN
+        <svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" />
+        </svg>
+      </span>
+    </div>
+  </motion.button>
+);
+
 const NowPage = () => {
   const isMobile = useIsMobile();
+  const [open, setOpen] = useState(null);
 
   const PL = isMobile ? "24px" : "clamp(80px, 12vw, 180px)";
   const PR = isMobile ? "24px" : "clamp(60px, 10vw, 160px)";
-
-  const body = {
-    fontSize: isMobile ? 15 : 16,
-    lineHeight: 1.8,
-    color: "rgba(255,252,232,0.82)",
-    margin: 0,
-  };
-
-  const Project = ({ index, status, live, title, children }) => (
-    <motion.article
-      {...fadeUp}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      style={{
-        borderTop: "1px solid rgba(255,252,232,0.16)",
-        padding: isMobile ? "40px 0" : "56px 0",
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        gap: isMobile ? 20 : "clamp(32px, 5vw, 80px)",
-      }}
-    >
-      <div
-        style={{
-          flex: isMobile ? "none" : "0 0 150px",
-          display: "flex",
-          flexDirection: isMobile ? "row" : "column",
-          alignItems: isMobile ? "center" : "flex-start",
-          gap: isMobile ? 14 : 16,
-        }}
-      >
-        <span
-          className="font-body"
-          style={{ fontSize: 13, letterSpacing: "0.1em", color: "rgba(255,252,232,0.40)" }}
-        >
-          {index}
-        </span>
-        <StatusChip label={status} live={live} />
-      </div>
-
-      <div style={{ flex: 1, minWidth: 0, maxWidth: 720 }}>
-        <h2
-          className="font-display"
-          style={{
-            fontSize: isMobile ? 30 : "clamp(32px, 3.6vw, 52px)",
-            color: CREAM,
-            lineHeight: 1,
-            margin: "0 0 20px 0",
-          }}
-        >
-          {title}
-        </h2>
-        {children}
-      </div>
-    </motion.article>
-  );
 
   return (
     <div style={{ backgroundColor: "#0d0d0b", position: "relative", minHeight: "100dvh" }}>
@@ -122,158 +196,179 @@ const NowPage = () => {
           paddingBottom: isMobile ? 80 : 130,
         }}
       >
-        {/* ── Opening ───────────────────────────────────────────── */}
-        <motion.p
-          className="font-quote"
-          style={{
-            fontSize: isMobile ? 26 : "clamp(30px, 3.4vw, 46px)",
-            color: CREAM,
-            margin: 0,
-            maxWidth: 840,
-          }}
-          initial={{ opacity: 0, y: 24 }}
+        {/* ── Header ────────────────────────────────────────────── */}
+        <motion.h1
+          className="font-display"
+          style={{ fontSize: isMobile ? 52 : "clamp(64px, 9vw, 120px)", color: CREAM, lineHeight: 0.92, margin: 0 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          Wanting in is not a plan, so this is the part I can actually control.
-        </motion.p>
+          BUILDING<br />NOW
+        </motion.h1>
 
         <motion.p
           className="font-body"
-          style={{ ...body, marginTop: 28, maxWidth: 620 }}
+          style={{ fontSize: isMobile ? 15 : 17, lineHeight: 1.8, color: "rgba(255,252,232,0.78)", margin: "32px 0 0 0", maxWidth: 560 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+          transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
         >
-          Three things running at the same time right now, all of them pointing
-          at the same place.
+          Wanting in is not a plan, so this is the part I can actually control.
+          Three things running right now, all pointing at the same place.
         </motion.p>
 
-        <div style={{ marginTop: isMobile ? 56 : 90 }}>
-          {/* ── 01 — LinkedIn ───────────────────────────────────── */}
-          <Project index="01" status="LIVE, EVERY WEEK" live title="WRITING ABOUT THE BUSINESS OF RACING">
-            <p className="font-body" style={body}>
-              I publish two series on LinkedIn every week, and both come from
-              the same place... this sport is far more interesting underneath
-              than the highlights ever make it look.
-            </p>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: isMobile ? "column" : "row",
-                gap: isMobile ? 36 : 40,
-                marginTop: 36,
-              }}
-            >
-              {[
-                {
-                  img: "/series_simplified.png",
-                  alt: "Motorsport Simplified cover: PACE NOTES, World Rally Championship",
-                  name: "MOTORSPORT SIMPLIFIED",
-                  text: "One idea from the motor world explained the way you'd explain it to a mate at a bar. F1, WEC, WRC, NASCAR, the Indy 500... no jargon, no paddock pass required.",
-                },
-                {
-                  img: "/series_stories.png",
-                  alt: "Motorsport Stories cover: Oscar Piastri",
-                  name: "MOTORSPORT STORIES",
-                  text: "A driver, a real moment, and the contract or the money or the team politics sitting underneath it that the highlight reel never shows you.",
-                },
-              ].map((s) => (
-                <motion.div
-                  key={s.name}
-                  style={{ flex: 1, minWidth: 0 }}
-                  whileHover={isMobile ? undefined : { y: -6 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div
-                    style={{
-                      overflow: "hidden",
-                      border: "1px solid rgba(255,252,232,0.14)",
-                      boxShadow: "0 18px 40px rgba(0,0,0,0.45)",
-                      lineHeight: 0,
-                    }}
-                  >
-                    <img
-                      src={s.img}
-                      alt={s.alt}
-                      loading="lazy"
-                      style={{ width: "100%", height: "auto", display: "block" }}
-                    />
-                  </div>
-                  <span
-                    className="font-display"
-                    style={{ display: "block", fontSize: 17, color: CREAM, margin: "18px 0 10px 0", letterSpacing: "0.02em" }}
-                  >
-                    {s.name}
-                  </span>
-                  <p className="font-body" style={{ ...body, fontSize: 14, lineHeight: 1.7 }}>
-                    {s.text}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.a
-              href="https://www.linkedin.com/in/ernestofabiani/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-body"
-              data-hover="true"
-              whileHover={{ opacity: 0.7 }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                marginTop: 32,
-                fontSize: 12,
-                letterSpacing: "0.1em",
-                color: CREAM,
-                textDecoration: "none",
-                borderBottom: "1px solid rgba(255,252,232,0.45)",
-                paddingBottom: 3,
-              }}
-            >
-              Read it on LinkedIn
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" />
-              </svg>
-            </motion.a>
-          </Project>
-
-          {/* ── 02 — This portfolio ─────────────────────────────── */}
-          <Project index="02" status="LIVE, YOU'RE IN IT" live title="THIS GARAGE, CODED FROM SCRATCH">
-            <p className="font-body" style={body}>
-              You're standing inside it. I built this whole thing myself with
-              Claude Code, no template and no agency, shaped as a garage because
-              that's the only honest way to lay out a story where every turn
-              ends up back at the motor world.
-            </p>
-            <p className="font-body" style={{ ...body, marginTop: 20 }}>
-              I could have written "I learn fast and I build things" on a CV
-              instead. This felt like the better argument.
-            </p>
-          </Project>
-
-          {/* ── 03 — F1 project ─────────────────────────────────── */}
-          <Project index="03" status="IN THE WORKSHOP" title="MAKING A RACE WEEKEND WORTH WATCHING">
-            <p className="font-body" style={body}>
-              Watching a Grand Prix asks you to already know everything, and if
-              you don't, the whole thing turns into cars going round while
-              someone shouts numbers at you.
-            </p>
-            <p className="font-body" style={{ ...body, marginTop: 20 }}>
-              So I'm building a way to live a race weekend that actually holds
-              your attention, put together from real timing data and told the
-              way the friend who watches every session would tell it to you.
-              Still in pieces on the workbench... but this one I'm genuinely
-              obsessed with.
-            </p>
-          </Project>
-
-          <div style={{ borderTop: "1px solid rgba(255,252,232,0.16)" }} />
+        {/* ── Cards ─────────────────────────────────────────────── */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+            gap: isMobile ? 20 : "clamp(16px, 2vw, 28px)",
+            marginTop: isMobile ? 48 : 72,
+          }}
+        >
+          {PROJECTS.map((p) => (
+            <Card key={p.id} project={p} onOpen={setOpen} isMobile={isMobile} />
+          ))}
         </div>
       </div>
+
+      {/* ── Detail modal ──────────────────────────────────────────── */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setOpen(null)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 9999,
+              backgroundColor: "rgba(0,0,0,0.78)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: isMobile ? 16 : 32,
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                backgroundColor: "#151512",
+                border: "1px solid rgba(255,252,232,0.16)",
+                width: "100%",
+                maxWidth: 680,
+                maxHeight: "88dvh",
+                overflowY: "auto",
+                position: "relative",
+              }}
+            >
+              {/* close */}
+              <button
+                onClick={() => setOpen(null)}
+                data-hover="true"
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  right: 18,
+                  zIndex: 2,
+                  background: "rgba(0,0,0,0.4)",
+                  border: "none",
+                  cursor: "pointer",
+                  fontSize: 11,
+                  letterSpacing: "0.1em",
+                  color: "rgba(255,252,232,0.7)",
+                  fontFamily: "inherit",
+                  padding: "8px 12px",
+                }}
+              >
+                ✕ CLOSE
+              </button>
+
+              {/* image / placeholder */}
+              <div
+                style={{
+                  width: "100%",
+                  aspectRatio: "16 / 9",
+                  backgroundColor: "#0e0e0c",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                }}
+              >
+                {open.img ? (
+                  <img src={open.img} alt={open.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                ) : (
+                  <span className="font-display" style={{ fontSize: 120, color: "rgba(255,252,232,0.06)" }}>
+                    {open.index}
+                  </span>
+                )}
+              </div>
+
+              {/* body */}
+              <div style={{ padding: isMobile ? "28px 24px 32px" : "40px 44px 44px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
+                  <StatusChip label={open.status} live={open.live} />
+                </div>
+
+                <h2
+                  className="font-display"
+                  style={{ fontSize: isMobile ? 34 : 48, color: CREAM, lineHeight: 0.98, margin: "0 0 24px 0" }}
+                >
+                  {open.title}
+                </h2>
+
+                <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+                  {open.body.map((para, i) => (
+                    <p
+                      key={i}
+                      className="font-body"
+                      style={{ fontSize: isMobile ? 15 : 16, lineHeight: 1.75, color: "rgba(255,252,232,0.82)", margin: 0 }}
+                    >
+                      {para}
+                    </p>
+                  ))}
+                </div>
+
+                {open.link && (
+                  <motion.a
+                    href={open.link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body"
+                    data-hover="true"
+                    whileHover={{ opacity: 0.7 }}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      marginTop: 32,
+                      fontSize: 12,
+                      letterSpacing: "0.1em",
+                      color: CREAM,
+                      textDecoration: "none",
+                      borderBottom: "1px solid rgba(255,252,232,0.45)",
+                      paddingBottom: 3,
+                    }}
+                  >
+                    {open.link.label}
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" />
+                    </svg>
+                  </motion.a>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
