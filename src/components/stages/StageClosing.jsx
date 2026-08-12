@@ -21,7 +21,7 @@ const StageClosing = () => {
           backgroundColor: "#0d0d0b",
           backgroundImage: "url('/contact_lando.jpg')",
           backgroundSize: "cover",
-          backgroundPosition: isMobile ? "60% center" : "center",
+          backgroundPosition: isMobile ? "58% center" : "center",
           zIndex: 0,
         }}
       />
@@ -129,7 +129,7 @@ const StageClosing = () => {
             </svg>
           </motion.a>
 
-          {/* LinkedIn — secondary */}
+          {/* LinkedIn */}
           <motion.a
             href="https://www.linkedin.com/in/ernestofabiani/"
             target="_blank"
@@ -140,15 +140,14 @@ const StageClosing = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: 10,
-              backgroundColor: "transparent",
+              backgroundColor: RED,
               color: CREAM,
               textDecoration: "none",
               padding: isMobile ? "14px 24px" : "15px 30px",
               fontSize: 14,
               letterSpacing: "0.08em",
-              border: "1px solid rgba(255,252,232,0.4)",
             }}
-            whileHover={{ borderColor: "rgba(255,252,232,1)", scale: 1.03 }}
+            whileHover={{ scale: 1.03, backgroundColor: "#8a1208" }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.2 }}
           >
