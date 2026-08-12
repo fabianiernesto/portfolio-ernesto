@@ -64,17 +64,18 @@ const StageClosing = () => {
         <motion.h2
           className="font-display"
           style={{
-            fontSize: isMobile ? 56 : "clamp(64px, 8vw, 110px)",
+            fontSize: isMobile ? 48 : "clamp(58px, 7vw, 100px)",
             color: CREAM,
             lineHeight: 0.92,
             margin: "16px 0 0 0",
+            whiteSpace: "nowrap",
           }}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          LET'S<br />TALK.
+          LET'S TALK.
         </motion.h2>
 
         <motion.div
