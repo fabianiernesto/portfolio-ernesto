@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
 
 const CREAM = "#fffce8";
-const RED = "#a9170b";
 const PL = "clamp(80px, 12vw, 180px)";
 
 const StageClosing = () => {
@@ -112,14 +111,14 @@ const StageClosing = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: 10,
-              backgroundColor: RED,
-              color: CREAM,
+              backgroundColor: "#ffffff",
+              color: "#111110",
               textDecoration: "none",
               padding: isMobile ? "14px 24px" : "15px 30px",
               fontSize: 14,
               letterSpacing: "0.08em",
             }}
-            whileHover={{ scale: 1.03, backgroundColor: "#8a1208" }}
+            whileHover={{ scale: 1.03, backgroundColor: CREAM }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.2 }}
           >
@@ -140,14 +139,14 @@ const StageClosing = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: 10,
-              backgroundColor: RED,
-              color: CREAM,
+              backgroundColor: "#ffffff",
+              color: "#111110",
               textDecoration: "none",
               padding: isMobile ? "14px 24px" : "15px 30px",
               fontSize: 14,
               letterSpacing: "0.08em",
             }}
-            whileHover={{ scale: 1.03, backgroundColor: "#8a1208" }}
+            whileHover={{ scale: 1.03, backgroundColor: CREAM }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.2 }}
           >
