@@ -4,6 +4,7 @@ import useIsMobile from "../hooks/useIsMobile";
 
 const CREAM = "#fffce8";
 const INK = "#111110";
+const RED = "#a9170b";
 const CLAY = "#d97757"; // Claude's clay
 
 const fadeUp = {
@@ -56,8 +57,8 @@ const GaragePage = () => {
             </motion.h1>
 
             <motion.p
-              className="font-quote"
-              style={{ fontSize: isMobile ? 26 : "clamp(30px, 3.4vw, 46px)", color: INK, margin: "34px 0 0 0" }}
+              className="font-display"
+              style={{ fontSize: isMobile ? 24 : "clamp(26px, 3vw, 42px)", color: RED, lineHeight: 1.02, margin: "30px 0 0 0" }}
               {...fadeUp} transition={{ duration: 0.7 }}
             >
               I was sick of the CV everyone else hands over.
@@ -181,9 +182,9 @@ const GaragePage = () => {
           {/* Claude Code mascots */}
           <div
             style={{
-              flex: isMobile ? "0 0 auto" : "0 0 auto",
+              flex: "0 0 auto",
               alignSelf: "center",
-              margin: isMobile ? "0 auto" : "0",
+              margin: isMobile ? "0 auto" : "0 0 0 clamp(20px, 3vw, 56px)",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
               gap: isMobile ? 12 : 22,
