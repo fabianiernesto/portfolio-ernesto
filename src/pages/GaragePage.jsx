@@ -5,32 +5,6 @@ import useIsMobile from "../hooks/useIsMobile";
 const CREAM = "#fffce8";
 const INK = "#111110";
 const CLAY = "#d97757"; // Claude's clay
-const RED = "#a9170b";
-
-/* Claude spark mark, rebuilt as a radial burst for decorative use */
-const Spark = ({ size = 44, color = CLAY, style }) => {
-  const rays = 12;
-  const cx = 50, cy = 50, inner = 7, outer = 47;
-  return (
-    <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true" style={style}>
-      {Array.from({ length: rays }, (_, i) => {
-        const a = (Math.PI * 2 * i) / rays;
-        return (
-          <line
-            key={i}
-            x1={cx + Math.cos(a) * inner}
-            y1={cy + Math.sin(a) * inner}
-            x2={cx + Math.cos(a) * outer}
-            y2={cy + Math.sin(a) * outer}
-            stroke={color}
-            strokeWidth={5}
-            strokeLinecap="round"
-          />
-        );
-      })}
-    </svg>
-  );
-};
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -68,52 +42,60 @@ const GaragePage = () => {
         </Link>
       </motion.div>
 
-      {/* ── BLOCK 1 — CREAM hero + the PDF problem ───────────────── */}
-      <div style={{ position: "relative", overflow: "hidden", paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 96 : 130, paddingBottom: isMobile ? 72 : 100 }}>
-        <Spark size={isMobile ? 34 : 70} style={{ position: "absolute", top: "12%", right: "6%", opacity: 0.5 }} />
-        <Spark size={isMobile ? 22 : 40} style={{ position: "absolute", top: "40%", right: "16%", opacity: 0.26 }} />
-        {!isMobile && <Spark size={30} style={{ position: "absolute", bottom: "14%", left: "5%", opacity: 0.24 }} />}
+      {/* ── BLOCK 1 — CREAM hero, text + CLAUDE CODE wordmark ────── */}
+      <div style={{ paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 96 : 130, paddingBottom: isMobile ? 72 : 100 }}>
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "flex-start", gap: isMobile ? 40 : "clamp(40px, 6vw, 100px)" }}>
+          {/* text */}
+          <div style={{ flex: 1, minWidth: 0, maxWidth: 640 }}>
+            <motion.h1
+              className="font-display"
+              style={{ fontSize: isMobile ? 44 : "clamp(52px, 7vw, 96px)", color: INK, lineHeight: 0.94, margin: 0 }}
+              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+            >
+              THIS GARAGE
+            </motion.h1>
 
-        <div style={{ position: "relative", zIndex: 1, maxWidth: 760 }}>
-          <motion.span
-            className="font-body"
-            style={{ fontSize: 12, color: "rgba(0,0,0,0.45)", display: "block", marginBottom: 22, letterSpacing: "0.1em", textTransform: "uppercase" }}
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-          >
-            02 — Building now
-          </motion.span>
+            <motion.p
+              className="font-quote"
+              style={{ fontSize: isMobile ? 26 : "clamp(30px, 3.4vw, 46px)", color: INK, margin: "34px 0 0 0" }}
+              {...fadeUp} transition={{ duration: 0.7 }}
+            >
+              I was sick of the CV everyone else hands over.
+            </motion.p>
 
-          <motion.h1
-            className="font-display"
-            style={{ fontSize: isMobile ? 44 : "clamp(52px, 7vw, 96px)", color: INK, lineHeight: 0.94, margin: 0 }}
-            initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-          >
-            THIS GARAGE
-          </motion.h1>
+            <motion.p className="font-body" style={{ ...bodyCream, marginTop: isMobile ? 32 : 40 }} {...fadeUp} transition={{ duration: 0.7 }}>
+              That PDF you fire off to a motorsport company, landing in a pile of
+              hundreds that look EXACTLY the same. Same format, same structure,
+              the same bullet points every single person on earth is using.
+              Opened for two seconds, closed, and forgotten before the next one
+              loads.
+            </motion.p>
 
+            <motion.p className="font-body" style={{ ...bodyCream, marginTop: 22 }} {...fadeUp} transition={{ duration: 0.7 }}>
+              So instead of sending another one, I built this. A website you can
+              actually walk through, coded from zero with Claude Code, by someone
+              who had never written a single line of code in his life. Not a
+              template, not an agency... just me typing what I wanted in plain
+              words and watching it slowly turn into a place instead of a
+              document.
+            </motion.p>
+          </div>
+
+          {/* CLAUDE CODE wordmark */}
           <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.25 }}
-            style={{ display: "inline-flex", alignItems: "center", gap: 9, marginTop: 26, padding: "7px 14px 7px 10px", border: `1px solid ${CLAY}`, borderRadius: 999 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            style={{ flex: "0 0 auto", alignSelf: isMobile ? "flex-start" : "center" }}
+            aria-hidden="true"
           >
-            <Spark size={18} />
-            <span className="font-body" style={{ fontSize: 11, letterSpacing: "0.14em", color: "#8a3d24" }}>
-              BUILT WITH CLAUDE CODE
+            <span
+              className="font-display"
+              style={{ display: "block", color: CLAY, lineHeight: 0.86, fontSize: isMobile ? 56 : "clamp(70px, 8vw, 130px)", letterSpacing: "0.01em" }}
+            >
+              CLAUDE<br />CODE
             </span>
           </motion.div>
-
-          <motion.p
-            className="font-quote"
-            style={{ fontSize: isMobile ? 26 : "clamp(30px, 3.4vw, 46px)", color: INK, margin: "40px 0 0 0" }}
-            {...fadeUp} transition={{ duration: 0.7 }}
-          >
-            I was sick of the CV everyone else hands over.
-          </motion.p>
-
-          <motion.p className="font-body" style={{ ...bodyCream, marginTop: isMobile ? 32 : 44, maxWidth: 640 }} {...fadeUp} transition={{ duration: 0.7 }}>
-            That PDF you fire off to a motorsport company, landing in a pile of
-            hundreds that look EXACTLY the same. Same format, same structure,
-            the same bullet points every single person on earth is using.
-          </motion.p>
         </div>
       </div>
 
@@ -132,7 +114,7 @@ const GaragePage = () => {
         />
         <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.66)", zIndex: 1 }} />
 
-        <div style={{ position: "relative", zIndex: 2, paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 90 : 110, paddingBottom: isMobile ? 90 : 110, maxWidth: 760 }}>
+        <div style={{ position: "relative", zIndex: 2, paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 90 : 110, paddingBottom: isMobile ? 90 : 110, maxWidth: 980 }}>
           <motion.span
             className="font-display"
             style={{ fontSize: 20, color: "rgba(255,252,232,0.55)", display: "block" }}
@@ -153,50 +135,66 @@ const GaragePage = () => {
             This is what came out. The whole thing you're walking through right
             now, my story built into it instead of flattened onto a page, this
             garage door lifting when you click it, motorsport videos and the
-            places I've been running underneath, animations, all of it.
-          </motion.p>
-
-          <motion.p
-            className="font-hand"
-            style={{ fontSize: isMobile ? 20 : 24, color: "rgba(255,252,232,0.8)", marginTop: 34, transform: "rotate(-0.5deg)" }}
-            {...fadeUp} transition={{ duration: 0.7 }}
-          >
-            The door you clicked to get in.
+            places I've been running underneath, animations, all of it. What
+            started as a test of whether it was even possible turned into the
+            thing I'm proudest of building.
           </motion.p>
         </div>
       </div>
 
-      {/* ── BLOCK 3 — CREAM, the sessions + terminal ─────────────── */}
+      {/* ── BLOCK 3 — CREAM, the sessions + terminal + bot ───────── */}
       <div style={{ position: "relative", overflow: "hidden", paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 72 : 110, paddingBottom: isMobile ? 72 : 110 }}>
-        <Spark size={isMobile ? 24 : 46} color={RED} style={{ position: "absolute", top: "10%", right: "9%", opacity: 0.16 }} />
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "stretch" : "flex-start", gap: isMobile ? 32 : "clamp(36px, 5vw, 80px)" }}>
+          {/* text + terminal */}
+          <div style={{ flex: 1, minWidth: 0, maxWidth: 660 }}>
+            <motion.p className="font-body" style={bodyCream} {...fadeUp} transition={{ duration: 0.7 }}>
+              It was two weeks of conversations with Claude Code. I'd describe
+              what I wanted in plain words, it would build it, I'd break it
+              trying to change one tiny thing, and we'd work out together why it
+              broke. Breaking things, understanding them, breaking them again...
+              that exact loop is how I actually learned what this tool can do,
+              and how far past a CV it can take you.
+            </motion.p>
 
-        <div style={{ position: "relative", zIndex: 1, maxWidth: 760 }}>
-          <motion.p className="font-body" style={{ ...bodyCream, maxWidth: 640 }} {...fadeUp} transition={{ duration: 0.7 }}>
-            Two weeks of conversations with Claude Code. Breaking things,
-            understanding them, breaking them again.
-          </motion.p>
+            {/* terminal mockup */}
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              style={{ marginTop: isMobile ? 32 : 44, backgroundColor: "#1a1a17", border: "1px solid rgba(0,0,0,0.2)", boxShadow: "0 24px 48px rgba(40,28,12,0.22)", overflow: "hidden" }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "12px 16px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+                <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#ff5f57" }} />
+                <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#febc2e" }} />
+                <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#28c840" }} />
+                <span className="font-body" style={{ marginLeft: 10, fontSize: 11, color: "rgba(255,252,232,0.4)", letterSpacing: "0.06em" }}>claude code</span>
+              </div>
+              <div style={{ padding: isMobile ? "18px 16px" : "22px 24px", display: "flex", flexDirection: "column", gap: 12, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", fontSize: isMobile ? 12.5 : 13.5, lineHeight: 1.5 }}>
+                <div><span style={{ color: CLAY }}>❯</span> <span style={{ color: "rgba(255,252,232,0.9)" }}>open a garage door when someone clicks</span></div>
+                <div style={{ color: "rgba(255,252,232,0.55)" }}>● built the entrance --&gt; door lifts on click, 1.2s</div>
+                <div><span style={{ color: CLAY }}>❯</span> <span style={{ color: "rgba(255,252,232,0.9)" }}>put the F1 videos behind my story</span></div>
+                <div style={{ color: "rgba(255,252,232,0.55)" }}>● done. also fixed the thing you broke last time</div>
+                <div><span style={{ color: CLAY }}>❯</span> <span style={{ color: "rgba(255,252,232,0.9)" }}>break it. understand it. break it again</span></div>
+                <div style={{ color: "rgba(255,252,232,0.55)" }}>● ...for two weeks straight <span style={{ opacity: 0.5 }}>▋</span></div>
+              </div>
+            </motion.div>
+          </div>
 
-          {/* terminal mockup */}
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            style={{ marginTop: isMobile ? 32 : 44, backgroundColor: "#1a1a17", border: "1px solid rgba(0,0,0,0.2)", boxShadow: "0 24px 48px rgba(40,28,12,0.22)", overflow: "hidden", maxWidth: 620 }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "12px 16px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#ff5f57" }} />
-              <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#febc2e" }} />
-              <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#28c840" }} />
-              <span className="font-body" style={{ marginLeft: 10, fontSize: 11, color: "rgba(255,252,232,0.4)", letterSpacing: "0.06em" }}>claude code</span>
-            </div>
-            <div style={{ padding: isMobile ? "18px 16px" : "22px 24px", display: "flex", flexDirection: "column", gap: 12, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", fontSize: isMobile ? 12.5 : 13.5, lineHeight: 1.5 }}>
-              <div><span style={{ color: CLAY }}>❯</span> <span style={{ color: "rgba(255,252,232,0.9)" }}>open a garage door when someone clicks</span></div>
-              <div style={{ color: "rgba(255,252,232,0.55)" }}>● built the entrance --&gt; door lifts on click, 1.2s</div>
-              <div><span style={{ color: CLAY }}>❯</span> <span style={{ color: "rgba(255,252,232,0.9)" }}>put the F1 videos behind my story</span></div>
-              <div style={{ color: "rgba(255,252,232,0.55)" }}>● done. also fixed the thing you broke last time</div>
-              <div><span style={{ color: CLAY }}>❯</span> <span style={{ color: "rgba(255,252,232,0.9)" }}>break it. understand it. break it again</span></div>
-              <div style={{ color: "rgba(255,252,232,0.55)" }}>● ...for two weeks straight <span style={{ opacity: 0.5 }}>▋</span></div>
-            </div>
-          </motion.div>
+          {/* Claude bot avatar */}
+          <motion.img
+            src="/claude_bot.png"
+            alt="The Claude Code mascot, coding with a coffee"
+            onError={(e) => { e.currentTarget.style.display = "none"; }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: [0, -10, 0] }}
+            viewport={{ once: true }}
+            transition={{ opacity: { duration: 0.8 }, y: { duration: 5, repeat: Infinity, ease: "easeInOut" } }}
+            style={{
+              flex: "0 0 auto",
+              alignSelf: isMobile ? "center" : "center",
+              width: isMobile ? 150 : "clamp(160px, 16vw, 240px)",
+              height: "auto",
+            }}
+          />
         </div>
       </div>
 
@@ -210,7 +208,7 @@ const GaragePage = () => {
         </video>
         <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.66)", zIndex: 1 }} />
 
-        <div style={{ position: "relative", zIndex: 2, paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 100 : 120, paddingBottom: isMobile ? 100 : 120, maxWidth: 780 }}>
+        <div style={{ position: "relative", zIndex: 2, paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 100 : 120, paddingBottom: isMobile ? 100 : 120, maxWidth: 820 }}>
           <motion.p className="font-body" style={bodyDark} {...fadeUp} transition={{ duration: 0.7 }}>
             A web portfolio looks like something only developers get to make. It
             isn't, not anymore. I'm a business student, not an engineer, and
