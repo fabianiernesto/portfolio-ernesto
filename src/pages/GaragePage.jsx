@@ -178,22 +178,41 @@ const GaragePage = () => {
             </motion.div>
           </div>
 
-          {/* Claude bot avatar */}
-          <motion.img
-            src="/claude_bot.png"
-            alt="The Claude Code mascot, coding with a coffee"
-            onError={(e) => { e.currentTarget.style.display = "none"; }}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: [0, -10, 0] }}
-            viewport={{ once: true }}
-            transition={{ opacity: { duration: 0.8 }, y: { duration: 5, repeat: Infinity, ease: "easeInOut" } }}
+          {/* Claude Code mascots */}
+          <div
             style={{
               flex: "0 0 auto",
-              alignSelf: isMobile ? "center" : "center",
-              width: isMobile ? 150 : "clamp(160px, 16vw, 240px)",
-              height: "auto",
+              alignSelf: "center",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: isMobile ? 6 : 10,
+              width: isMobile ? 260 : "clamp(220px, 22vw, 320px)",
             }}
-          />
+          >
+            {[
+              { src: "/claude_bot.png", alt: "Claude Code mascot with a coffee" },
+              { src: "/claude_wizard.png", alt: "Claude Code mascot as a wizard" },
+              { src: "/claude_chef.png", alt: "Claude Code mascot as a chef" },
+              { src: "/claude_detective.png", alt: "Claude Code mascot as a detective" },
+            ].map((bot, i) => (
+              <motion.img
+                key={bot.src}
+                src={bot.src}
+                alt={bot.alt}
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+                viewport={{ once: true }}
+                transition={{
+                  opacity: { duration: 0.6, delay: i * 0.1 },
+                  scale: { duration: 0.6, delay: i * 0.1 },
+                  y: { duration: 4 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 },
+                }}
+                whileHover={{ scale: 1.08, rotate: i % 2 ? 3 : -3 }}
+                style={{ width: "100%", height: "auto" }}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
