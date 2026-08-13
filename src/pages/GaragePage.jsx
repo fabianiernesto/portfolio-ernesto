@@ -181,12 +181,13 @@ const GaragePage = () => {
           {/* Claude Code mascots */}
           <div
             style={{
-              flex: "0 0 auto",
+              flex: isMobile ? "0 0 auto" : "0 0 auto",
               alignSelf: "center",
+              margin: isMobile ? "0 auto" : "0",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: isMobile ? 6 : 10,
-              width: isMobile ? 260 : "clamp(220px, 22vw, 320px)",
+              gap: isMobile ? 12 : 22,
+              width: isMobile ? 300 : "clamp(320px, 32vw, 480px)",
             }}
           >
             {[
