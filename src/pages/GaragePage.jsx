@@ -82,20 +82,19 @@ const GaragePage = () => {
           </div>
 
           {/* CLAUDE CODE wordmark */}
-          <motion.div
+          <motion.img
+            src="/claude_code_wordmark.png"
+            alt="Claude Code"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            style={{ flex: "0 0 auto", alignSelf: isMobile ? "flex-start" : "center" }}
-            aria-hidden="true"
-          >
-            <span
-              className="font-display"
-              style={{ display: "block", color: CLAY, lineHeight: 0.86, fontSize: isMobile ? 56 : "clamp(70px, 8vw, 130px)", letterSpacing: "0.01em" }}
-            >
-              CLAUDE<br />CODE
-            </span>
-          </motion.div>
+            style={{
+              flex: "0 0 auto",
+              alignSelf: isMobile ? "flex-start" : "center",
+              width: isMobile ? 220 : "clamp(280px, 30vw, 460px)",
+              height: "auto",
+            }}
+          />
         </div>
       </div>
 
