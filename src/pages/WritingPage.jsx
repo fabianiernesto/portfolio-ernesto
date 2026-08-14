@@ -80,7 +80,7 @@ const WritingPage = () => {
 
       {/* ── BLOCK 2 — DARK, MOTORSPORT STORIES ───────────────────── */}
       <div style={{ position: "relative", overflow: "hidden", display: "flex", alignItems: "center" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundColor: "#0d0d0b", zIndex: 0 }} />
+        <div style={{ position: "absolute", inset: 0, backgroundColor: RED, zIndex: 0 }} />
 
         <div style={{ position: "relative", zIndex: 2, width: "100%", paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 90 : 120, paddingBottom: isMobile ? 90 : 120 }}>
           <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 36 : "clamp(40px, 5vw, 80px)", alignItems: isMobile ? "stretch" : "center" }}>
@@ -183,7 +183,7 @@ const WritingPage = () => {
           autoPlay muted loop playsInline
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }}
         >
-          <source src="/hero_bg.mp4" type="video/mp4" />
+          <source src="/writing_close_bg.mp4" type="video/mp4" />
         </video>
         <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.68)", zIndex: 1 }} />
 

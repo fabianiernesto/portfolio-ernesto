@@ -224,7 +224,7 @@ const GaragePage = () => {
           autoPlay muted loop playsInline
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }}
         >
-          <source src="/hero_bg.mp4" type="video/mp4" />
+          <source src="/garage_close_bg.mp4" type="video/mp4" />
         </video>
         <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.66)", zIndex: 1 }} />
 
