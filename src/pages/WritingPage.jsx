@@ -85,13 +85,13 @@ const WritingPage = () => {
             position: "absolute",
             inset: 0,
             backgroundColor: "#0d0d0b",
-            backgroundImage: "url('/now_writing.jpg')",
+            backgroundImage: "url('/now_f1.jpg')",
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "center 22%",
             zIndex: 0,
           }}
         />
-        <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.72)", zIndex: 1 }} />
+        <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.74)", zIndex: 1 }} />
 
         <div style={{ position: "relative", zIndex: 2, width: "100%", paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 90 : 120, paddingBottom: isMobile ? 90 : 120 }}>
           <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 36 : "clamp(40px, 5vw, 80px)", alignItems: isMobile ? "stretch" : "center" }}>
