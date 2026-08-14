@@ -11,6 +11,7 @@ import StoryPage from "./pages/StoryPage";
 import WhyPage from "./pages/WhyPage";
 import NowPage from "./pages/NowPage";
 import GaragePage from "./pages/GaragePage";
+import WritingPage from "./pages/WritingPage";
 import ProjectPage from "./pages/ProjectPage";
 import ContactPage from "./pages/ContactPage";
 
@@ -105,6 +106,7 @@ function App() {
           <Route path="/why-motorsport" element={<WhyPage />} />
           <Route path="/building-now" element={<NowPage />} />
           <Route path="/building-now/garage" element={<GaragePage />} />
+          <Route path="/building-now/writing" element={<WritingPage />} />
           <Route path="/building-now/:slug" element={<ProjectPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<Home entered={entered} setEntered={setEntered} />} />
