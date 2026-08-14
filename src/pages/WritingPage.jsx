@@ -80,18 +80,7 @@ const WritingPage = () => {
 
       {/* ── BLOCK 2 — DARK, MOTORSPORT STORIES ───────────────────── */}
       <div style={{ position: "relative", overflow: "hidden", display: "flex", alignItems: "center" }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "#0d0d0b",
-            backgroundImage: "url('/now_f1.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center 22%",
-            zIndex: 0,
-          }}
-        />
-        <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.74)", zIndex: 1 }} />
+        <div style={{ position: "absolute", inset: 0, backgroundColor: "#0d0d0b", zIndex: 0 }} />
 
         <div style={{ position: "relative", zIndex: 2, width: "100%", paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 90 : 120, paddingBottom: isMobile ? 90 : 120 }}>
           <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 36 : "clamp(40px, 5vw, 80px)", alignItems: isMobile ? "stretch" : "center" }}>
