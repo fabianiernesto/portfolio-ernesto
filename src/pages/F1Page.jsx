@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
 
-const CREAM = "#fffce8";
 const RED = "#a9170b";
 
 const F1Page = () => {
@@ -78,7 +77,6 @@ const F1Page = () => {
         SOON<motion.span
           animate={{ opacity: [1, 0.25, 1] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-          style={{ color: CREAM }}
         >...</motion.span>
       </motion.span>
     </div>
