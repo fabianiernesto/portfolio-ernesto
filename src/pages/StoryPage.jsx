@@ -3,6 +3,8 @@ import BackToGarage from "../components/BackToGarage";
 
 import Stage5_Present from "../components/stages/Stage5_Present";
 import StageSheffield from "../components/stages/StageSheffield";
+import StageBetaGamma from "../components/stages/StageBetaGamma";
+import StageTopClass from "../components/stages/StageTopClass";
 import Stage4_Unno from "../components/stages/Stage4_Unno";
 import Stage3_DenseYear from "../components/stages/Stage3_DenseYear";
 import StagePodcast from "../components/stages/StagePodcast";
@@ -19,6 +21,8 @@ const StoryPage = () => {
       <main className="relative z-10">
         <Stage5_Present />
         <StageSheffield />
+        <StageBetaGamma />
+        <StageTopClass />
         <Stage4_Unno />
         <Stage3_DenseYear />
         <Stage2_Paris />
