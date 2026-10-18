@@ -20,9 +20,9 @@ const StoryPage = () => {
 
       <main className="relative z-10">
         <Stage5_Present />
-        <StageSheffield />
         <StageBetaGamma />
         <StageTopClass />
+        <StageSheffield />
         <Stage4_Unno />
         <Stage3_DenseYear />
         <Stage2_Paris />
