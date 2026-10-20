@@ -190,7 +190,7 @@ const WritingPage = () => {
         <div style={{ position: "relative", zIndex: 2, paddingLeft: PL, paddingRight: PR, paddingTop: isMobile ? 100 : 120, paddingBottom: isMobile ? 100 : 120, maxWidth: 820 }}>
           <motion.p className="font-body" style={bodyDark} {...fadeUp} transition={{ duration: 0.7 }}>
             I write these every week because it's the fastest way I know to think
-            properly about an industry I want to work in. Nobody commissioned
+            about an industry I want to work in. Nobody commissioned
             them and nobody is paying for them... they're just me, a topic that
             won't leave me alone, and the part of it I can't stop digging into.
           </motion.p>

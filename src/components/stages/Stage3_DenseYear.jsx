@@ -210,7 +210,7 @@ const Stage3_DenseYear = () => {
               I built ERASMOVE because I'd been through the Erasmus process twice and knew exactly where it broke, the information scattered across a hundred different places, deadlines that appear out of nowhere, a housing search that nobody prepares you for, and the general feeling that you're supposed to figure it all out alone.
             </p>
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-              So I designed a service that actually explained it, housing, paperwork, insurance, communication with host institutions, everything packaged in a way that worked for someone going through it for the first time.
+              So I designed a service that explained it, housing, paperwork, insurance, communication with host institutions, everything packaged in a way that worked for someone going through it for the first time.
             </p>
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(255,252,232,0.85)", margin: 0 }}>
               Months of concept development, user research, business model definition, and then a pitch in front of every entrepreneurship project at IQS.

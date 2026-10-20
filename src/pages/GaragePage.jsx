@@ -74,7 +74,7 @@ const GaragePage = () => {
 
             <motion.p className="font-body" style={{ ...bodyCream, marginTop: 22 }} {...fadeUp} transition={{ duration: 0.7 }}>
               So instead of sending another one, I built this. A website you can
-              actually walk through, coded from zero with Claude Code, by someone
+              walk through, coded from zero with Claude Code, by someone
               who had never written a single line of code in his life. Not a
               template, not an agency... just me typing what I wanted in plain
               words and watching it slowly turn into a place instead of a

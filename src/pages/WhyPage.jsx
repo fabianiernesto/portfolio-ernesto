@@ -265,7 +265,7 @@ const WhyPage = () => {
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
               It's not that we don't talk about other things. It's that
               something happens when it's cars that doesn't happen anywhere
-              else, a way of both actually being there at the same time without
+              else, a way of both being there at the same time without
               either of us trying.
             </p>
           </motion.div>
