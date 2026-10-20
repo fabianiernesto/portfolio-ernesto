@@ -104,7 +104,7 @@ const WritingPage = () => {
               </motion.p>
 
               <motion.p className="font-body" style={{ ...bodyDark, marginTop: 22 }} {...fadeUp} transition={{ duration: 0.7 }}>
-                The story is the way in. What I'm actually chasing is the
+                The story is the way in. What I'm chasing is the
                 commercial reading underneath it, the one a fan account never
                 reaches and someone who thinks in contracts and partnerships gets
                 immediately. Then I sit with what it makes me think, without

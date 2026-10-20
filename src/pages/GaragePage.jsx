@@ -124,9 +124,9 @@ const GaragePage = () => {
           </motion.span>
 
           <motion.p className="font-body" style={{ ...bodyDark, marginTop: 28 }} {...fadeUp} transition={{ duration: 0.7 }}>
-            For months I'd been obsessed with how far AI actually goes... not the
+            For months I'd been obsessed with how far AI goes... not the
             hype, the real thing, what one person can build alone if they
-            properly go all in. A good friend of mine, Marc Guitart Frescó, told
+            go all in. A good friend of mine, Marc Guitart Frescó, told
             me you could code a website from zero without knowing how to program.
             So I set out to find whether that was true.
           </motion.p>
@@ -152,7 +152,7 @@ const GaragePage = () => {
               what I wanted in plain words, it would build it, I'd break it
               trying to change one tiny thing, and we'd work out together why it
               broke. Breaking things, understanding them, breaking them again...
-              that exact loop is how I actually learned what this tool can do,
+              that exact loop is how I learned what this tool can do,
               and how far past a CV it can take you.
             </motion.p>
 
@@ -232,7 +232,7 @@ const GaragePage = () => {
           <motion.p className="font-body" style={bodyDark} {...fadeUp} transition={{ duration: 0.7 }}>
             A web portfolio looks like something only developers get to make. It
             isn't, not anymore. I'm a business student, not an engineer, and
-            honestly that was half the point. The other half was seeing how far I
+            that was half the point. The other half was seeing how far I
             could push Claude Code myself, past anything I'd done with it before,
             and the only way to learn that is to build something real and let it
             break on you.

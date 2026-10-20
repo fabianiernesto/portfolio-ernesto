@@ -74,7 +74,7 @@ const Stage2_Paris = () => {
               Paris was my first Erasmus, the first time I'd ever gone somewhere completely alone, and I understood pretty quickly that the city was going to give me EXACTLY what I put into it, nothing more.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              So every weekend, without exception, I walked. Solo, hours through the centre, the same streets and different ones, the same museums again and again until I stopped looking like a tourist and started actually seeing things... I don't know what that kind of solitude does to you when you're 19 and you let it in properly, but somewhere in the middle of all those walks something started forming that I hadn't planned.
+              So every weekend, without exception, I walked. Solo, hours through the centre, the same streets and different ones, the same museums again and again until I stopped looking like a tourist and started seeing things... I don't know what that kind of solitude does to you when you're 19 and you let it in, but somewhere in the middle of all those walks something started forming that I hadn't planned.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
               That became a podcast.

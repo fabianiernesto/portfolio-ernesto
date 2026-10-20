@@ -94,7 +94,7 @@ const StageTopClass = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.9, delay: 0.3 }}
           >
-            And this is the one that actually got me. Because everything you're about to scroll through, Sheffield, UNNO, Paris, Barcelona, the podcast, the year where I was doing three things at once and sleeping badly... none of it came out of a plan. It came out of saying yes and figuring it out after. The plaque is just the receipt.
+            And this is the one that got me. Because everything you're about to scroll through, Sheffield, UNNO, Paris, Barcelona, the podcast, the year where I was doing three things at once and sleeping badly... none of it came out of a plan. It came out of saying yes and figuring it out after. The plaque is just the receipt.
           </motion.p>
 
           <motion.p
@@ -105,7 +105,7 @@ const StageTopClass = () => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.9, delay: 0.45 }}
           >
-            That's me in the photo, by the way, about two seconds after they handed it over, with the guy giving out the awards pointing back at me like we'd just won something together. And honestly that's how it felt. The culmination of my degree, on a stage, in about four seconds.
+            That's me in the photo, by the way, about two seconds after they handed it over, with the guy giving out the awards pointing back at me like we'd just won something together. And that's how it felt. The culmination of my degree, on a stage, in about four seconds.
           </motion.p>
         </div>
       </div>

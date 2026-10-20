@@ -106,7 +106,7 @@ const Stage5_Present = () => {
               viewport={{ once: true, margin: "-15%" }}
               transition={{ duration: 0.9, delay: 0.45 }}
             >
-              All of it pulling toward the same place: the motor industry. Motorsport, automotive, the business behind both. That's where I'm going. This is where I've been.
+              All of it pulling towards the same place: the motor industry. Motorsport, automotive, the business behind both. That's where I'm going. This is where I've been.
             </motion.p>
           </div>
         </motion.div>
@@ -245,10 +245,10 @@ const Stage5_Present = () => {
               transition={{ duration: 1, delay: 1.0 }}
             >
               <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-                21 years old, just graduated, zero experience in the motor industry... and I've never wanted something this clearly in my life.
+                22 years old, just graduated, zero experience in the motor industry... and I've never wanted something this clearly in my life.
               </p>
               <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-                I've spent the last three years throwing myself into things I had no business doing at that age, a HealthTech startup at 19, co-founding my own studio at 20, two Erasmus exchanges, a hackathon win, a pitch that walked out with Best Pitch Award at IQS. Not because I had a plan, but because sitting still has never been an option for me.
+                I've spent the last four years throwing myself into things I had no business doing at that age, a HealthTech startup at 19, co-founding my own studio at 20, two Erasmus exchanges, a hackathon win, a pitch that walked out with Best Pitch Award at IQS. Not because I had a plan, but because sitting still has never been an option for me.
               </p>
               <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
                 Motorsport has been there through all of it. The business behind the sport, the decisions that happen away from the circuit, the strategy, the operations, the people who make it run. That's where I'm going, and I'm not particularly good at giving up on things.

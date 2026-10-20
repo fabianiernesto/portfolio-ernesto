@@ -149,7 +149,7 @@ const NowPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          Wanting in is not a plan, so this is the part I can actually control.
+          Wanting in is not a plan, so this is the part I can control.
           Three things running right now, all pointing at the same place... pick
           one.
         </motion.p>

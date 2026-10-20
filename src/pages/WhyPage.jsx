@@ -124,7 +124,7 @@ const WhyPage = () => {
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
           >
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-              My mother swears she can still hear it. Three straight months of
+              My mum swears she can still hear it. Three straight months of
               the same film, a two-year-old planted in front of the screen
               watching a red cartoon car go round in circles... and the second
               it ended, asking for it again like it was the first time.
@@ -132,13 +132,13 @@ const WhyPage = () => {
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
               It was the engines. Even then, the sound of them put goosebumps
               on a kid who could barely talk... and when I rewatched the film a
-              month ago (literally, a month ago) my skin did the EXACT same
+              month ago (yes, a month ago) my skin did the EXACT same
               thing. Same shiver, same kid.
             </p>
             <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
               Twenty years later CARS is still the most-watched film of my
               life, and nobody in my house has ever managed to explain it (my
-              mother just rolls her eyes when it comes up). Some things move in
+              mum just rolls her eyes when it comes up). Some things move in
               before you have words for them, and this one never left.
             </p>
           </motion.div>
@@ -292,7 +292,7 @@ const WhyPage = () => {
             The strangest part is that this connection has made me want to be in
             this world in a way I can no longer separate from him. I don't know
             where the passion for the sport ends and where what I feel when I'm
-            with my dad talking about it begins... and honestly, I'm not sure I
+            with my dad talking about it begins... and I'm not sure I
             want to know.
           </motion.p>
         </div>

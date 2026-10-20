@@ -87,7 +87,7 @@ const StagePodcast = () => {
             No format, no guest list, no strategy... just me talking through things I was figuring out in real time because at some point the thoughts needed somewhere to go and writing wasn't cutting it anymore.
           </p>
           <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
-            The people around me listened, close friends, family, and that was enough to keep going. It was never meant to reach anyone beyond that, and honestly that's what made it feel real, there was no performance behind it.
+            The people around me listened, close friends, family, and that was enough to keep going. It was never meant to reach anyone beyond that, and that's what made it feel real, there was no performance behind it.
           </p>
           <p className="font-body" style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,252,232,0.85)", margin: 0 }}>
             Six months, published consistently, ended intentionally. I still don't know if I said anything particularly useful... but thinking out loud through a microphone taught me something writing never did.
@@ -116,7 +116,7 @@ const StagePodcast = () => {
             whileHover={{ opacity: 0.7 }}
             transition={{ duration: 0.2 }}
           >
-            Listen on Spotify →
+            Listen on Spotify -->
           </motion.a>
         </motion.div>
 

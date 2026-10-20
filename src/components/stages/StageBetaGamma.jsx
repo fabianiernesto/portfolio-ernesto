@@ -74,10 +74,10 @@ const StageBetaGamma = () => {
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
           >
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              Beta Gamma Sigma is the honour society for business schools, and they only invite the top 10% of the students. I'll be honest with you, I had to look it up when the email landed because I had no clue what it was. Then I read it properly and just sat there for a second.
+              Beta Gamma Sigma is the honour society for business schools, and they only invite the top 10% of the students. I had to look it up when the email landed because I had no clue what it was. Then I read it twice and just sat there for a second.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              What I like about this one is that I never went looking for it. I spent my degree saying yes to projects that made zero sense on paper, launching things that half worked, flying to Paris for a hackathon with people I'd met a week before... and somewhere in the middle of all that mess the grades came along too.
+              What I like about this one is that I never went looking for it. I spent my degree saying yes to projects that made zero sense on paper, launching things that half worked, 48 hours in a hackathon about construction waste with people I barely knew... and somewhere in the middle of all that mess the grades came along too.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
               Turns out caring about something is a pretty decent study method.

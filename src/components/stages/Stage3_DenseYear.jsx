@@ -102,7 +102,7 @@ const Stage3_DenseYear = () => {
                 The tester programme for MouthX, coordinating logistics, user communication, feedback loops across real patients. The entire dental sector vertical, from zero, market research to B2B partnerships to closing a deal with one of the largest dental clinic groups in Spain... alone, start to finish.
               </p>
               <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-                And the ERP system, sitting with engineers and figuring out, mostly self-taught, how internal operations should actually be structured. I don't know exactly when the intern title stopped making sense. But at some point it did.
+                And the ERP system, sitting with engineers and figuring out, mostly self-taught, how internal operations should be structured. I don't know exactly when the intern title stopped making sense. But at some point it did.
               </p>
             </motion.div>
 
@@ -226,7 +226,7 @@ const Stage3_DenseYear = () => {
           >
             <span className="font-display text-anton-48" style={{ color: CREAM, display: "block", lineHeight: 0.95 }}>Best Pitch Award</span>
             <span className="font-body" style={{ fontSize: 16, color: "rgba(255,252,232,0.85)", marginTop: 12, display: "block", maxWidth: 480, lineHeight: 1.6 }}>
-              From all projects, my pitch and project was the most valued in front of the judges and business angels.
+              Out of every entrepreneurship project at IQS, the judges and the business angels put mine first.
             </span>
           </motion.div>
 

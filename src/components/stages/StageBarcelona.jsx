@@ -71,7 +71,7 @@ const StageBarcelona = () => {
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
           >
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
-              Bachillerato in Mallorca had been genuinely hard... the kind of hard that has nothing to do with the work, I crossed paths with the wrong people and that stays with you longer than you'd like it to.
+              Bachillerato in Mallorca had been hard... the kind of hard that has nothing to do with the work, I crossed paths with the wrong people and that stays with you longer than you'd like it to.
             </p>
             <p className="font-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(0,0,0,0.75)", margin: 0 }}>
               Barcelona felt like I could finally breathe. First year at IQS, nobody knew me, nothing carried over, and I remember showing up with this urgency I couldn't quite explain, not ambition exactly, more like I had something to recover and I was going to do it HERE.
