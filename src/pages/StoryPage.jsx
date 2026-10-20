@@ -10,6 +10,8 @@ import Stage3_DenseYear from "../components/stages/Stage3_DenseYear";
 import StagePodcast from "../components/stages/StagePodcast";
 import StageBarcelona from "../components/stages/StageBarcelona";
 import StageHackathon from "../components/stages/StageHackathon";
+import StageYearOne from "../components/stages/StageYearOne";
+import StageOrigin from "../components/stages/StageOrigin";
 import StageClosing from "../components/stages/StageClosing";
 import Stage2_Paris from "../components/stages/Stage2_Paris";
 
@@ -29,6 +31,8 @@ const StoryPage = () => {
         <StagePodcast />
         <StageBarcelona />
         <StageHackathon />
+        <StageYearOne />
+        <StageOrigin />
         <StageClosing />
       </main>
     </div>
