@@ -362,7 +362,7 @@ const WhyPage = () => {
               it was already mine.
             </p>
             <p className="font-body" style={bodyStyle}>
-              Enrique Tintoré. Barcelona, 1913. A textile industrialist and
+              Enrique Tintoré, born in Barcelona in 1913. A textile industrialist and
               member of the legendary Penya Rhin, one of the very few people who
               ever shared a grid with Fangio and Nuvolari... the F1 from before
               the World Championship even existed. And he wasn't the star of it
@@ -380,8 +380,8 @@ const WhyPage = () => {
         <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center", alignSelf: isMobile ? "center" : "auto", width: isMobile ? "100%" : "auto" }}>
           <ArchivePrint
             src="/why_tintore.png"
-            alt="The red and yellow Maserati of Enrique Tintoré, Penya Rhin era"
-            caption="The photo she sent me. Enrique Tintoré's Maserati."
+            alt="The red and yellow Maserati of Enrique Tintoré in the 1940s, Penya Rhin era"
+            caption="The photo she sent me. Enrique Tintoré's Maserati, 1940s."
             tilt={2.6}
             isMobile={isMobile}
           />
