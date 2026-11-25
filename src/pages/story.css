@@ -118,3 +118,6 @@
 .w-frame.fit { background:#0f0f0f; } .w-frame.fit .media { object-fit:contain; }
 
 .w-frame.cert { aspect-ratio:791/557; background:#fff; }
+
+/* Only the inner pages need this (pinned scenes). The homepage keeps its own. */
+html:has(.story), body:has(.story) { overflow-x:clip; }

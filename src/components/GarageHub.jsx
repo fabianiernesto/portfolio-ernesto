@@ -10,7 +10,7 @@ const ITEMS = [
   {
     index: "01",
     title: "BUILT ALREADY",
-    desc: "Four years of building, and what I do today.",
+    desc: "Four years of building, told as they happened.",
     to: "/story",
     img: "/hub_now.jpg",
     alt: "Formula 1 car seen from above with the driver in the cockpit",
@@ -124,8 +124,8 @@ const Panel = ({ item, i, entered, isMobile, hovered, setHovered }) => {
             style={{
               display: "block",
               color: CREAM,
-              fontFamily: "Michroma, sans-serif", letterSpacing: "-0.045em", fontSize: isMobile ? 24 : "clamp(13px, 1.42vw, 30px)",
-              lineHeight: 1.14,
+              fontSize: isMobile ? 30 : "clamp(24px, 2.4vw, 40px)",
+              lineHeight: 0.95,
               textWrap: "balance",
             }}
           >
