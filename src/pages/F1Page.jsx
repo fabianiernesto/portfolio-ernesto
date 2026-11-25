@@ -1,86 +1,31 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import useIsMobile from "../hooks/useIsMobile";
+/* eslint-disable */
+import { Cover, End, Hero, Track, Wing } from "../components/scenes";
 
-const RED = "#a9170b";
+const LI = "https://www.linkedin.com/in/ernestofabiani/";
+const RS = "https://racing-simplified.vercel.app/";
+const W = "/wings/";
 
-const F1Page = () => {
-  const isMobile = useIsMobile();
+const PANELS = [
+  { tab: "The idea", wide: true, title: ["Every race, simplified"], img: W + "rs_home.webp", alt: "Racing Simplified home", when: "Live since 25 November 2026", what: "racing-simplified.vercel.app",
+    left: ["Formula 1 is full of things happening at once, a strategy call here, a penalty there, a gap that suddenly matters, and unless you already know the sport most of it just goes past you."],
+    right: ["So I took every race of the 2026 season and explained it so that ANYONE can follow it, using the official timing data. 21 Grands Prix so far, every session of every weekend."], link: ["Open the website", RS] },
+  { tab: "Read it", wide: true, title: ["Read it"], img: W + "rs_read.webp", alt: "The sessions of a weekend", when: "Scrolled", what: "The weekend as a story, along the real track",
+    left: ["The circuit draws itself under you and the cards land as the laps go by, with more than 1,300 moments of the season explained one by one."],
+    right: ["And when something big happens it stops you --> would you have pitted? Which penalty would you give if you were the steward? You answer first, then the data shows what the team did."] },
+  { tab: "Play it", wide: true, title: ["Play it"], img: W + "rs_call.webp", alt: "Call the race", when: "Simplified", what: "Two ways of playing the real race",
+    left: ["Call the race plays the whole thing back in about three minutes on the real circuit, it stops when the race turns and asks you what happens next."],
+    right: ["In Paddock exchange every driver is a share worth his position, so you buy low and sell high lap by lap, as the race really went."] },
+  { tab: "How it's built", wide: true, title: ["How it's built"], img: W + "rs_hub.webp", alt: "The Las Vegas hub", when: "Since 7 August 2026", what: "Alone, after my 9 to 6, with Claude Code",
+    left: ["Thousands of lines of Python read the timing of every session (OpenF1 and FastF1) and the website is made in Next.js. If the data can't back a claim, the claim isn't made."],
+    right: ["For a while my code was convinced races had been stopped with a red flag, and the culprit was hiding in two words: chequeRED FLAG hahaha"], link: ["Open the website", RS] },
+];
 
-  return (
-    <div
-      style={{
-        backgroundColor: "#0d0d0b",
-        position: "relative",
-        minHeight: "100dvh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        paddingLeft: isMobile ? 20 : 48,
-        paddingRight: isMobile ? 20 : 48,
-        paddingTop: isMobile ? 90 : 110,
-        paddingBottom: isMobile ? 80 : 100,
-      }}
-    >
-      {/* Back to the grid */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        style={{ position: "fixed", top: 20, left: 20, zIndex: 8000, mixBlendMode: "difference" }}
-      >
-        <Link
-          to="/building-now"
-          data-hover="true"
-          className="font-body"
-          style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#ffffff", textDecoration: "none", fontSize: 11, letterSpacing: "0.12em" }}
-        >
-          <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M8.5 5H1.5M1.5 5L4.5 2M1.5 5L4.5 8" />
-          </svg>
-          BUILDING NOW
-        </Link>
-      </motion.div>
-
-      {/* The preview */}
-      <motion.img
-        src="/f1_preview.png"
-        alt="A preview of the Formula 1 race weekend recap I'm building"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        style={{
-          width: "100%",
-          maxWidth: 1280,
-          height: "auto",
-          display: "block",
-          border: "1px solid rgba(255,252,232,0.14)",
-          boxShadow: "0 30px 70px rgba(0,0,0,0.6)",
-        }}
-      />
-
-      {/* Soon */}
-      <motion.span
-        className="font-display"
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.35 }}
-        style={{
-          marginTop: isMobile ? 36 : 52,
-          fontSize: isMobile ? 40 : "clamp(48px, 6vw, 88px)",
-          color: RED,
-          lineHeight: 1,
-          letterSpacing: "0.02em",
-        }}
-      >
-        SOON<motion.span
-          animate={{ opacity: [1, 0.25, 1] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-        >...</motion.span>
-      </motion.span>
-    </div>
-  );
-};
+const F1Page = () => (
+  <Wing back="/building-now" backLabel="BUILDING NOW">
+    <Hero src={W + "rs_car.webp"} title={["Racing", "Simplified"]} text="Every F1 race of 2026, explained so anyone can follow it. It's live." />
+    <Track panels={PANELS} label="Racing Simplified" />
+    <End title={["It's all yours"]} text="It isn't affiliated with Formula 1 in any way, it's just me trying to make this sport easier to love. And I'm sure something is broken somewhere, so if you find it, tell me." links={[["Open it", RS], ["Let's talk", "/contact"]]} />
+  </Wing>
+);
 
 export default F1Page;

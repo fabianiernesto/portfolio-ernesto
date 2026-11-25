@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
  * Fixed "back to hub" link shown on every sub-page.
  * White + mix-blend-difference so it stays readable on cream and dark alike.
  */
-const BackToGarage = () => {
+const BackToGarage = ({ to = "/", label = "GARAGE" }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
@@ -20,7 +20,7 @@ const BackToGarage = () => {
       }}
     >
       <Link
-        to="/"
+        to={to}
         data-hover="true"
         className="font-body"
         style={{
@@ -36,7 +36,7 @@ const BackToGarage = () => {
         <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
           <path d="M8.5 5H1.5M1.5 5L4.5 2M1.5 5L4.5 8" />
         </svg>
-        GARAGE
+        {label}
       </Link>
     </motion.div>
   );

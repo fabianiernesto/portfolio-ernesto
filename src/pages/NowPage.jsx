@@ -1,175 +1,33 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import BackToGarage from "../components/BackToGarage";
-import useIsMobile from "../hooks/useIsMobile";
-import { PROJECTS } from "../data/nowProjects";
+/* eslint-disable */
+import { Cover, End, Hero, Track, Wing } from "../components/scenes";
 
-const CREAM = "#fffce8";
-const RED = "#a9170b";
-const CARD = "#ffffff";
-const TILE = "#efe9d6";
-const INK = "#111110";
+const LI = "https://www.linkedin.com/in/ernestofabiani/";
+const RS = "https://racing-simplified.vercel.app/";
+const W = "/wings/";
 
-const StatusChip = ({ label, live }) => (
-  <span
-    className="font-body"
-    style={{
-      display: "inline-block",
-      fontSize: 10,
-      letterSpacing: "0.14em",
-      padding: "5px 11px",
-      whiteSpace: "nowrap",
-      color: live ? CREAM : RED,
-      backgroundColor: live ? RED : "transparent",
-      border: `1px solid ${live ? RED : "rgba(169,23,11,0.45)"}`,
-    }}
-  >
-    {label}
-  </span>
+const PANELS = [
+  { tab: "Racing Simplified", wide: true, title: ["Racing Simplified"], img: W + "rs_home.webp", alt: "The Racing Simplified home page", when: "Live since 25 November 2026", what: "A website that explains every F1 race of 2026",
+    left: ["Built alone, at night and on weekends since 7 August, on the official timing data and with Claude Code."], right: ["You can read every session like a story, or play the race itself."], link: ["See the project", "/building-now/f1"] },
+  { tab: "LinkedIn", wide: true, title: ["LinkedIn"], img: W + "btl2_car.webp", alt: "Behind The Logo, Claude and Williams", when: "Three posts a week, every week", what: "The business behind motorsport",
+    left: ["I'm NOT in motorsport yet!!! And instead of waiting I write about the business side of it, mostly so that by the time I get in I already know how the money moves."],
+    right: ["Drivers' stories with the business decision underneath and the deals behind the logos, in Formula 1, MotoGP and WEC, and every now and then something from my own life."], link: ["How it works", "/building-now/writing"] },
+  { tab: "YouTube", wide: true, title: ["YouTube"], img: W + "youtube.webp", alt: "The YouTube channel", fit: true, when: "Since November 2026", what: "The business behind motorsport, on video",
+    left: ["Behind The Logo in long form, why a brand is on that car and what each side got out of it, with the room a post doesn't have."], right: ["The first one is Claude x Williams, and it's on its way."], link: ["Open the channel", "https://www.youtube.com/@ernestofabianicollado"] },
+  { tab: "MAD Formula Team", wide: true, title: ["MAD Formula Team"], img: W + "mad.webp", alt: "A MAD Formula Team car", pos: "50% 45%", when: "Since November 2026", what: "Formula Student, Universidad Carlos III de Madrid",
+    left: ["Students who design and build a single seater every year and race it around Europe. I work side by side with Andrei Furtuna, its Team Principal & CEO."], right: ["They bring the car and I bring the systems, starting with how the team tells its story on LinkedIn."], link: ["See the team", "https://madformulateam.com/"] },
+  { tab: "Formula Careers", wide: true, title: ["Formula Careers"], img: W + "fcn.webp", alt: "Driving flat out to the Formula Careers Network", pos: "50% 30%", when: "Since August 2026", what: "Founding 20, The Formula Careers Network",
+    left: ["The private community Louise McGrath, founder of Formula Careers, opened for people who want to work in motorsport. She hand-picked 20 of us out of about 1,400 applications."], right: ["I got in for the commercial angle, partnerships, sponsorship and the money behind the sport, in a room where most people come from engineering."], link: ["Formula Careers", "https://formulacareers.com/"] },
+  { tab: "This garage", wide: true, title: ["This garage"], img: W + "door.webp", alt: "The garage door", when: "Live, you're in it", what: "The CV I built instead of sending another PDF",
+    left: ["Every line of this website was built with Claude Code by a business student who had never written code in his life."],
+    right: ["And it keeps changing, which a PDF can't really do :)"], link: ["The story behind it", "/building-now/garage"] },
+];
+
+const NowPage = () => (
+  <Wing>
+    <Hero src={W + "garage_close_bg.mp4"} title={["Building now"]} text="Wanting in is not a plan, so this is the part I can control. Six things running right now, all pointing at the same place..." />
+    <Track panels={PANELS} label="Right now" />
+    <End title={["Let's talk"]} text="Deadline: 24 September 2027. That's when I said in public I'd be working in Formula 1, so if you can see a way in that I can't, I'd love to hear it :)" links={[["Contact", "/contact"], ["LinkedIn", LI]]} />
+  </Wing>
 );
-
-const Card = ({ project, isMobile }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-8%" }}
-    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-    whileHover={{ y: -8, boxShadow: "0 26px 50px rgba(40,28,12,0.18)" }}
-    style={{
-      background: CARD,
-      border: "1px solid rgba(0,0,0,0.12)",
-      boxShadow: "0 14px 30px rgba(40,28,12,0.10)",
-      overflow: "hidden",
-    }}
-  >
-    <Link
-      to={`/building-now/${project.id}`}
-      data-hover="true"
-      style={{ display: "flex", flexDirection: "column", textAlign: "left", textDecoration: "none", height: "100%" }}
-    >
-      {/* image / placeholder */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "3 / 4",
-          overflow: "hidden",
-          backgroundColor: TILE,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {project.img ? (
-          <img
-            src={project.img}
-            alt={project.title}
-            loading="lazy"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        ) : (
-          <span className="font-display" style={{ fontSize: "clamp(80px, 10vw, 140px)", color: "rgba(0,0,0,0.07)", lineHeight: 1 }}>
-            {project.index}
-          </span>
-        )}
-      </div>
-
-      {/* meta */}
-      <div style={{ padding: isMobile ? "24px 22px 26px" : "28px 28px 30px", display: "flex", flexDirection: "column", gap: 16, flex: 1 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-          <StatusChip label={project.status} live={project.live} />
-          <span className="font-body" style={{ fontSize: 13, color: "rgba(0,0,0,0.35)", letterSpacing: "0.1em" }}>
-            {project.index}
-          </span>
-        </div>
-
-        <h2 className="font-display" style={{ fontSize: isMobile ? 28 : "clamp(26px, 2.1vw, 36px)", color: INK, lineHeight: 1.02, margin: 0 }}>
-          {project.title}
-        </h2>
-
-        <p className="font-body" style={{ fontSize: 15, lineHeight: 1.6, color: "rgba(0,0,0,0.60)", margin: 0 }}>
-          {project.teaser}
-        </p>
-
-        <span
-          className="font-body"
-          style={{ marginTop: "auto", paddingTop: 6, fontSize: 12, letterSpacing: "0.08em", color: RED, display: "inline-flex", alignItems: "center", gap: 7 }}
-        >
-          OPEN
-          <svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" />
-          </svg>
-        </span>
-      </div>
-    </Link>
-  </motion.div>
-);
-
-const NowPage = () => {
-  const isMobile = useIsMobile();
-
-  return (
-    <div style={{ backgroundColor: CREAM, position: "relative", minHeight: "100dvh" }}>
-      <BackToGarage />
-
-      {!isMobile && (
-        <motion.span
-          className="font-display"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          style={{
-            position: "fixed",
-            top: 20,
-            right: 20,
-            zIndex: 8000,
-            mixBlendMode: "difference",
-            color: "#ffffff",
-            fontSize: 14,
-            letterSpacing: "0.1em",
-          }}
-        >
-          BUILDING NOW
-        </motion.span>
-      )}
-
-      <div
-        style={{
-          paddingLeft: isMobile ? "24px" : "clamp(40px, 5vw, 80px)",
-          paddingRight: isMobile ? "24px" : "clamp(40px, 5vw, 80px)",
-          paddingTop: isMobile ? 96 : 120,
-          paddingBottom: isMobile ? 72 : 90,
-        }}
-      >
-        {/* ── Intro ─────────────────────────────────────────────── */}
-        <motion.p
-          className="font-quote"
-          style={{ fontSize: isMobile ? 24 : "clamp(28px, 3vw, 42px)", color: INK, margin: 0, maxWidth: 820 }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          Wanting in is not a plan, so this is the part I can control.
-          Three things running right now, all pointing at the same place... pick
-          one.
-        </motion.p>
-
-        {/* ── Cards ─────────────────────────────────────────────── */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-            gap: isMobile ? 24 : "clamp(20px, 2.2vw, 34px)",
-            marginTop: isMobile ? 44 : 64,
-          }}
-        >
-          {PROJECTS.map((p) => (
-            <Card key={p.id} project={p} isMobile={isMobile} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default NowPage;
