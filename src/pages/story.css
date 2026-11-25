@@ -6,7 +6,7 @@
 .story .tt { font-family:"Michroma",sans-serif; font-weight:400; letter-spacing:-.045em; text-transform:uppercase; line-height:1.14; margin:0; }
 .story p { font-size:var(--body); line-height:1.65; margin:0; text-wrap:pretty; }
 .story .media { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
-.story .shade { position:absolute; inset:0; background:rgba(8,8,7,.58); }
+.story .shade { position:absolute; inset:0; background:rgba(8,8,7,.66); }
 .story .lnk { display:inline-block; margin-top:28px; font-size:var(--body); color:inherit; text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:4px; }
 
 .s-hero { position:relative; height:100vh; height:100dvh; overflow:hidden; color:var(--cream); background:var(--ink); }
@@ -121,3 +121,9 @@
 
 /* Only the inner pages need this (pinned scenes). The homepage keeps its own. */
 html:has(.story), body:has(.story) { overflow-x:clip; }
+
+/* Red that works: the house red on cream, the same hue lit up over photographs. */
+.story { --lit:#ff5a46; }
+.story .hl { font-family:"Plus Jakarta Sans","Sora",sans-serif; font-style:italic; font-weight:600; letter-spacing:-.005em; color:var(--red); }
+.s-hero .hl, .cover .hl, .panel.full .hl, .cover .c-when, .panel.full .meta-w { color:var(--lit); }
+.s-end .hl { color:inherit; }

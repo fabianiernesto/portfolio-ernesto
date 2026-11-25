@@ -18,7 +18,10 @@ export const Lines = ({ t }) => t.map((l, i) => <span key={i} style={{ display: 
 const Anchor = ({ link }) =>
   !link ? null : link[1].startsWith("/") && !link[1].endsWith(".mp4") ? <Link className="lnk" to={link[1]} data-hover="true">{link[0]}</Link> : <a className="lnk" href={link[1]} target="_blank" rel="noopener noreferrer" data-hover="true">{link[0]}</a>;
 
-const Paras = ({ t }) => t.map((x, i) => <p key={i}>{x}</p>);
+/* *word* in the copy becomes the red italic. */
+export const Rich = ({ t }) => t.split("*").map((x, i) => (i % 2 ? <em key={i} className="hl">{x}</em> : x));
+
+const Paras = ({ t }) => t.map((x, i) => <p key={i}><Rich t={x} /></p>);
 
 const Meta = ({ d }) => (d.when ? <div className="meta"><span className="meta-w">{d.when}</span><span>{d.what}</span></div> : null);
 
@@ -47,7 +50,7 @@ export const Cover = ({ s }) => {
         <motion.div className="s-center" style={{ opacity: o, y }}>
           <h2 className="tt"><Lines t={s.title} /></h2>
           <span className="c-when">{s.when}</span>
-          <p>{s.intro}</p>
+          <p><Rich t={s.intro} /></p>
         </motion.div>
       </div>
     </section>
@@ -154,7 +157,7 @@ export const Hero = ({ src, title, text, pos, dark }) => (
     <div className="shade" style={dark ? { background: "rgba(8,8,7,.84)" } : undefined} />
     <motion.div className="s-center" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}>
       <h1 className="tt"><Lines t={title} /></h1>
-      <p>{text}</p>
+      <p><Rich t={text} /></p>
     </motion.div>
   </header>
 );
@@ -163,7 +166,7 @@ export const End = ({ title, text, links = [], credits }) => (
   <footer className="s-end">
     <div className="s-center">
       <h2 className={"tt" + (title.join("").length > 20 ? " e-long" : "")}><Lines t={title} /></h2>
-      {text && <p>{text}</p>}
+      {text && <p><Rich t={text} /></p>}
       <div className="btns">
         {links.map(([l, h]) => h.startsWith("/")
           ? <Link key={l} to={h} data-hover="true">{l}</Link>

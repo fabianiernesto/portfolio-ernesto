@@ -7,7 +7,7 @@ const A = "/story/";
 const ME = [{
   tab: "Ernesto Fabiani",
   title: ["Ernesto Fabiani"], img: A + "portrait_hd.webp", alt: "Ernesto Fabiani", pos: "62% 20%",
-  left: ["22 years old, Mallorca to Barcelona to Madrid, International Business graduate, and I've never wanted something this clearly in my life, a job in motorsport, on the business side of it."],
+  left: ["22 years old, Mallorca to Barcelona to Madrid, International Business graduate, and I've never wanted something this clearly in my life, *a job in motorsport, on the business side of it*."],
   right: ["I've spent four years throwing myself into things I had no business doing at that age, because sitting still has never been an option for me.", "From here the page goes BACKWARDS, from what I do today, through each year of my degree, to a warehouse floor in 2022."],
   link: ["LinkedIn", "https://www.linkedin.com/in/ernestofabiani/"],
 }, {

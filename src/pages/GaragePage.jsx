@@ -9,7 +9,7 @@ const PANELS = [
   { tab: "The pile", full: true, title: ["Not another PDF"], img: W + "garage_close_bg.mp4", alt: "", pos: "50% 50%", when: "2026", what: "I was sick of the CV everyone else hands over",
     left: ["That PDF you fire off to a motorsport company, landing in a pile of hundreds that look EXACTLY the same, opened for two seconds, closed, and forgotten before the next one loads.", "So instead of sending another one I built this, a website you can walk through, made with Claude Code by someone who had never written a line of code in his life."] },
   { tab: "Claude Code", light: true, title: ["Claude"], img: "/claude_bot.png", alt: "The Claude Code mascot with a coffee", pos: "50% 50%", contain: true, when: "How it was built", what: "Two weeks of conversations for the first version",
-    left: ["A good friend of mine, Marc Guitart Frescó, told me you could code a website from zero without knowing how to program, so I set out to find whether that was true."],
+    left: ["A good friend of mine, Marc Guitart Frescó, told me you could code a website from zero *without knowing how to program*, so I set out to find whether that was true."],
     right: ["I'd describe what I wanted in plain words, it would build it, I'd break it trying to change one tiny thing, and we'd work out together why it broke.", "That exact loop is how I learned what this tool can do, and it's the same one that later turned into Racing Simplified."], link: ["See Racing Simplified", "/building-now/f1"] },
 ];
 
