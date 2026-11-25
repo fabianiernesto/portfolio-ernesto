@@ -116,3 +116,5 @@
 }
 
 .w-frame.fit { background:#0f0f0f; } .w-frame.fit .media { object-fit:contain; }
+
+.w-frame.cert { aspect-ratio:791/557; background:#fff; }

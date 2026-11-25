@@ -81,7 +81,7 @@ const Full = ({ d, x }) => (
 /* A screen, or anything landscape: picture on top, two columns of text under it. */
 const Wide = ({ d }) => (
   <article className="panel wide">
-    <div className={"w-frame" + (d.fit ? " fit" : "")}><Media src={d.img} alt={d.alt} pos={d.pos} /></div>
+    <div className={"w-frame" + (d.fit ? " fit" : d.cert ? " cert" : "")}><Media src={d.img} alt={d.alt} pos={d.pos} /></div>
     <h3 className="tt w-tt"><Lines t={d.title} /></h3>
     <div className="w-cols">
       <div><Meta d={d} /><Paras t={d.left} /></div>
