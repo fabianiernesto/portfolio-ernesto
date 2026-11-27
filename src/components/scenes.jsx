@@ -18,6 +18,15 @@ export const Lines = ({ t }) => t.map((l, i) => <span key={i} style={{ display: 
 export const Anchor = ({ link }) =>
   !link ? null : link[1].startsWith("/") && !link[1].endsWith(".mp4") ? <Link className="lnk" to={link[1]} data-hover="true">{link[0]}</Link> : <a className="lnk" href={link[1]} target="_blank" rel="noopener noreferrer" data-hover="true">{link[0]}</a>;
 
+/* A way in: inside the site it says Enter on the cursor, outside it says Open. */
+const inside = (h) => h.startsWith("/") && !h.endsWith(".mp4");
+export const Go = ({ to, className, cursor, children }) => {
+  const label = cursor ? (inside(to) ? "Enter" : "Open") : undefined;
+  return inside(to)
+    ? <Link className={className} to={to} data-hover="true" data-cursor={label}>{children}</Link>
+    : <a className={className} href={to} target="_blank" rel="noopener noreferrer" data-hover="true" data-cursor={label}>{children}</a>;
+};
+
 /* *word* in the copy becomes the red italic. */
 export const Rich = ({ t }) => t.split("*").map((x, i) => (i % 2 ? <em key={i} className="hl">{x}</em> : x));
 
@@ -85,16 +94,21 @@ const Full = ({ d, x }) => (
 );
 
 /* A screen, or anything landscape: picture on top, two columns of text under it. */
-const Wide = ({ d }) => (
-  <article className="panel wide">
-    <div className={"w-frame" + (d.fit ? " fit" : d.cert ? " cert" : "")}><Media src={d.img} alt={d.alt} pos={d.pos} /></div>
-    <h3 className="tt w-tt"><Lines t={d.title} /></h3>
-    <div className="w-cols">
-      <div><Meta d={d} /><Paras t={d.left} /></div>
-      <div><Paras t={d.right} /><Anchor link={d.link} />{d.links && <div className="lnks">{d.links.map((l) => <Anchor key={l[0]} link={l} />)}</div>}</div>
-    </div>
-  </article>
-);
+/* cta: the picture is a door and the link becomes a real button. */
+const Wide = ({ d }) => {
+  const cls = "w-frame" + (d.fit ? " fit" : d.cert ? " cert" : "");
+  const media = <Media src={d.img} alt={d.alt} pos={d.pos} />;
+  return (
+    <article className="panel wide">
+      {d.cta ? <Go to={d.link[1]} className={cls + " go"} cursor>{media}</Go> : <div className={cls}>{media}</div>}
+      <h3 className="tt w-tt"><Lines t={d.title} /></h3>
+      <div className="w-cols">
+        <div><Meta d={d} /><Paras t={d.left} /></div>
+        <div><Paras t={d.right} />{d.cta ? <Go to={d.link[1]} className="btn">{d.link[0]}</Go> : <Anchor link={d.link} />}{d.links && <div className="lnks">{d.links.map((l) => <Anchor key={l[0]} link={l} />)}</div>}</div>
+      </div>
+    </article>
+  );
+};
 
 /* The same series in three championships, side by side. */
 const Trio = ({ d }) => (

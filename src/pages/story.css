@@ -242,3 +242,13 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
 .countdown .c-when b { font-weight:400; color:var(--red); }
 .cd-clock { display:block; font-size:calc(var(--body)*1.05); font-variant-numeric:tabular-nums; opacity:.62; }
 .countdown .s-center p { margin-top:36px; }
+
+/* Building now: every project is a door. The picture opens it, and so does a real button. */
+.w-frame.go { display:block; text-decoration:none; transition:box-shadow .5s ease; }
+.w-frame.go .media { transition:transform .9s cubic-bezier(.22,1,.36,1), filter .5s ease; }
+.w-frame.go:hover .media { transform:scale(1.04); }
+.w-frame.go:hover { box-shadow:0 28px 60px rgba(20,14,6,.28); }
+.story .btn { display:inline-flex; align-items:center; justify-content:center; min-width:230px; margin-top:26px; padding:16px 30px; background:var(--red); color:var(--cream); text-decoration:none; font-size:var(--body); font-weight:600; letter-spacing:.005em; line-height:1.2; box-shadow:0 10px 24px rgba(169,23,11,.22); transition:background .25s ease, transform .25s ease, box-shadow .25s ease; }
+.story .btn:hover { background:var(--ink); transform:translateY(-2px); box-shadow:0 14px 30px rgba(13,13,11,.25); }
+.story .btn:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+@media (max-width:767px) { .story .btn { display:flex; width:100%; margin-top:22px; } }

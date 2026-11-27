@@ -129,6 +129,29 @@ html.lenis body {
   height: 40px;
   background-color: #ffffff;
 }
+/* Over a project picture the dot becomes a red disc that says where it goes. */
+.cursor-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cursor-dot span {
+  opacity: 0;
+  color: #fffce8;
+  font: 600 13px/1 "Sora", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: opacity 160ms ease;
+}
+.cursor-dot.is-label {
+  width: 92px;
+  height: 92px;
+  background-color: #a9170b;
+  mix-blend-mode: normal;
+}
+.cursor-dot.is-label span {
+  opacity: 1;
+}
 @media (max-width: 767px) {
   .cursor-dot {
     display: none;

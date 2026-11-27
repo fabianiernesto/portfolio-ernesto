@@ -7,19 +7,19 @@ const W = "/wings/";
 
 const PANELS = [
   { tab: "Racing Simplified", wide: true, title: ["Racing Simplified"], img: W + "rs_key.webp", fit: true, alt: "Racing Simplified, the website that explains every F1 race, and lets you play it", when: "Live since 25 November 2026", what: "A website that explains every F1 race of 2026",
-    left: ["Built alone, at night and on weekends since 7 August, on the official timing data and with Claude Code."], right: ["You can read every session like a story, or play the race itself."], link: ["See the project", "/building-now/f1"] },
+    left: ["Built alone, at night and on weekends since 7 August, on the official timing data and with Claude Code."], right: ["You can read every session like a story, or play the race itself."], link: ["Explore Racing Simplified", "/building-now/f1"], cta: true },
   { tab: "LinkedIn", wide: true, title: ["LinkedIn"], img: W + "btl2_car.webp", alt: "Behind The Logo, Claude and Williams", when: "Three posts a week, every week", what: "The business behind motorsport",
     left: ["*I'm NOT in motorsport yet!!!* And instead of waiting I write about the business side of it, mostly so that by the time I get in I already know how the money moves."],
-    right: ["Drivers' stories with the business decision underneath and the deals behind the logos, in Formula 1, MotoGP and WEC, and every now and then something from my own life."], link: ["How it works", "/building-now/writing"] },
+    right: ["Drivers' stories with the business decision underneath and the deals behind the logos, in Formula 1, MotoGP and WEC, and every now and then something from my own life."], link: ["See the numbers and posts", "/building-now/writing"], cta: true },
   { tab: "YouTube", wide: true, title: ["YouTube"], img: W + "youtube.webp", alt: "The YouTube channel", fit: true, when: "Since November 2026", what: "The business behind motorsport, on video",
-    left: ["Behind The Logo in long form, why a brand is on that car and what each side got out of it, with the room a post doesn't have."], right: ["The first one is Claude x Williams, and it's on its way."], link: ["Open the channel", "https://www.youtube.com/@ernestofabianicollado"] },
+    left: ["Behind The Logo in long form, why a brand is on that car and what each side got out of it, with the room a post doesn't have."], right: ["The first one is Claude x Williams, and it's on its way."], link: ["Open the channel", "https://www.youtube.com/@ernestofabianicollado"], cta: true },
   { tab: "MAD Formula Team", wide: true, title: ["MAD Formula Team"], img: W + "mad.webp", alt: "A MAD Formula Team car", pos: "50% 45%", when: "Since November 2026", what: "Formula Student, Universidad Carlos III de Madrid",
-    left: ["Students who design and build a single seater every year and race it around Europe. I work side by side with Andrei Furtuna, its Team Principal & CEO."], right: ["They bring the car and I bring the systems, starting with how the team tells its story on LinkedIn."], link: ["See the team", "https://madformulateam.com/"] },
+    left: ["Students who design and build a single seater every year and race it around Europe. I work side by side with Andrei Furtuna, its Team Principal & CEO."], right: ["They bring the car and I bring the systems, starting with how the team tells its story on LinkedIn."], link: ["Visit the team", "https://madformulateam.com/"], cta: true },
   { tab: "Formula Careers", wide: true, title: ["Formula Careers"], img: W + "fcn_certificate.webp", alt: "Formula Careers Network certificate of membership 2026, Ernesto Fabiani Collado", cert: true, when: "Since August 2026", what: "Founding 20, The Formula Careers Network",
-    left: ["The private community Louise McGrath, founder of Formula Careers, opened for people who want to work in motorsport. She *hand-picked 20 of us* out of about 1,400 applications."], right: ["I got in for the commercial angle, partnerships, sponsorship and the money behind the sport, in a room where most people come from engineering."], link: ["Formula Careers", "https://formulacareers.com/"] },
+    left: ["The private community Louise McGrath, founder of Formula Careers, opened for people who want to work in motorsport. She *hand-picked 20 of us* out of about 1,400 applications."], right: ["I got in for the commercial angle, partnerships, sponsorship and the money behind the sport, in a room where most people come from engineering."], link: ["Visit Formula Careers", "https://formulacareers.com/"], cta: true },
   { tab: "This garage", wide: true, title: ["This garage"], img: W + "door.webp", alt: "The garage door", when: "Live, you're in it", what: "The CV I built instead of sending another PDF",
     left: ["Every line of this website was built with Claude Code by a business student who had never written code in his life."],
-    right: ["And it keeps changing, which a PDF can't really do :)"], link: ["The story behind it", "/building-now/garage"] },
+    right: ["And it keeps changing, which a PDF can't really do :)"], link: ["See how I built it", "/building-now/garage"], cta: true },
 ];
 
 const NowPage = () => (
