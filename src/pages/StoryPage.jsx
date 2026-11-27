@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Fragment } from "react";
 import { Cover, End, Hero, Track, Wing } from "../components/scenes";
 import { SEASONS } from "../data/story";
 
@@ -21,11 +22,11 @@ const StoryPage = () => (
   <Wing>
     <Hero src={A + "hero.mp4"} title={["Built already"]} text="This is not a CV. It's the four years that got me here, 2026 back to 2022." />
     <Track panels={ME} label="Today, 2026" />
-    {SEASONS.map((s) => (
-      <div key={s.from}>
+    {SEASONS.map((s, i) => (
+      <Fragment key={s.from}>
         <Cover s={s} />
-        <Track panels={s.panels} label={`${s.title[0]}, ${s.when}`} />
-      </div>
+        <Track panels={s.panels} label={`${s.title[0]}, ${s.when}`} hold={i === SEASONS.length - 1} />
+      </Fragment>
     ))}
     <End title={["Let's talk"]}
       text="If you're in motorsport or automotive, or you know someone who is, write me. No pitch needed, no formalities... I just really like talking to people who live in this world ;)"

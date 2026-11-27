@@ -26,7 +26,7 @@ const PANELS = [
 const NowPage = () => (
   <Wing>
     <Hero src={W + "garage_close_bg.mp4"} title={["Building now"]} text="Wanting in is not a plan, so this is the part I can control. Six things running right now, all pointing at the same place..." />
-    <Rail items={PANELS.map((d) => ({ ...d, title: d.title.join(" "), text: [...d.left, ...(d.right || [])] }))} />
+    <Rail hold items={PANELS.map((d) => ({ ...d, title: d.title.join(" "), text: [...d.left, ...(d.right || [])] }))} />
     <End title={["Let's talk"]} text="Deadline: 24 September 2027. That's when I said in public I'd be working in Formula 1, so if you can see a way in that I can't, I'd love to hear it :)" links={[["Contact", "/contact"], ["LinkedIn", LI]]} />
   </Wing>
 );

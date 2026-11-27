@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Cover, End, Hero, Wing } from "../components/scenes";
+import { Cover, End, Wing } from "../components/scenes";
 import { Album } from "../components/journeys";
 
 const LI = "https://www.linkedin.com/in/ernestofabiani/";
@@ -7,6 +7,7 @@ const RS = "https://racing-simplified.vercel.app/";
 const W = "/wings/";
 
 const CARS = {
+  head: "Why motorsport", sub: "A cartoon car, a tube TV, my father, and a man in an old photo I didn't know was family.",
   from: "20", to: "06", cover: W + "cars.webp", coverAlt: "Lightning McQueen mid air", pos: "50% 50%", shift: -12, drop: 8,
   title: ["First love,", "a cartoon car"], when: "2006, two years old",
   intro: "My mum swears she can still hear it. Three straight months of the same film, a two year old planted in front of the screen watching a red cartoon car go round in circles... and the second it ended, asking for it again.",
@@ -25,7 +26,6 @@ const ALBUM = [
 
 const WhyPage = () => (
   <Wing>
-    <Hero src="/why_drive.webp" title={["Why motorsport"]} text="A cartoon car, a tube TV, my father, and a man in an old photo I didn't know was family." pos="50% 45%" />
     <Cover s={CARS} />
     <Album items={ALBUM} label="Where it comes from" />
     <End title={["Some things", "you choose,", "this one chose first"]} links={[["Building now", "/building-now"], ["Let's talk", "/contact"]]} />

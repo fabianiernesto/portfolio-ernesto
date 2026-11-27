@@ -38,9 +38,12 @@ export const Cover = ({ s }) => {
   const o = useTransform(p, (v) => Math.min(1, Math.max(0, (v - 0.56) / 0.16)));
   const y = useTransform(o, (v) => 40 * (1 - v));
   const my = useTransform(open, (v) => `${(s.drop ? (m ? 27 : s.drop) : 0) * (1 - v)}vh`);
+  const pre = useTransform(open, [0, 0.3], [1, 0]);
   return (
     <section className="cover" ref={ref}>
       <div className="cover-pin">
+        {s.head && <motion.div className="cover-head" style={{ opacity: pre }}><h1 className="tt">{s.head}</h1></motion.div>}
+        {s.sub && <motion.div className="cover-sub" style={{ opacity: pre }}><p><Rich t={s.sub} /></p></motion.div>}
         <motion.div className="tt cover-n l" style={{ x: l }}>{s.from}</motion.div>
         <motion.div className="tt cover-n r" style={{ x: r }}>{s.to}</motion.div>
         <motion.div className={"cover-win" + (s.contain ? " contain" : "")} style={{ clipPath: clip }}>
@@ -130,20 +133,22 @@ const Panel = ({ d, i, n, p, m }) => {
   return d.words ? <Words d={d} /> : d.trio ? <Trio d={d} /> : d.wide ? <Wide d={d} /> : d.full ? <Full d={d} x={x} /> : <Art d={d} x={x} />;
 };
 
-export const Track = ({ panels, label }) => {
+/* hold: the last scene stays put for one more screen, so the closing section slides over it. */
+export const Track = ({ panels, label, hold }) => {
   const [cur, setCur] = useState(0);
   const ref = useRef(null);
   const m = useIsMobile();
   const n = panels.length;
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const x = useTransform(p, [0, 1], ["0vw", `${-(n - 1) * 100}vw`]);
-  useMotionValueEvent(p, "change", (v) => setCur(Math.round(v * (n - 1))));
+  useMotionValueEvent(p, "change", (v) => setCur(Math.min(n - 1, Math.max(0, Math.round(v * (n - 1))))));
   const go = (i) => {
     const y = ref.current.getBoundingClientRect().top + window.scrollY + i * window.innerHeight;
     window.__lenis ? window.__lenis.scrollTo(y) : window.scrollTo(0, y);
   };
   return (
-    <section className="track" ref={ref} style={{ height: `${n * 100}vh` }}>
+    <section className={"track" + (hold ? " hold" : "")} style={{ height: `${n * 100 + (hold ? 100 : 0)}vh` }}>
+      <div className="run" ref={ref} style={{ height: `${n * 100}vh` }} aria-hidden="true" />
       <div className="track-pin">
         {label && (
           <nav className={"guide" + (panels[cur].full || panels[cur].dark ? " on-dark" : "")} aria-label={label}>

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
 import { Anchor, Lines, Media, Meta, Paras, Rich } from "./scenes";
 
@@ -68,14 +69,22 @@ export const Album = ({ items, label }) => {
   );
 };
 
-/* BUILDING NOW. An index: the list stays, the one you are on lights up. */
-export const Rail = ({ items }) => {
+/* BUILDING NOW. An index: the list stays, the one you are on lights up.
+   The ones with a page of their own carry an arrow, and their picture and link take you in. */
+const own = (d) => d.link && d.link[1].startsWith("/building-now/");
+const Shot = ({ d }) => {
+  const s = <div className={"rail-shot" + (d.fit ? " fit" : "")}><Media src={d.img} alt={d.alt} pos={d.pos} /></div>;
+  return own(d) ? <Link to={d.link[1]} data-hover="true" style={{ display: "block" }}>{s}</Link> : s;
+};
+const Go = ({ d }) => (own(d) ? <Link className="lnk in" to={d.link[1]} data-hover="true">{d.link[0]} <span style={{ whiteSpace: "nowrap" }}>--&gt;</span></Link> : <Anchor link={d.link} />);
+
+export const Rail = ({ items, hold }) => {
   const ref = useRef(null);
   const m = useIsMobile();
   const n = items.length;
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const [cur, setCur] = useState(0);
-  useMotionValueEvent(p, "change", (v) => setCur(Math.min(n - 1, Math.floor(v * n))));
+  useMotionValueEvent(p, "change", (v) => setCur(Math.min(n - 1, Math.max(0, Math.floor(v * n)))));
   const go = (i) => {
     const y = ref.current.getBoundingClientRect().top + window.scrollY + (i + 0.5) * (ref.current.offsetHeight - window.innerHeight) / n;
     window.__lenis ? window.__lenis.scrollTo(y) : window.scrollTo(0, y);
@@ -86,28 +95,29 @@ export const Rail = ({ items }) => {
         {items.map((d, i) => (
           <article key={d.title}>
             <span className="rail-n">{String(i + 1).padStart(2, "0")}</span>
-            <div className={"rail-shot" + (d.fit ? " fit" : "")}><Media src={d.img} alt={d.alt} pos={d.pos} /></div>
-            <h3 className="tt">{d.title}</h3><Meta d={d} /><Paras t={d.text} /><Anchor link={d.link} />
+            <Shot d={d} />
+            <h3 className="tt">{d.title}</h3><Meta d={d} /><Paras t={d.text} /><Go d={d} />
           </article>
         ))}
       </section>
     );
   const d = items[cur];
   return (
-    <section className="rail" ref={ref} style={{ height: `${n * 80 + 100}vh` }}>
+    <section className={"rail" + (hold ? " hold" : "")} style={{ height: `${n * 80 + 100 + (hold ? 100 : 0)}vh` }}>
+      <div className="run" ref={ref} style={{ height: `${n * 80 + 100}vh` }} aria-hidden="true" />
       <div className="rail-pin">
         <ol className="rail-list">
           {items.map((x, i) => (
             <li key={x.title} className={i === cur ? "on" : ""}>
-              <button onClick={() => go(i)} data-hover="true"><span className="rail-n">{String(i + 1).padStart(2, "0")}</span><span className="tt">{x.title}</span></button>
+              <button onClick={() => go(i)} data-hover="true"><span className="rail-n">{String(i + 1).padStart(2, "0")}</span><span className="tt">{x.title}</span>{own(x) && <span className="rail-arrow" aria-label="has its own page">--&gt;</span>}</button>
             </li>
           ))}
         </ol>
         <div className="rail-stage">
           <AnimatePresence mode="wait">
             <motion.div key={cur} className="rail-card" initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
-              <div className={"rail-shot" + (d.fit ? " fit" : "")}><Media src={d.img} alt={d.alt} pos={d.pos} /></div>
-              <div className="rail-copy"><Meta d={d} /><Paras t={d.text} /><Anchor link={d.link} /></div>
+              <Shot d={d} />
+              <div className="rail-copy"><Meta d={d} /><Paras t={d.text} /><Go d={d} /></div>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -208,5 +218,159 @@ export const Stats = ({ total, reached, outside, rows, best }) => {
         </div>
       </div>
     </section>
+  );
+};
+
+const Post = ({ x }) => (
+  <figure className="post">
+    <img src={x.img} alt={x.alt} loading="lazy" decoding="async" style={{ aspectRatio: x.ratio, objectPosition: x.pos }} />
+    <figcaption>{x.alt}</figcaption>
+  </figure>
+);
+
+/* LINKEDIN. A feed: the posts go up a column as wide as a phone, and the series they belong to stays beside them. */
+export const Feed = ({ series, label, hold }) => {
+  const ref = useRef(null);
+  const col = useRef(null);
+  const m = useIsMobile();
+  const posts = series.flatMap((s, i) => s.posts.map((x) => ({ ...x, s: i })));
+  const [g, setG] = useState(null);
+  const [cur, setCur] = useState(0);
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  useEffect(() => {
+    if (m || !col.current) return;
+    const measure = () => {
+      const H = window.innerHeight;
+      const c = [...col.current.children].map((k) => k.offsetTop + k.offsetHeight / 2);
+      setG({ H, c, start: c[0] - H / 2, travel: Math.max(1, c[c.length - 1] - c[0]) });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(col.current);
+    window.addEventListener("resize", measure);
+    return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
+  }, [m]);
+  const y = useTransform(p, (v) => (g ? -(g.start + v * g.travel) : 0));
+  useMotionValueEvent(y, "change", (v) => {
+    if (!g) return;
+    let k = 0, best = Infinity;
+    g.c.forEach((c, i) => { const dd = Math.abs(v + c - g.H / 2); if (dd < best) { best = dd; k = i; } });
+    setCur(posts[k].s);
+  });
+  const go = (i) => {
+    if (!g) return;
+    const k = posts.findIndex((x) => x.s === i);
+    const top = ref.current.getBoundingClientRect().top + window.scrollY;
+    const to = top + (g.c[k] - g.c[0]);
+    window.__lenis ? window.__lenis.scrollTo(to) : window.scrollTo(0, to);
+  };
+  if (m)
+    return (
+      <section className="feed-m">
+        {series.map((s) => (
+          <article key={s.title}>
+            <h3 className="tt">{s.title}</h3><Meta d={s} />
+            <div className="feed-m-posts">{s.posts.map((x) => <Post key={x.img} x={x} />)}</div>
+            <Paras t={s.left} /><Paras t={s.right} /><Anchor link={s.link} />
+          </article>
+        ))}
+      </section>
+    );
+  const run = g ? g.travel + g.H : null;
+  return (
+    <section className={"feed" + (hold ? " hold" : "")} style={{ height: run ? run + (hold ? g.H : 0) : `${posts.length * 60 + 100}vh` }}>
+      <div className="run" ref={ref} style={{ height: run || `${posts.length * 60 + 100}vh` }} aria-hidden="true" />
+      <div className="feed-pin">
+        {label && (
+          <nav className="guide" aria-label={label}>
+            <span className="guide-y">{label}</span>
+            {series.map((s, i) => <button key={s.title} className={i === cur ? "is-on" : ""} onClick={() => go(i)} data-hover="true">{s.title}</button>)}
+          </nav>
+        )}
+        <div className="feed-l">
+          {series.map((s, i) => (
+            <div key={s.title} className={"feed-leaf" + (i === cur ? " on" : "")} aria-hidden={i !== cur}>
+              <Meta d={s} /><h3 className="tt">{s.title}</h3><Paras t={s.left} />
+            </div>
+          ))}
+        </div>
+        <div className="feed-col"><motion.div ref={col} style={{ y }}>{posts.map((x) => <Post key={x.img} x={x} />)}</motion.div></div>
+        <div className="feed-r">
+          {series.map((s, i) => (
+            <div key={s.title} className={"feed-leaf" + (i === cur ? " on" : "")} aria-hidden={i !== cur}>
+              <Paras t={s.right} /><Anchor link={s.link} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* THIS GARAGE. The first version and this one: the line moves across as you scroll. */
+export const Compare = ({ d, hold }) => {
+  const ref = useRef(null);
+  const m = useIsMobile();
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: m ? ["start 0.85", "end 0.25"] : ["start start", "end end"] });
+  const cut = useTransform(p, m ? [0, 1] : [0.08, 0.78], [96, 0], { clamp: true });
+  const clip = useTransform(cut, (c) => `inset(0 0 0 ${c}%)`);
+  const left = useTransform(cut, (c) => `${c}%`);
+  const frame = (
+    <div className="cmp-frame" ref={m ? ref : undefined}>
+      <img src={d.before} alt={d.beforeAlt} loading="lazy" decoding="async" />
+      <motion.img src={d.after} alt={d.afterAlt} loading="lazy" decoding="async" style={{ clipPath: clip }} />
+      <motion.i style={{ left }} />
+    </div>
+  );
+  const body = (
+    <>
+      <div className="cmp-tags"><span>{d.beforeTag}</span><span>{d.afterTag}</span></div>
+      {frame}
+      <h3 className="tt w-tt">{d.title}</h3>
+      <div className="w-cols"><div><Meta d={d} /><Paras t={d.left} /></div><div><Paras t={d.right} /></div></div>
+    </>
+  );
+  if (m) return <section className="cmp-m">{body}</section>;
+  return (
+    <section className={"cmp" + (hold ? " hold" : "")} style={{ height: `${hold ? 340 : 240}vh` }}>
+      <div className="run" ref={ref} style={{ height: "240vh" }} aria-hidden="true" />
+      <div className="cmp-pin">{body}</div>
+    </section>
+  );
+};
+
+/* LET'S TALK. The days left to the deadline, counting down live. */
+const left = (to) => Math.max(0, to - Date.now());
+export const Countdown = ({ to, label, text }) => {
+  const [ms, setMs] = useState(() => left(to));
+  const [shown, setShown] = useState(0);
+  const days = Math.floor(ms / 864e5);
+  useEffect(() => {
+    const t = setInterval(() => setMs(left(to)), 1000);
+    return () => clearInterval(t);
+  }, [to]);
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return setShown(days);
+    let raf, t0;
+    const tick = (t) => {
+      t0 = t0 || t;
+      const k = Math.min(1, (t - t0) / 1800);
+      setShown(Math.round(days * (1 - Math.pow(1 - k, 4))));
+      if (k < 1) raf = requestAnimationFrame(tick);
+    };
+    const start = setTimeout(() => (raf = requestAnimationFrame(tick)), 300);
+    return () => { clearTimeout(start); cancelAnimationFrame(raf); };
+  }, [days]);
+  const two = (v) => String(v).padStart(2, "0");
+  const h = Math.floor(ms / 36e5) % 24, mi = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1e3) % 60;
+  return (
+    <header className="counter countdown">
+      <div className="s-center">
+        <span className="c-when">{label}</span>
+        <div className="tt counter-n">{shown}</div>
+        <span className="cd-clock">days, {two(h)} h {two(mi)} min {two(s)} s</span>
+        <p><Rich t={text} /></p>
+      </div>
+    </header>
   );
 };
