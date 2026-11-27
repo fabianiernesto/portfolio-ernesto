@@ -269,3 +269,33 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
   .feed-m .chapter-logos { justify-content:flex-start; margin-top:22px; } .feed-m .chapter-logos img { height:22px; }
   .feed-m article + article { border-top:1px solid rgba(13,13,11,.14); padding-top:40px; }
 }
+
+/* Let's talk: the countdown holds still and the conversation slides over it. */
+.cd-wrap { position:relative; }
+@media (min-width:768px) {
+  .cd-wrap.hold { height:200vh; }
+  .cd-wrap.hold .countdown { position:sticky; top:0; height:100vh; min-height:0; }
+  .hold + .talk { margin-top:-100vh; box-shadow:0 -26px 60px rgba(20,14,6,.14); }
+}
+.talk { position:relative; z-index:6; min-height:100vh; min-height:100dvh; background:var(--cream); display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.08fr); gap:clamp(40px,6vw,110px); align-items:center; padding:10vh var(--gut); }
+.talk-photo { margin:0; justify-self:end; width:min(100%,520px); }
+.talk-photo img { width:100%; aspect-ratio:736/465; object-fit:cover; display:block; box-shadow:0 26px 60px rgba(20,14,6,.22); }
+.talk-copy { max-width:620px; }
+.talk-copy > .tt { font-size:var(--t2); color:var(--red); margin:0 0 30px; }
+.ways { margin-top:40px; border-top:1px solid rgba(13,13,11,.16); }
+.way { display:flex; align-items:baseline; justify-content:space-between; gap:24px; padding:22px 18px; border-bottom:1px solid rgba(13,13,11,.16); color:var(--ink); text-decoration:none; transition:background .3s ease, color .3s ease, padding .3s ease; }
+.way .tt { font-size:clamp(20px,2.2vw,34px); color:var(--ink); margin:0; transition:color .3s ease; }
+.way-d { font-size:var(--body); opacity:.75; overflow-wrap:anywhere; text-align:right; transition:opacity .3s ease; }
+.way:hover { background:var(--ink); color:var(--cream); padding-left:28px; }
+.way:hover .tt { color:var(--lit); }
+.way:hover .way-d { opacity:1; }
+.way:focus-visible, .copy:focus-visible { outline:2px solid var(--red); outline-offset:3px; }
+.copy { margin-top:20px; background:none; border:0; padding:0 0 3px; font:inherit; font-size:calc(var(--body)*.92); color:var(--ink); border-bottom:1px solid currentColor; opacity:.7; transition:opacity .2s ease; }
+.copy:hover { opacity:1; }
+@media (max-width:767px) {
+  .talk { display:block; padding:64px 24px 72px; min-height:0; }
+  .talk-photo { width:100%; margin-bottom:36px; }
+  .talk-copy > .tt { font-size:9vw; }
+  .way { flex-direction:column; align-items:flex-start; gap:6px; padding:18px 4px; }
+  .way-d { text-align:left; }
+}

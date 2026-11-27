@@ -285,7 +285,7 @@ export const Compare = ({ d, hold }) => {
 
 /* LET'S TALK. The days left to the deadline, counting down live. */
 const left = (to) => Math.max(0, to - Date.now());
-export const Countdown = ({ to, label, text }) => {
+export const Countdown = ({ to, label, text, hold }) => {
   const [ms, setMs] = useState(() => left(to));
   const [shown, setShown] = useState(0);
   const days = Math.floor(ms / 864e5);
@@ -308,13 +308,53 @@ export const Countdown = ({ to, label, text }) => {
   const two = (v) => String(v).padStart(2, "0");
   const h = Math.floor(ms / 36e5) % 24, mi = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1e3) % 60;
   return (
-    <header className="counter countdown">
-      <div className="s-center">
-        <span className="c-when">{label}</span>
-        <div className="tt counter-n">{shown}</div>
-        <span className="cd-clock">days, {two(h)} h {two(mi)} min {two(s)} s</span>
-        <p><Rich t={text} /></p>
+    <section className={"cd-wrap" + (hold ? " hold" : "")}>
+      <header className="counter countdown">
+        <div className="s-center">
+          <span className="c-when">{label}</span>
+          <div className="tt counter-n">{shown}</div>
+          <span className="cd-clock">days, {two(h)} h {two(mi)} min {two(s)} s</span>
+          <p><Rich t={text} /></p>
+        </div>
+      </header>
+    </section>
+  );
+};
+
+/* LET'S TALK. The two ways in, as big rows that fill with red, and the address ready to copy. */
+export const Talk = ({ img, alt, pos, title, left, right, email, subject, linkedin, linkedinLabel }) => {
+  const [copied, setCopied] = useState(false);
+  const addr = useRef(null);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2400);
+    } catch {
+      const r = document.createRange();
+      r.selectNodeContents(addr.current);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(r);
+    }
+  };
+  return (
+    <section className="talk">
+      <figure className="talk-photo"><img src={img} alt={alt} loading="lazy" decoding="async" style={{ objectPosition: pos }} /></figure>
+      <div className="talk-copy">
+        <h2 className="tt">{title}</h2>
+        <Paras t={left} />
+        <Paras t={right} />
+        <div className="ways">
+          <a className="way" href={`mailto:${email}?subject=${encodeURIComponent(subject)}`} data-hover="true" data-cursor="Write">
+            <span className="tt">Email</span><span className="way-d" ref={addr}>{email}</span>
+          </a>
+          <a className="way" href={linkedin} target="_blank" rel="noopener noreferrer" data-hover="true" data-cursor="Open">
+            <span className="tt">LinkedIn</span><span className="way-d">{linkedinLabel}</span>
+          </a>
+        </div>
+        <button type="button" className="copy" onClick={copy} data-hover="true">{copied ? "Copied" : "Copy my email address"}</button>
       </div>
-    </header>
+    </section>
   );
 };
