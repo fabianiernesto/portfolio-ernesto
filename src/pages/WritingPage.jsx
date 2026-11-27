@@ -26,7 +26,7 @@ const SERIES = [
   { title: "Personal", when: "Every now and then", what: "Something from my own life",
     posts: [{ img: "/story/award_moment.webp", alt: "On stage at graduation, IQS Barcelona", ratio: "3/2", pos: "50% 20%" }],
     left: ["Asking the president of the FIA what someone my age needs to get in (after drying my hands on my own trousers, TWICE), or my parents hijacking two ceremonies in a row."],
-    right: ["And the public promise with a date on it --> on my 22nd birthday I said I'd be working in Formula 1 before *24 September 2027*."], link: ["Read them", LI] },
+    right: ["And the public promise with a date on it, on my 22nd birthday I said I'd be working in Formula 1 before *24 September 2027*."], link: ["Read them", LI] },
 ];
 
 const WritingPage = () => (

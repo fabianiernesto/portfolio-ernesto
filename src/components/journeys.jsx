@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { Link } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
 import { Anchor, Lines, Media, Meta, Paras, Rich } from "./scenes";
@@ -64,63 +64,6 @@ export const Album = ({ items, label }) => {
         <div className="album-label"><span className="guide-y">{label}</span><span>{String(cur + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span></div>
         <div className="album-text">{items.map((d, k) => <Leaf key={k} d={d} k={k} a={a} />)}</div>
         <div className="album-pile">{items.map((d, k) => <Print key={k} d={d} k={k} a={a} />)}</div>
-      </div>
-    </section>
-  );
-};
-
-/* BUILDING NOW. An index: the list stays, the one you are on lights up.
-   The ones with a page of their own carry an arrow, and their picture and link take you in. */
-const own = (d) => d.link && d.link[1].startsWith("/building-now/");
-const Shot = ({ d }) => {
-  const s = <div className={"rail-shot" + (d.fit ? " fit" : "")}><Media src={d.img} alt={d.alt} pos={d.pos} /></div>;
-  return own(d) ? <Link to={d.link[1]} data-hover="true" style={{ display: "block" }}>{s}</Link> : s;
-};
-const Go = ({ d }) => (own(d) ? <Link className="lnk in" to={d.link[1]} data-hover="true">{d.link[0]} <span style={{ whiteSpace: "nowrap" }}>--&gt;</span></Link> : <Anchor link={d.link} />);
-
-export const Rail = ({ items, hold }) => {
-  const ref = useRef(null);
-  const m = useIsMobile();
-  const n = items.length;
-  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const [cur, setCur] = useState(0);
-  useMotionValueEvent(p, "change", (v) => setCur(Math.min(n - 1, Math.max(0, Math.floor(v * n)))));
-  const go = (i) => {
-    const y = ref.current.getBoundingClientRect().top + window.scrollY + (i + 0.5) * (ref.current.offsetHeight - window.innerHeight) / n;
-    window.__lenis ? window.__lenis.scrollTo(y) : window.scrollTo(0, y);
-  };
-  if (m)
-    return (
-      <section className="rail-m">
-        {items.map((d, i) => (
-          <article key={d.title}>
-            <span className="rail-n">{String(i + 1).padStart(2, "0")}</span>
-            <Shot d={d} />
-            <h3 className="tt">{d.title}</h3><Meta d={d} /><Paras t={d.text} /><Go d={d} />
-          </article>
-        ))}
-      </section>
-    );
-  const d = items[cur];
-  return (
-    <section className={"rail" + (hold ? " hold" : "")} style={{ height: `${n * 80 + 100 + (hold ? 100 : 0)}vh` }}>
-      <div className="run" ref={ref} style={{ height: `${n * 80 + 100}vh` }} aria-hidden="true" />
-      <div className="rail-pin">
-        <ol className="rail-list">
-          {items.map((x, i) => (
-            <li key={x.title} className={i === cur ? "on" : ""}>
-              <button onClick={() => go(i)} data-hover="true"><span className="rail-n">{String(i + 1).padStart(2, "0")}</span><span className="tt">{x.title}</span>{own(x) && <span className="rail-arrow" aria-label="has its own page">--&gt;</span>}</button>
-            </li>
-          ))}
-        </ol>
-        <div className="rail-stage">
-          <AnimatePresence mode="wait">
-            <motion.div key={cur} className="rail-card" initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
-              <Shot d={d} />
-              <div className="rail-copy"><Meta d={d} /><Paras t={d.text} /><Go d={d} /></div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
       </div>
     </section>
   );

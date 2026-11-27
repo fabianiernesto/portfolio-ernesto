@@ -156,22 +156,6 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
 .print figcaption { position:absolute; left:18px; right:18px; bottom:16px; font-size:15px; color:rgba(13,13,11,.62); text-align:left; }
 .album-m { padding:40px 24px 30px; } .album-m article { margin-bottom:76px; } .album-m .print { position:relative; left:auto; top:auto; translate:none; width:100%; max-height:none; margin-bottom:34px; padding:10px 10px 40px; } .album-m .print figcaption { font-size:13px; bottom:11px; } .album-m .tt { font-size:7.4vw; color:var(--red); margin:2px 0 18px; }
 
-.rail { position:relative; }
-.rail-pin { position:sticky; top:0; height:100vh; overflow:hidden; display:grid; grid-template-columns:minmax(0,40fr) minmax(0,60fr); gap:clamp(30px,4vw,80px); padding:0 var(--gut); align-items:center; background:var(--cream); }
-.rail-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:clamp(8px,1.6vh,18px); }
-.rail-list button { background:none; border:0; padding:0; display:flex; align-items:baseline; gap:18px; color:var(--ink); opacity:.28; transition:opacity .35s, color .35s; text-align:left; }
-.rail-list .tt { font-size:clamp(16px,min(1.85vw,3.8vh),38px); transition:font-size .35s; white-space:nowrap; }
-.rail-n { font-size:13px; font-variant-numeric:tabular-nums; min-width:22px; }
-.rail-list li.on button { opacity:1; color:var(--red); }
-.rail-list li.on .tt { font-size:clamp(18px,min(2.15vw,4.6vh),44px); }
-.rail-stage { position:relative; height:100%; display:flex; align-items:center; }
-.rail-card { width:100%; }
-.rail-shot { position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#ddd; box-shadow:0 28px 60px rgba(20,14,6,.2); }
-.rail-shot.fit { background:#0f0f0f; aspect-ratio:1200/627; } .rail-shot.fit .media { object-fit:contain; }
-.rail-copy { margin-top:clamp(18px,3.4vh,36px); max-width:640px; }
-.rail-copy .meta { margin-bottom:.9em; }
-.rail-m { padding:30px 24px 20px; } .rail-m article { margin-bottom:72px; } .rail-m .rail-n { color:var(--red); display:block; margin-bottom:10px; } .rail-m .tt { font-size:7.6vw; color:var(--red); margin:24px 0 10px; }
-
 .door { position:relative; height:240vh; }
 .door-pin { position:sticky; top:0; height:100vh; overflow:hidden; background:#0d0d0b; color:var(--cream); }
 .door-panel { position:absolute; inset:0; z-index:4; will-change:transform; box-shadow:0 30px 70px rgba(0,0,0,.7); }
@@ -222,11 +206,6 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
 .cover-head .tt { font-size:min(var(--t2),11vh); color:var(--red); }
 .cover-sub p { max-width:640px; text-wrap:balance; }
 @media (max-width:767px) { .cover-head, .cover-sub { height:30%; } .cover-head .tt { font-size:8vw; } }
-
-/* Building now: the ones with a page of their own */
-.rail-arrow { font-family:"Sora",sans-serif; font-size:clamp(13px,1.2vw,18px); margin-left:14px; white-space:nowrap; }
-.story .lnk.in { font-weight:600; font-size:calc(var(--body)*1.12); border-bottom-width:2px; }
-.rail-m .rail-shot { margin-top:4px; }
 
 /* LinkedIn: the feed */
 .feed { position:relative; }

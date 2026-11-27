@@ -19,7 +19,7 @@ export const Anchor = ({ link }) =>
   !link ? null : link[1].startsWith("/") && !link[1].endsWith(".mp4") ? <Link className="lnk" to={link[1]} data-hover="true">{link[0]}</Link> : <a className="lnk" href={link[1]} target="_blank" rel="noopener noreferrer" data-hover="true">{link[0]}</a>;
 
 /* *word* in the copy becomes the red italic. */
-export const Rich = ({ t }) => t.split("*").map((x, i) => (i % 2 ? <em key={i} className="hl">{x}</em> : x.split("-->").map((y, j) => (j ? <span key={i + "-" + j}><span style={{ whiteSpace: "nowrap" }}>--&gt;</span>{y}</span> : y))));
+export const Rich = ({ t }) => t.split("*").map((x, i) => (i % 2 ? <em key={i} className="hl">{x}</em> : x));
 
 export const Paras = ({ t = [] }) => t.map((x, i) => <p key={i}><Rich t={x} /></p>);
 
