@@ -15,15 +15,15 @@ export const Media = ({ src, alt = "", pos, eager }) =>
 
 export const Lines = ({ t }) => t.map((l, i) => <span key={i} style={{ display: "block" }}>{l}</span>);
 
-const Anchor = ({ link }) =>
+export const Anchor = ({ link }) =>
   !link ? null : link[1].startsWith("/") && !link[1].endsWith(".mp4") ? <Link className="lnk" to={link[1]} data-hover="true">{link[0]}</Link> : <a className="lnk" href={link[1]} target="_blank" rel="noopener noreferrer" data-hover="true">{link[0]}</a>;
 
 /* *word* in the copy becomes the red italic. */
-export const Rich = ({ t }) => t.split("*").map((x, i) => (i % 2 ? <em key={i} className="hl">{x}</em> : x));
+export const Rich = ({ t }) => t.split("*").map((x, i) => (i % 2 ? <em key={i} className="hl">{x}</em> : x.split("-->").map((y, j) => (j ? <span key={i + "-" + j}><span style={{ whiteSpace: "nowrap" }}>--&gt;</span>{y}</span> : y))));
 
-const Paras = ({ t }) => t.map((x, i) => <p key={i}><Rich t={x} /></p>);
+export const Paras = ({ t = [] }) => t.map((x, i) => <p key={i}><Rich t={x} /></p>);
 
-const Meta = ({ d }) => (d.when ? <div className="meta"><span className="meta-w">{d.when}</span><span>{d.what}</span></div> : null);
+export const Meta = ({ d }) => (d.when ? <div className="meta"><span className="meta-w">{d.when}</span><span>{d.what}</span></div> : null);
 
 /* Two numbers and a window. The window opens until the photograph is the screen. */
 export const Cover = ({ s }) => {
@@ -112,11 +112,22 @@ const Trio = ({ d }) => (
   </article>
 );
 
+/* No picture: the copy carries the scene. */
+const Words = ({ d }) => (
+  <article className={"panel wide words" + (d.dark ? " dark" : "")} data-n={d.n}>
+    <h3 className="tt w-tt"><Lines t={d.title} /></h3>
+    <div className="w-cols">
+      <div><Meta d={d} /><Paras t={d.left} /></div>
+      <div><Paras t={d.right} /><Anchor link={d.link} /></div>
+    </div>
+  </article>
+);
+
 const Panel = ({ d, i, n, p, m }) => {
   const at = n > 1 ? i / (n - 1) : 0;
   const step = n > 1 ? 1 / (n - 1) : 1;
   const x = useTransform(p, [at - step, at + step], m ? ["0%", "0%"] : ["-3%", "3%"]);
-  return d.trio ? <Trio d={d} /> : d.wide ? <Wide d={d} /> : d.full ? <Full d={d} x={x} /> : <Art d={d} x={x} />;
+  return d.words ? <Words d={d} /> : d.trio ? <Trio d={d} /> : d.wide ? <Wide d={d} /> : d.full ? <Full d={d} x={x} /> : <Art d={d} x={x} />;
 };
 
 export const Track = ({ panels, label }) => {
@@ -135,7 +146,7 @@ export const Track = ({ panels, label }) => {
     <section className="track" ref={ref} style={{ height: `${n * 100}vh` }}>
       <div className="track-pin">
         {label && (
-          <nav className={"guide" + (panels[cur].full ? " on-dark" : "")} aria-label={label}>
+          <nav className={"guide" + (panels[cur].full || panels[cur].dark ? " on-dark" : "")} aria-label={label}>
             <span className="guide-y">{label}</span>
             {panels.map((d, i) => (
               <button key={i} className={i === cur ? "is-on" : ""} onClick={() => go(i)} data-hover="true">{d.tab}</button>
@@ -162,6 +173,11 @@ export const Hero = ({ src, title, text, pos, dark }) => (
   </header>
 );
 
+/* A finished piece shown whole, never cropped. */
+export const Poster = ({ src, alt, title }) => (
+  <header className="s-poster"><h1>{title}</h1><img src={src} alt={alt} /></header>
+);
+
 export const End = ({ title, text, links = [], credits }) => (
   <footer className="s-end">
     <div className="s-center">
@@ -177,6 +193,6 @@ export const End = ({ title, text, links = [], credits }) => (
   </footer>
 );
 
-export const Wing = ({ children, back, backLabel }) => (
-  <div className="story"><BackToGarage to={back} label={backLabel} /><main>{children}</main></div>
+export const Wing = ({ children, back, backLabel, cls = "" }) => (
+  <div className={"story " + cls}><BackToGarage to={back} label={backLabel} /><main>{children}</main></div>
 );

@@ -1,12 +1,13 @@
 /* eslint-disable */
-import { Cover, End, Hero, Track, Wing } from "../components/scenes";
+import { End, Hero, Wing } from "../components/scenes";
+import { Rail } from "../components/journeys";
 
 const LI = "https://www.linkedin.com/in/ernestofabiani/";
 const RS = "https://racing-simplified.vercel.app/";
 const W = "/wings/";
 
 const PANELS = [
-  { tab: "Racing Simplified", wide: true, title: ["Racing Simplified"], img: W + "rs_home.webp", alt: "The Racing Simplified home page", when: "Live since 25 November 2026", what: "A website that explains every F1 race of 2026",
+  { tab: "Racing Simplified", wide: true, title: ["Racing Simplified"], img: W + "rs_key.webp", fit: true, alt: "Racing Simplified, the website that explains every F1 race, and lets you play it", when: "Live since 25 November 2026", what: "A website that explains every F1 race of 2026",
     left: ["Built alone, at night and on weekends since 7 August, on the official timing data and with Claude Code."], right: ["You can read every session like a story, or play the race itself."], link: ["See the project", "/building-now/f1"] },
   { tab: "LinkedIn", wide: true, title: ["LinkedIn"], img: W + "btl2_car.webp", alt: "Behind The Logo, Claude and Williams", when: "Three posts a week, every week", what: "The business behind motorsport",
     left: ["*I'm NOT in motorsport yet!!!* And instead of waiting I write about the business side of it, mostly so that by the time I get in I already know how the money moves."],
@@ -25,7 +26,7 @@ const PANELS = [
 const NowPage = () => (
   <Wing>
     <Hero src={W + "garage_close_bg.mp4"} title={["Building now"]} text="Wanting in is not a plan, so this is the part I can control. Six things running right now, all pointing at the same place..." />
-    <Track panels={PANELS} label="Right now" />
+    <Rail items={PANELS.map((d) => ({ ...d, title: d.title.join(" "), text: [...d.left, ...(d.right || [])] }))} />
     <End title={["Let's talk"]} text="Deadline: 24 September 2027. That's when I said in public I'd be working in Formula 1, so if you can see a way in that I can't, I'd love to hear it :)" links={[["Contact", "/contact"], ["LinkedIn", LI]]} />
   </Wing>
 );

@@ -1,12 +1,13 @@
 /* eslint-disable */
-import { Cover, End, Hero, Track, Wing } from "../components/scenes";
+import { End, Track, Wing } from "../components/scenes";
+import { DoorLift } from "../components/journeys";
 
 const LI = "https://www.linkedin.com/in/ernestofabiani/";
 const RS = "https://racing-simplified.vercel.app/";
 const W = "/wings/";
 
 const PANELS = [
-  { tab: "The pile", full: true, title: ["Not another PDF"], img: W + "garage_close_bg.mp4", alt: "", pos: "50% 50%", when: "2026", what: "I was sick of the CV everyone else hands over",
+  { tab: "The pile", words: true, title: ["Not another PDF"], when: "2026", what: "I was sick of the CV everyone else hands over",
     left: ["That PDF you fire off to a motorsport company, landing in a pile of hundreds that look EXACTLY the same, opened for two seconds, closed, and forgotten before the next one loads.", "So instead of sending another one I built this, a website you can walk through, made with Claude Code by someone who had never written a line of code in his life."] },
   { tab: "Claude Code", light: true, title: ["Claude"], img: "/claude_bot.png", alt: "The Claude Code mascot with a coffee", pos: "50% 50%", contain: true, when: "How it was built", what: "Two weeks of conversations for the first version",
     left: ["A good friend of mine, Marc Guitart Frescó, told me you could code a website from zero *without knowing how to program*, so I set out to find whether that was true."],
@@ -15,7 +16,7 @@ const PANELS = [
 
 const GaragePage = () => (
   <Wing back="/building-now" backLabel="BUILDING NOW">
-    <Hero src={W + "door.webp"} dark title={["This garage"]} text="A web portfolio looks like something only developers get to make. It isn't, not anymore." />
+    <DoorLift door={W + "door.webp"} under={W + "garage_close_bg.mp4"} title={["This garage"]} when="Built with Claude Code, 2026" text="A web portfolio looks like something only developers get to make. It isn't, not anymore." />
     <Track panels={PANELS} label="How it was made" />
     <End title={["At least mine", "isn't another PDF", "in the pile"]} links={[["Built already", "/story"], ["Let's talk", "/contact"]]} />
   </Wing>

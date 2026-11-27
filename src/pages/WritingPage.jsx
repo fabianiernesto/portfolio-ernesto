@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Cover, End, Hero, Track, Wing } from "../components/scenes";
+import { End, Track, Wing } from "../components/scenes";
+import { Counter, Stats } from "../components/journeys";
 
 const LI = "https://www.linkedin.com/in/ernestofabiani/";
 const RS = "https://racing-simplified.vercel.app/";
@@ -23,9 +24,10 @@ const PANELS = [
 
 const WritingPage = () => (
   <Wing back="/building-now" backLabel="BUILDING NOW">
-    <Hero src={W + "writing_close_bg.mp4"} title={["The business", "of racing"]} text="Three posts a week on LinkedIn about the part of motorsport that almost never gets told, the money, the contracts and the decisions." />
+    <Counter value={511109} label="Impressions on LinkedIn, last 12 months" text="Three posts a week about the part of motorsport that almost never gets told, the money, the contracts and the decisions. *89%* of those impressions came from people outside my own network." />
+    <Stats total={511109} reached={205680} outside={89} best={[52496, "impressions on Claude x Williams, my best post"]} rows={[["Reactions", 2610], ["Comments", 520], ["Saves", 83], ["Sends", 32], ["Reposts", 12]]} />
     <Track panels={PANELS} label="What I write" />
-    <End title={["511,109 impressions"]} text="In the 12 months to 25 November 2026, in front of 205,680 people, with 89% of the impressions coming from outside my own network. Plus 2,610 reactions and 520 comments, and nobody commissioned any of it..." links={[["Read them", LI], ["Let's talk", "/contact"]]} />
+    <End title={["Read them"]} text="205,680 people reached, 2,610 reactions and 520 comments in the last 12 months, and nobody commissioned any of it..." links={[["Read them", LI], ["Let's talk", "/contact"]]} />
   </Wing>
 );
 
