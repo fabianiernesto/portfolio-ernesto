@@ -5,9 +5,10 @@ import { Counter, Feed, Stats } from "../components/journeys";
 const LI = "https://www.linkedin.com/in/ernestofabiani/";
 const W = "/wings/";
 const WIDE = "1200/627", TALL = "4/5";
+const LOGOS = [W + "logo_f1.webp", W + "logo_motogp.webp", W + "logo_wec_red.webp"];
 
 const SERIES = [
-  { title: "Motorsport Stories", when: "Formula 1, MotoGP and WEC", what: "The business decision under the story",
+  { title: "Motorsport Stories", when: "Formula 1, MotoGP and WEC", what: "The business decision under the story", logos: LOGOS,
     posts: [
       { img: W + "ms_f1.webp", alt: "Kimi Antonelli, Formula 1", ratio: WIDE },
       { img: W + "ms_motogp.webp", alt: "Marc Márquez, MotoGP", ratio: WIDE },
@@ -15,7 +16,7 @@ const SERIES = [
     ],
     left: ["It started with F1 drivers and now it's also MotoGP and endurance."],
     right: ["The story is the way in, what I'm chasing is the commercial reading a fan account never reaches.", "The one on Kimi Antonelli did *48,508 impressions*, and the one on Charles Leclerc around 48,000."], link: ["Read them", LI] },
-  { title: "Behind The Logo", when: "Formula 1, MotoGP and WEC", what: "Why it's on the car (or the bike) and what each side got",
+  { title: "Behind The Logo", when: "Formula 1, MotoGP and WEC", what: "Why it's on the car (or the bike) and what each side got", logos: LOGOS,
     posts: [
       { img: W + "btl2.webp", alt: "Claude and Williams, Formula 1", ratio: TALL },
       { img: W + "btl_motogp.webp", alt: "Ducati and Lenovo, MotoGP", ratio: TALL },

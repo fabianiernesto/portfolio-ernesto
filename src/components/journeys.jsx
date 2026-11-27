@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { Link } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
@@ -171,83 +171,84 @@ const Post = ({ x }) => (
   </figure>
 );
 
-/* LINKEDIN. A feed: the posts go up a column as wide as a phone, and the series they belong to stays beside them. */
-export const Feed = ({ series, label, hold }) => {
+/* LINKEDIN. One chapter per series: a cover that slides over the series before it,
+   then its posts going up a column as wide as a phone, with the series beside them. */
+const jump = (i) => {
+  const el = document.getElementById("series-" + i);
+  if (!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY;
+  window.__lenis ? window.__lenis.scrollTo(y) : window.scrollTo(0, y);
+};
+
+const Chapter = ({ s, i }) => (
+  <section className="chapter" id={"series-" + i}>
+    <div className="s-center">
+      <span className="c-when">{s.when}</span>
+      <h2 className="tt">{s.title}</h2>
+      <p>{s.what}</p>
+      {s.logos && <div className="chapter-logos">{s.logos.map((l) => <img key={l} src={l} alt="" loading="lazy" />)}</div>}
+    </div>
+  </section>
+);
+
+const FeedRun = ({ s, i, all, label, hold }) => {
   const ref = useRef(null);
   const col = useRef(null);
-  const m = useIsMobile();
-  const posts = series.flatMap((s, i) => s.posts.map((x) => ({ ...x, s: i })));
   const [g, setG] = useState(null);
-  const [cur, setCur] = useState(0);
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   useEffect(() => {
-    if (m || !col.current) return;
+    if (!col.current) return;
     const measure = () => {
       const H = window.innerHeight;
       const c = [...col.current.children].map((k) => k.offsetTop + k.offsetHeight / 2);
-      setG({ H, c, start: c[0] - H / 2, travel: Math.max(1, c[c.length - 1] - c[0]) });
+      setG({ H, start: c[0] - H / 2, travel: Math.max(1, c[c.length - 1] - c[0]) });
     };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(col.current);
     window.addEventListener("resize", measure);
     return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
-  }, [m]);
+  }, []);
   const y = useTransform(p, (v) => (g ? -(g.start + v * g.travel) : 0));
-  useMotionValueEvent(y, "change", (v) => {
-    if (!g) return;
-    let k = 0, best = Infinity;
-    g.c.forEach((c, i) => { const dd = Math.abs(v + c - g.H / 2); if (dd < best) { best = dd; k = i; } });
-    setCur(posts[k].s);
-  });
-  const go = (i) => {
-    if (!g) return;
-    const k = posts.findIndex((x) => x.s === i);
-    const top = ref.current.getBoundingClientRect().top + window.scrollY;
-    const to = top + (g.c[k] - g.c[0]);
-    window.__lenis ? window.__lenis.scrollTo(to) : window.scrollTo(0, to);
-  };
+  const run = g ? g.travel + g.H : null;
+  return (
+    <section className={"feed" + (hold ? " hold" : "")} style={{ height: run ? run + (hold ? g.H : 0) : `${s.posts.length * 60 + 100}vh` }}>
+      <div className="run" ref={ref} style={{ height: run || `${s.posts.length * 60 + 100}vh` }} aria-hidden="true" />
+      <div className="feed-pin">
+        {label && (
+          <nav className="guide" aria-label={label}>
+            <span className="guide-y">{label}</span>
+            {all.map((x, j) => <button key={x.title} className={j === i ? "is-on" : ""} onClick={() => jump(j)} data-hover="true">{x.title}</button>)}
+          </nav>
+        )}
+        <div className="feed-l"><div className="feed-leaf on"><Meta d={s} /><h3 className="tt">{s.title}</h3><Paras t={s.left} /></div></div>
+        <div className="feed-col"><motion.div ref={col} style={{ y }}>{s.posts.map((x) => <Post key={x.img} x={x} />)}</motion.div></div>
+        <div className="feed-r"><div className="feed-leaf on"><Paras t={s.right} /><Anchor link={s.link} /></div></div>
+      </div>
+    </section>
+  );
+};
+
+export const Feed = ({ series, label, hold }) => {
+  const m = useIsMobile();
   if (m)
     return (
       <section className="feed-m">
-        {series.map((s) => (
+        {series.map((s, i) => (
           <article key={s.title}>
-            <h3 className="tt">{s.title}</h3><Meta d={s} />
+            <Chapter s={s} i={i} />
             <div className="feed-m-posts">{s.posts.map((x) => <Post key={x.img} x={x} />)}</div>
             <Paras t={s.left} /><Paras t={s.right} /><Anchor link={s.link} />
           </article>
         ))}
       </section>
     );
-  const run = g ? g.travel + g.H : null;
-  return (
-    <section className={"feed" + (hold ? " hold" : "")} style={{ height: run ? run + (hold ? g.H : 0) : `${posts.length * 60 + 100}vh` }}>
-      <div className="run" ref={ref} style={{ height: run || `${posts.length * 60 + 100}vh` }} aria-hidden="true" />
-      <div className="feed-pin">
-        {label && (
-          <nav className="guide" aria-label={label}>
-            <span className="guide-y">{label}</span>
-            {series.map((s, i) => <button key={s.title} className={i === cur ? "is-on" : ""} onClick={() => go(i)} data-hover="true">{s.title}</button>)}
-          </nav>
-        )}
-        <div className="feed-l">
-          {series.map((s, i) => (
-            <div key={s.title} className={"feed-leaf" + (i === cur ? " on" : "")} aria-hidden={i !== cur}>
-              <Meta d={s} /><h3 className="tt">{s.title}</h3><Paras t={s.left} />
-            </div>
-          ))}
-        </div>
-        <div className="feed-col"><motion.div ref={col} style={{ y }}>{posts.map((x) => <Post key={x.img} x={x} />)}</motion.div></div>
-        <div className="feed-r">
-          {series.map((s, i) => (
-            <div key={s.title} className={"feed-leaf" + (i === cur ? " on" : "")} aria-hidden={i !== cur}>
-              <Paras t={s.right} /><Anchor link={s.link} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return series.map((s, i) => (
+    <Fragment key={s.title}>
+      <Chapter s={s} i={i} />
+      <FeedRun s={s} i={i} all={series} label={label} hold={i < series.length - 1 || hold} />
+    </Fragment>
+  ));
 };
 
 /* THIS GARAGE. The first version and this one: the line moves across as you scroll. */
