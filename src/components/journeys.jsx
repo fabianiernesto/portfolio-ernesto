@@ -35,6 +35,8 @@ const Leaf = ({ d, k, a }) => {
   );
 };
 
+/* The album stays put for one more screen at the end, so the next section slides over it
+   instead of carrying the last title off the top of the page. */
 export const Album = ({ items, label }) => {
   const ref = useRef(null);
   const m = useIsMobile();
@@ -55,7 +57,8 @@ export const Album = ({ items, label }) => {
       </section>
     );
   return (
-    <section className="album" ref={ref} style={{ height: `${n * 110}vh` }}>
+    <section className="album" style={{ height: `${n * 110 + 100}vh` }}>
+      <div className="album-run" ref={ref} style={{ height: `${n * 110}vh` }} aria-hidden="true" />
       <div className="album-pin">
         <div className="album-label"><span className="guide-y">{label}</span><span>{String(cur + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span></div>
         <div className="album-text">{items.map((d, k) => <Leaf key={k} d={d} k={k} a={a} />)}</div>
