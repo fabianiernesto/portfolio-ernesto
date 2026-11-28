@@ -200,8 +200,10 @@ const jump = (i) => {
   window.__lenis ? window.__lenis.scrollTo(y) : window.scrollTo(0, y);
 };
 
+/* each series opens in a dark room lit by one of its own posts */
 const Chapter = ({ s, i }) => (
   <section className="chapter" id={"series-" + i}>
+    <img className="chapter-glow" src={s.posts[0].img} alt="" aria-hidden="true" />
     <div className="s-center">
       <span className="c-when">{s.when}</span>
       <h2 className="tt">{s.title}</h2>
