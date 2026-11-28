@@ -129,7 +129,8 @@ html.lenis body {
   height: 40px;
   background-color: #ffffff;
 }
-/* Over a project picture the dot becomes a red disc that says where it goes. */
+/* Over a project picture the dot becomes a solid black disc with the word in white;
+   a thin light ring keeps it visible on dark scenes too. */
 .cursor-dot {
   display: flex;
   align-items: center;
@@ -137,7 +138,7 @@ html.lenis body {
 }
 .cursor-dot span {
   opacity: 0;
-  color: #fffce8;
+  color: #f9f9f9;
   font: 600 13px/1 "Sora", system-ui, sans-serif;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -146,8 +147,9 @@ html.lenis body {
 .cursor-dot.is-label {
   width: 92px;
   height: 92px;
-  background-color: #a9170b;
+  background-color: #111111;
   mix-blend-mode: normal;
+  box-shadow: 0 0 0 1px rgba(249, 249, 249, 0.45), 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 .cursor-dot.is-label span {
   opacity: 1;

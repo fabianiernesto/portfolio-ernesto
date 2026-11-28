@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { Link } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
-import { Anchor, Lines, Media, Meta, Paras, Rich } from "./scenes";
+import { Anchor, Go, Lines, Media, Meta, Paras, Rich } from "./scenes";
 
 const clamp = (v) => Math.min(1, Math.max(0, v));
 
@@ -356,5 +356,88 @@ export const Talk = ({ img, alt, pos, title, left, right, email, subject, linked
         <button type="button" className="copy" onClick={copy} data-hover="true">{copied ? "Copied" : "Copy my email address"}</button>
       </div>
     </section>
+  );
+};
+
+/* BUILDING NOW. One full screen per project, each in its own light, and the next one slides over it.
+   kind: photo (the picture fills the screen), object (the picture floats like a piece), stack (posts fanned like cards). */
+const BayArt = ({ d, e }) => {
+  const y = useTransform(e, (v) => `${(1 - v) * 70}px`);
+  const r = useTransform(e, (v) => (d.tilt || 0) * (1 + (1 - v) * 2.5));
+  const sc = useTransform(e, (v) => 1.08 - 0.08 * v);
+  if (d.kind === "photo")
+    return (
+      <Go to={d.link[1]} className="bay-photo" cursor>
+        <motion.img src={d.img} alt={d.alt} style={{ objectPosition: d.pos, scale: sc }} loading="lazy" decoding="async" />
+      </Go>
+    );
+  if (d.kind === "stack")
+    return (
+      <Go to={d.link[1]} className="bay-art" cursor>
+        <motion.div className="bay-stack" style={{ y }}>
+          {d.stack.map(([src, alt], k) => <img key={src} src={src} alt={alt} loading="lazy" decoding="async" className={"c" + k} />)}
+        </motion.div>
+      </Go>
+    );
+  return (
+    <Go to={d.link[1]} className="bay-art" cursor>
+      <motion.img className="bay-object" src={d.img} alt={d.alt} style={{ y, rotate: r, aspectRatio: d.ratio }} loading="lazy" decoding="async" />
+    </Go>
+  );
+};
+
+const Bay = ({ d, i, hold, m }) => {
+  const ref = useRef(null);
+  const { scrollYProgress: e } = useScroll({ target: ref, offset: ["start end", "start start"] });
+  return (
+    <section ref={ref} className={`bay t-${d.tone} side-${d.side} k-${d.kind}` + (d.dim ? " dim" : "") + (hold ? " hold" : "")} id={"bay-" + i} data-tone={d.tone}>
+      <div className="bay-pin">
+        <BayArt d={d} e={e} />
+        <div className="bay-copy">
+          <span className="bay-when">{d.when}</span>
+          <h2 className="tt">{d.title}</h2>
+          <p className="bay-what">{d.what}</p>
+          <Paras t={d.text} />
+          {d.stat && <div className="bay-stat"><span className="tt">{d.stat[0]}</span><span>{d.stat[1]}</span></div>}
+          <Go to={d.link[1]} className="btn">{d.link[0]}</Go>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export const Bays = ({ items, label, hold }) => {
+  const m = useIsMobile();
+  const [cur, setCur] = useState(0);
+  useEffect(() => {
+    if (m) return;
+    const els = items.map((_, i) => document.getElementById("bay-" + i));
+    const on = () => {
+      let k = 0;
+      els.forEach((el, i) => { if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.5) k = i; });
+      setCur(k);
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, [m, items]);
+  const go = (i) => {
+    const el = document.getElementById("bay-" + i);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY;
+    window.__lenis ? window.__lenis.scrollTo(y) : window.scrollTo(0, y);
+  };
+  return (
+    <div className={"bays" + (hold ? " hold" : "")}>
+      {!m && label && (
+        <div className="bays-guide">
+          <nav className={"guide" + (items[cur].tone === "light" ? "" : " on-dark")} aria-label={label}>
+            <span className="guide-y">{label}</span>
+            {items.map((d, i) => <button key={d.title} className={i === cur ? "is-on" : ""} onClick={() => go(i)} data-hover="true">{d.title}</button>)}
+          </nav>
+        </div>
+      )}
+      {items.map((d, i) => <Bay key={d.title} d={d} i={i} m={m} hold={!m && (i < items.length - 1 || hold)} />)}
+    </div>
   );
 };
