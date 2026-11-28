@@ -443,3 +443,17 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
 
 /* a cut-out picture (transparent background) casts its shadow from its own outline */
 .bay.cut .bay-object { box-shadow:none !important; filter:drop-shadow(0 30px 40px rgba(0,0,0,.22)); max-height:56vh; max-width:min(100%,460px); }
+
+/* LinkedIn feed: posts fade before they reach the tabs, and the column leans towards the mouse */
+.feed-col { perspective:1400px; -webkit-mask-image:linear-gradient(transparent 0, #000 120px, #000 calc(100% - 70px), transparent 100%); mask-image:linear-gradient(transparent 0, #000 120px, #000 calc(100% - 70px), transparent 100%); }
+.feed-tilt { transform-style:preserve-3d; will-change:transform; }
+
+/* Let's talk: the year of the promise as a bar */
+.cd-year { width:min(620px,84vw); margin-top:34px; }
+.cd-year-top { display:flex; justify-content:space-between; gap:12px; font-size:13px; color:var(--date); margin-bottom:10px; font-variant-numeric:tabular-nums; }
+.cd-year-top span:nth-child(2) { color:var(--ink); font-weight:600; }
+.cd-bar { height:4px; background:rgba(17,17,17,.1); overflow:hidden; }
+.cd-bar i { display:block; height:100%; background:var(--ink); transform-origin:left; }
+.talk-photo { perspective:1200px; }
+.talk-photo img { transform-style:preserve-3d; will-change:transform; }
+@media (max-width:767px) { .cd-year-top span:nth-child(2) { display:none; } }

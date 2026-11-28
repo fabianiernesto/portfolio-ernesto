@@ -211,7 +211,23 @@ const Chapter = ({ s, i }) => (
   </section>
 );
 
+/* A surface that leans towards the mouse: returns the rotations and the two handlers. */
+const useLean = (x = 12, y = 9) => {
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rotateX = useSpring(useTransform(my, (v) => -v * y), { stiffness: 110, damping: 18 });
+  const rotateY = useSpring(useTransform(mx, (v) => v * x), { stiffness: 110, damping: 18 });
+  const onPointerMove = (ev) => {
+    const b = ev.currentTarget.getBoundingClientRect();
+    mx.set((ev.clientX - b.left) / b.width - 0.5);
+    my.set((ev.clientY - b.top) / b.height - 0.5);
+  };
+  const onPointerLeave = () => { mx.set(0); my.set(0); };
+  return { style: { rotateX, rotateY }, on: { onPointerMove, onPointerLeave } };
+};
+
 const FeedRun = ({ s, i, all, label, hold }) => {
+  const lean = useLean(10, 6);
   const ref = useRef(null);
   const col = useRef(null);
   const [g, setG] = useState(null);
@@ -234,7 +250,7 @@ const FeedRun = ({ s, i, all, label, hold }) => {
   return (
     <section className={"feed" + (hold ? " hold" : "")} style={{ height: run ? run + (hold ? g.H : 0) : `${s.posts.length * 60 + 100}vh` }}>
       <div className="run" ref={ref} style={{ height: run || `${s.posts.length * 60 + 100}vh` }} aria-hidden="true" />
-      <div className="feed-pin">
+      <div className="feed-pin" {...lean.on}>
         {label && (
           <nav className="guide" aria-label={label}>
             <span className="guide-y">{label}</span>
@@ -242,7 +258,7 @@ const FeedRun = ({ s, i, all, label, hold }) => {
           </nav>
         )}
         <div className="feed-l"><div className="feed-leaf on"><Meta d={s} /><h3 className="tt">{s.title}</h3><Paras t={s.left} /></div></div>
-        <div className="feed-col"><motion.div ref={col} style={{ y }}>{s.posts.map((x) => <Post key={x.img} x={x} />)}</motion.div></div>
+        <div className="feed-col"><motion.div className="feed-tilt" style={lean.style}><motion.div ref={col} style={{ y }}>{s.posts.map((x) => <Post key={x.img} x={x} />)}</motion.div></motion.div></div>
         <div className="feed-r"><div className="feed-leaf on"><Paras t={s.right} /><Anchor link={s.link} /></div></div>
       </div>
     </section>
@@ -320,7 +336,8 @@ export const Compare = ({ d, hold }) => {
 
 /* LET'S TALK. The days left to the deadline, counting down live. */
 const left = (to) => Math.max(0, to - Date.now());
-export const Countdown = ({ to, label, text, hold }) => {
+/* from: the day the promise was made, so a bar can show how much of the year is already gone */
+export const Countdown = ({ to, from, fromLabel, toLabel, label, text, hold }) => {
   const [ms, setMs] = useState(() => left(to));
   const [shown, setShown] = useState(0);
   const days = Math.floor(ms / 864e5);
@@ -349,6 +366,15 @@ export const Countdown = ({ to, label, text, hold }) => {
           <span className="c-when">{label}</span>
           <div className="tt counter-n">{shown}</div>
           <span className="cd-clock">days, {two(h)} h {two(mi)} min {two(s)} s</span>
+          {from && (() => {
+            const gone = Math.min(1, Math.max(0, (Date.now() - from) / (to - from)));
+            return (
+              <div className="cd-year">
+                <div className="cd-year-top"><span>{fromLabel}</span><span>{Math.round(gone * 100)}% of the year gone</span><span>{toLabel}</span></div>
+                <div className="cd-bar"><motion.i initial={{ scaleX: 0 }} animate={{ scaleX: gone }} transition={{ duration: 1.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }} /></div>
+              </div>
+            );
+          })()}
           <p><Rich t={text} /></p>
         </div>
       </header>
@@ -359,6 +385,7 @@ export const Countdown = ({ to, label, text, hold }) => {
 /* LET'S TALK. The two ways in, as big rows that fill with red, and the address ready to copy. */
 export const Talk = ({ img, alt, pos, title, left, right, email, subject, linkedin, linkedinLabel }) => {
   const [copied, setCopied] = useState(false);
+  const lean = useLean(14, 10);
   const addr = useRef(null);
   const copy = async () => {
     try {
@@ -374,8 +401,8 @@ export const Talk = ({ img, alt, pos, title, left, right, email, subject, linked
     }
   };
   return (
-    <section className="talk">
-      <figure className="talk-photo"><img src={img} alt={alt} loading="lazy" decoding="async" style={{ objectPosition: pos }} /></figure>
+    <section className="talk" {...lean.on}>
+      <figure className="talk-photo"><motion.img src={img} alt={alt} loading="lazy" decoding="async" style={{ objectPosition: pos, ...lean.style }} /></figure>
       <div className="talk-copy">
         <h2 className="tt">{title}</h2>
         <Paras t={left} />
