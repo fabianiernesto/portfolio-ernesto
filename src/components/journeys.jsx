@@ -361,6 +361,10 @@ export const Talk = ({ img, alt, pos, title, left, right, email, subject, linked
 
 /* BUILDING NOW. One full screen per project, each in its own light, and the next one slides over it.
    kind: photo (the picture fills the screen), object (the picture floats like a piece), stack (posts fanned like cards). */
+/* A scene's picture is a door only when it has somewhere to go. */
+const Door = ({ d, className, children }) =>
+  d.link ? <Go to={d.link[1]} className={className} cursor>{children}</Go> : <div className={className}>{children}</div>;
+
 const BayArt = ({ d, e, mx, my }) => {
   const y = useTransform(e, (v) => `${(1 - v) * 70}px`);
   const r = useTransform(e, (v) => (d.tilt || 0) * (1 + (1 - v) * 2.5));
@@ -372,30 +376,32 @@ const BayArt = ({ d, e, mx, my }) => {
   const py = useSpring(useTransform(my, (v) => v * -18), { stiffness: 90, damping: 20 });
   if (d.kind === "photo")
     return (
-      <Go to={d.link[1]} className="bay-photo" cursor>
-        <motion.img src={d.img} alt={d.alt} style={{ objectPosition: d.pos, scale: sc, x: px, y: py }} loading="lazy" decoding="async" />
-      </Go>
+      <Door d={d} className="bay-photo">
+        {d.img.endsWith(".mp4")
+          ? <motion.video src={d.img} style={{ objectPosition: d.pos, scale: sc, x: px, y: py }} autoPlay muted loop playsInline preload="metadata" />
+          : <motion.img src={d.img} alt={d.alt} style={{ objectPosition: d.pos, scale: sc, x: px, y: py }} loading="lazy" decoding="async" />}
+      </Door>
     );
   if (d.kind === "stack")
     return (
-      <Go to={d.link[1]} className="bay-art" cursor>
+      <Door d={d} className="bay-art">
         <motion.div className="bay-tilt" style={{ rotateX: rx, rotateY: ry }}>
           <motion.div className="bay-stack" style={{ y }}>
             {d.stack.map(([src, alt], k) => <img key={src} src={src} alt={alt} loading="lazy" decoding="async" className={"c" + k} />)}
           </motion.div>
         </motion.div>
-      </Go>
+      </Door>
     );
   return (
-    <Go to={d.link[1]} className="bay-art" cursor>
+    <Door d={d} className="bay-art">
       <motion.div className="bay-tilt" style={{ rotateX: rx, rotateY: ry }}>
-        <motion.img className="bay-object" src={d.img} alt={d.alt} style={{ y, rotate: r, aspectRatio: d.ratio }} loading="lazy" decoding="async" />
+        <motion.img className="bay-object" src={d.img} alt={d.alt} style={{ y, rotate: r, aspectRatio: d.ratio, objectPosition: d.pos }} loading="lazy" decoding="async" />
       </motion.div>
-    </Go>
+    </Door>
   );
 };
 
-const Bay = ({ d, i, hold, m }) => {
+const Bay = ({ d, id, hold, m }) => {
   const ref = useRef(null);
   const { scrollYProgress: e } = useScroll({ target: ref, offset: ["start end", "start start"] });
   const mx = useMotionValue(0);
@@ -413,7 +419,7 @@ const Bay = ({ d, i, hold, m }) => {
   };
   const leave = () => { mx.set(0); my.set(0); };
   return (
-    <section ref={ref} className={`bay t-${d.tone} side-${d.side} k-${d.kind}` + (d.dim ? " dim" : "") + (hold ? " hold" : "")} id={"bay-" + i} data-tone={d.tone}>
+    <section ref={ref} className={`bay t-${d.tone} side-${d.side} k-${d.kind}` + (d.dim ? " dim" : "") + (hold ? " hold" : "")} id={id} data-tone={d.tone}>
       <div className="bay-pin" onPointerMove={move} onPointerLeave={leave}>
         <BayArt d={d} e={e} mx={mx} my={my} />
         <div className="bay-copy">
@@ -422,10 +428,10 @@ const Bay = ({ d, i, hold, m }) => {
             <h2 className="tt">{d.title}</h2>
           </motion.div>
           <motion.div style={{ y: cy, opacity: co }}>
-            <p className="bay-what">{d.what}</p>
+            {d.what && <p className="bay-what">{d.what}</p>}
             <Paras t={d.text} />
             {d.stat && <div className="bay-stat"><span className="tt">{d.stat[0]}</span><span>{d.stat[1]}</span></div>}
-            <Go to={d.link[1]} className="btn">{d.link[0]}</Go>
+            {d.link && <Go to={d.link[1]} className="btn">{d.link[0]}</Go>}
           </motion.div>
         </div>
       </div>
@@ -433,15 +439,16 @@ const Bay = ({ d, i, hold, m }) => {
   );
 };
 
-export const Bays = ({ items, label, hold }) => {
+/* name keeps the ids apart when a page has several groups of scenes; dense fits longer stories. */
+export const Bays = ({ items, label, hold, name = "bay", dense }) => {
   const m = useIsMobile();
   const [cur, setCur] = useState(0);
+  const id = (i) => `${name}-${i}`;
   useEffect(() => {
     if (m) return;
-    const els = items.map((_, i) => document.getElementById("bay-" + i));
     const on = () => {
       let k = 0;
-      els.forEach((el, i) => { if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.5) k = i; });
+      items.forEach((_, i) => { const el = document.getElementById(id(i)); if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.5) k = i; });
       setCur(k);
     };
     on();
@@ -449,22 +456,22 @@ export const Bays = ({ items, label, hold }) => {
     return () => window.removeEventListener("scroll", on);
   }, [m, items]);
   const go = (i) => {
-    const el = document.getElementById("bay-" + i);
+    const el = document.getElementById(id(i));
     if (!el) return;
     const y = el.getBoundingClientRect().top + window.scrollY;
     window.__lenis ? window.__lenis.scrollTo(y) : window.scrollTo(0, y);
   };
   return (
-    <div className={"bays" + (hold ? " hold" : "")}>
+    <div className={"bays" + (dense ? " dense" : "") + (hold ? " hold" : "")}>
       {!m && label && (
         <div className="bays-guide">
           <nav className={"guide" + (items[cur].tone === "light" ? "" : " on-dark")} aria-label={label}>
             <span className="guide-y">{label}</span>
-            {items.map((d, i) => <button key={d.title} className={i === cur ? "is-on" : ""} onClick={() => go(i)} data-hover="true">{d.title}</button>)}
+            {items.map((d, i) => <button key={d.title} className={i === cur ? "is-on" : ""} onClick={() => go(i)} data-hover="true">{d.tab || d.title}</button>)}
           </nav>
         </div>
       )}
-      {items.map((d, i) => <Bay key={d.title} d={d} i={i} m={m} hold={!m && (i < items.length - 1 || hold)} />)}
+      {items.map((d, i) => <Bay key={d.title} d={d} id={id(i)} m={m} hold={!m && (i < items.length - 1 || hold)} />)}
     </div>
   );
 };

@@ -332,7 +332,7 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
 
 /* the picture side */
 .bay-art { position:relative; z-index:2; height:100%; display:flex; align-items:center; justify-content:center; padding:72px clamp(24px,4vw,72px) 40px; text-decoration:none; }
-.bay-object { display:block; width:min(100%,760px); height:auto; max-height:70vh; object-fit:contain; box-shadow:0 34px 80px rgba(0,0,0,.35), 0 3px 10px rgba(0,0,0,.18); transition:transform .9s cubic-bezier(.22,1,.36,1); }
+.bay-object { display:block; width:auto; max-width:min(100%,760px); height:auto; max-height:70vh; object-fit:contain; box-shadow:0 34px 80px rgba(0,0,0,.35), 0 3px 10px rgba(0,0,0,.18); transition:transform .9s cubic-bezier(.22,1,.36,1); }
 .bay.t-light .bay-object { box-shadow:0 34px 70px rgba(0,0,0,.2), 0 3px 10px rgba(0,0,0,.1); }
 .bay.k-object .bay-art:hover .bay-object { transform:scale(1.035); }
 .bay.t-rs .bay-object { box-shadow:0 40px 90px rgba(255,30,10,.22), 0 0 0 1px rgba(255,80,60,.25); }
@@ -376,3 +376,28 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
 .bay.k-photo .bay-photo img { will-change:transform; }
 .bay.k-photo .bay-photo { overflow:hidden; }
 .bay.k-photo .bay-photo img { width:calc(100% + 60px); height:calc(100% + 40px); margin:-20px 0 0 -30px; max-width:none; }
+
+/* Built already: the open cover holds while the first scene of that year slides over it. */
+.cover-run { position:absolute; top:0; left:0; width:1px; height:240vh; pointer-events:none; }
+@media (min-width:768px) {
+  .cover.hold { height:340vh; }
+  .hold + .bays { margin-top:-100vh; }
+  .hold + .bays > .bay:first-of-type .bay-pin { box-shadow:0 -26px 60px rgba(0,0,0,.2); }
+}
+@media (max-width:767px) { .cover-run { height:200vh; } }
+
+/* Longer stories: more room for the words, a smaller title. */
+@media (min-width:768px) {
+  .bays.dense .bay-pin { grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr); --body:clamp(14px,min(1.22vw,2.15vh),22px); }
+  .bays.dense .bay.side-left .bay-pin { grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr); }
+  .bays.dense .bay-copy { max-width:calc(640px + var(--gut) * 2); padding-top:72px; padding-bottom:28px; }
+  .bays.dense .bay-copy h2.tt { font-size:min(var(--t2),9cqi,10vh); margin:10px 0 14px; }
+  .bays.dense .bay-what { margin-bottom:.8em !important; }
+  .bays.dense .bay .btn { margin-top:22px; }
+  .bays.dense .bay-object { max-height:72vh; width:auto; max-width:min(100%,720px); }
+}
+
+/* videos fill their scene like the photographs do */
+.bay.k-photo .bay-photo video { display:block; object-fit:cover; width:calc(100% + 60px); height:calc(100% + 40px); margin:-20px 0 0 -30px; max-width:none; will-change:transform; }
+/* the closing section covers the tabs of the scenes it slides over */
+@media (min-width:768px) { .bays.hold + .s-end { z-index:25; } }

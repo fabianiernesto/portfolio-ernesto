@@ -35,7 +35,8 @@ export const Paras = ({ t = [] }) => t.map((x, i) => <p key={i}><Rich t={x} /></
 export const Meta = ({ d }) => (d.when ? <div className="meta"><span className="meta-w">{d.when}</span><span>{d.what}</span></div> : null);
 
 /* Two numbers and a window. The window opens until the photograph is the screen. */
-export const Cover = ({ s }) => {
+/* hold: the open cover stays put for one more screen, so the scenes of that year slide over it. */
+export const Cover = ({ s, hold }) => {
   const ref = useRef(null);
   const m = useIsMobile();
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
@@ -49,7 +50,8 @@ export const Cover = ({ s }) => {
   const my = useTransform(open, (v) => `${(s.drop ? (m ? 27 : s.drop) : 0) * (1 - v)}vh`);
   const pre = useTransform(open, [0, 0.3], [1, 0]);
   return (
-    <section className="cover" ref={ref}>
+    <section className={"cover" + (hold ? " hold" : "")}>
+      <div className="cover-run" ref={ref} aria-hidden="true" />
       <div className="cover-pin">
         {s.head && <motion.div className="cover-head" style={{ opacity: pre }}><h1 className="tt">{s.head}</h1></motion.div>}
         {s.sub && <motion.div className="cover-sub" style={{ opacity: pre }}><p><Rich t={s.sub} /></p></motion.div>}
