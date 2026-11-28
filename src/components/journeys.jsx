@@ -88,7 +88,8 @@ export const Album = ({ items, label }) => {
 };
 
 /* THIS GARAGE. The door goes up as you scroll. */
-export const DoorLift = ({ door, under, title, when, text }) => {
+/* hold: the open door stays for one more screen, so the next scene slides over it. */
+export const DoorLift = ({ door, under, title, when, text, hold }) => {
   const ref = useRef(null);
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const y = useTransform(p, (v) => `${-clamp((v - 0.12) / 0.55) * 104}%`);
@@ -96,7 +97,8 @@ export const DoorLift = ({ door, under, title, when, text }) => {
   const ty = useTransform(o, (v) => 36 * (1 - v));
   const hint = useTransform(p, (v) => 1 - clamp(v / 0.1));
   return (
-    <section className="door" ref={ref}>
+    <section className={"door" + (hold ? " hold" : "")}>
+      <div className="door-run" ref={ref} aria-hidden="true" />
       <div className="door-pin">
         <Media src={under} />
         <div className="shade" style={{ background: "rgba(8,8,7,.62)" }} />
@@ -269,34 +271,49 @@ export const Feed = ({ series, label, hold }) => {
   ));
 };
 
-/* THIS GARAGE. The first version and this one: the line moves across as you scroll. */
+/* THIS GARAGE. The first version and this one on one big screen in a dark room:
+   the line sweeps across as you scroll and the screen leans towards the mouse. */
 export const Compare = ({ d, hold }) => {
   const ref = useRef(null);
   const m = useIsMobile();
   const { scrollYProgress: p } = useScroll({ target: ref, offset: m ? ["start 0.85", "end 0.25"] : ["start start", "end end"] });
-  const cut = useTransform(p, m ? [0, 1] : [0.08, 0.78], [96, 0], { clamp: true });
+  const cut = useTransform(p, m ? [0, 1] : [0.1, 0.8], [96, 0], { clamp: true });
   const clip = useTransform(cut, (c) => `inset(0 0 0 ${c}%)`);
   const left = useTransform(cut, (c) => `${c}%`);
-  const frame = (
-    <div className="cmp-frame" ref={m ? ref : undefined}>
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rx = useSpring(useTransform(my, (v) => 3 - v * 8), { stiffness: 110, damping: 18 });
+  const ry = useSpring(useTransform(mx, (v) => -6 + v * 12), { stiffness: 110, damping: 18 });
+  const move = (ev) => {
+    const b = ev.currentTarget.getBoundingClientRect();
+    mx.set((ev.clientX - b.left) / b.width - 0.5);
+    my.set((ev.clientY - b.top) / b.height - 0.5);
+  };
+  const leave = () => { mx.set(0); my.set(0); };
+  const screen = (
+    <motion.div className="cmp-screen" ref={m ? ref : undefined} style={m ? undefined : { rotateX: rx, rotateY: ry }}>
       <img src={d.before} alt={d.beforeAlt} loading="lazy" decoding="async" />
       <motion.img src={d.after} alt={d.afterAlt} loading="lazy" decoding="async" style={{ clipPath: clip }} />
       <motion.i style={{ left }} />
+    </motion.div>
+  );
+  const labels = <div className="cmp-labels"><span>{d.beforeTag}</span><span>{d.afterTag}</span></div>;
+  const copy = (
+    <div className="cmp-copy">
+      <span className="bay-when">{d.when}</span>
+      <h2 className="tt">{d.title}</h2>
+      <p className="bay-what">{d.what}</p>
+      <Paras t={[...d.left, ...d.right]} />
     </div>
   );
-  const body = (
-    <>
-      <div className="cmp-tags"><span>{d.beforeTag}</span><span>{d.afterTag}</span></div>
-      {frame}
-      <h3 className="tt w-tt">{d.title}</h3>
-      <div className="w-cols"><div><Meta d={d} /><Paras t={d.left} /></div><div><Paras t={d.right} /></div></div>
-    </>
-  );
-  if (m) return <section className="cmp-m">{body}</section>;
+  if (m) return <section className="cmp-m">{labels}{screen}{copy}</section>;
   return (
-    <section className={"cmp" + (hold ? " hold" : "")} style={{ height: `${hold ? 340 : 240}vh` }}>
-      <div className="run" ref={ref} style={{ height: "240vh" }} aria-hidden="true" />
-      <div className="cmp-pin">{body}</div>
+    <section className={"cmp" + (hold ? " hold" : "")}>
+      <div className="run" ref={ref} aria-hidden="true" />
+      <div className="cmp-pin" onPointerMove={move} onPointerLeave={leave}>
+        {copy}
+        <div className="cmp-stage">{labels}{screen}</div>
+      </div>
     </section>
   );
 };
@@ -437,7 +454,7 @@ const Bay = ({ d, id, hold, m }) => {
   };
   const leave = () => { mx.set(0); my.set(0); };
   return (
-    <section ref={ref} className={`bay t-${d.tone} side-${d.side} k-${d.kind}` + (d.dim ? " dim" : "") + (hold ? " hold" : "")} id={id} data-tone={d.tone}>
+    <section ref={ref} className={`bay t-${d.tone} side-${d.side} k-${d.kind}` + (d.dim ? " dim" : "") + (d.cut ? " cut" : "") + (hold ? " hold" : "")} id={id} data-tone={d.tone}>
       <div className="bay-pin" onPointerMove={move} onPointerLeave={leave}>
         <BayArt d={d} e={e} mx={mx} my={my} />
         <div className="bay-copy">

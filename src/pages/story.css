@@ -223,22 +223,6 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
 .feed-m { padding:40px 24px 20px; } .feed-m article { margin-bottom:76px; } .feed-m .tt { font-size:7.4vw; color:var(--red); margin:0 0 14px; }
 .feed-m-posts { margin:28px 0 30px; } .feed-m .post { margin-bottom:26px; }
 
-/* This garage: the first version and this one */
-.cmp { position:relative; }
-.cmp-pin { position:sticky; top:0; height:100vh; overflow:hidden; background:var(--cream); --body:clamp(14px,min(1.28vw,2.1vh),24px); }
-.cmp-pin p, .cmp-pin .meta { font-size:var(--body); }
-.cmp-frame { position:absolute; left:50%; top:10vh; height:46vh; aspect-ratio:16/10; transform:translateX(-50%); overflow:hidden; background:#111; box-shadow:0 26px 60px rgba(0,0,0,.22); }
-.cmp-frame img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
-.cmp-frame i { position:absolute; top:0; bottom:0; width:2px; margin-left:-1px; background:var(--cream); box-shadow:0 0 0 1px rgba(0,0,0,.25); }
-.cmp-tags { position:absolute; left:50%; top:calc(10vh - 32px); width:calc(46vh * 1.6); transform:translateX(-50%); display:flex; justify-content:space-between; font-size:15px; }
-.cmp-tags span:first-child { color:var(--date); }
-.cmp-pin .w-tt { top:59vh; }
-.cmp-m { padding:88px 24px 40px; --body:16px; }
-.cmp-m .cmp-tags { position:static; transform:none; width:auto; margin-bottom:10px; }
-.cmp-m .cmp-frame { position:relative; left:auto; top:auto; transform:none; width:100%; height:auto; }
-.cmp-m .w-tt { position:static; font-size:7vw; padding-top:28px; text-align:left; }
-.cmp-m .w-cols { position:static; transform:none; width:auto; display:block; padding-top:20px; } .cmp-m .w-cols > div + div { padding-top:18px; }
-
 /* Let's talk: the countdown */
 .countdown .c-when b { font-weight:600; color:var(--ink); }
 .cd-clock { display:block; font-size:calc(var(--body)*1.05); font-variant-numeric:tabular-nums; opacity:.62; }
@@ -429,3 +413,33 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
   .album-m p { color:rgba(249,249,249,.8); }
   .album-m .hl { color:#fff; }
 }
+
+/* This garage: the door holds while the next scene slides over it */
+.door-run { position:absolute; top:0; left:0; width:1px; height:240vh; pointer-events:none; }
+@media (min-width:768px) { .door.hold { height:340vh; } .hold + .cmp { margin-top:-100vh; } .hold + .cmp .cmp-pin { box-shadow:0 -26px 60px rgba(0,0,0,.35); } }
+
+/* This garage: the first version and this one, on one big screen in a dark room */
+.cmp { position:relative; z-index:6; height:240vh; }
+.cmp.hold { height:340vh; }
+.cmp .run { height:240vh; }
+.cmp-pin { position:sticky; top:0; height:100vh; height:100dvh; overflow:hidden; color:#f9f9f9; display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); align-items:center; background:radial-gradient(80% 90% at 70% 50%, #1d1d1d 0%, #0b0b0b 70%); }
+.cmp-copy { padding:76px var(--gut) 40px; max-width:calc(540px + var(--gut) * 2); justify-self:center; container-type:inline-size; width:100%; }
+.cmp-copy .bay-when { color:#a3a3a3; }
+.cmp-copy h2.tt { font-size:min(var(--t2),11cqi,12vh); color:#f9f9f9; margin:14px 0 18px; }
+.cmp-copy .bay-what { font-size:calc(var(--body)*1.08) !important; font-weight:600; margin-bottom:1em !important; }
+.cmp-copy p { color:rgba(249,249,249,.74); }
+.cmp-copy p + p { margin-top:.8em; }
+.cmp-stage { position:relative; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:72px clamp(20px,4vw,72px) 40px 0; perspective:1600px; }
+.cmp-labels { width:min(100%,104vh); display:flex; justify-content:space-between; font-size:15px; margin-bottom:16px; color:#f9f9f9; }
+.cmp-labels span:first-child { color:#a3a3a3; }
+.cmp-screen { position:relative; width:min(100%,104vh); aspect-ratio:16/10; overflow:hidden; background:#111; border-radius:6px; box-shadow:0 0 0 1px rgba(255,255,255,.08), 0 50px 120px rgba(0,0,0,.6), 0 0 90px rgba(255,255,255,.05); transform-style:preserve-3d; will-change:transform; }
+.cmp-screen img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+.cmp-screen i { position:absolute; top:0; bottom:0; width:2px; margin-left:-1px; background:#fff; box-shadow:0 0 14px rgba(255,255,255,.85), 0 0 40px rgba(255,255,255,.35); }
+.cmp-m { background:#0f0f0f; color:#f9f9f9; padding:88px 24px 56px; --body:16px; }
+.cmp-m .cmp-labels { width:auto; }
+.cmp-m .cmp-screen { width:100%; }
+.cmp-m .cmp-copy { padding:28px 0 0; max-width:none; }
+.cmp-m .cmp-copy h2.tt { font-size:9vw; }
+
+/* a cut-out picture (transparent background) casts its shadow from its own outline */
+.bay.cut .bay-object { box-shadow:none !important; filter:drop-shadow(0 30px 40px rgba(0,0,0,.22)); max-height:56vh; max-width:min(100%,460px); }
