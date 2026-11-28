@@ -24,6 +24,12 @@ const Print = ({ d, k, a }) => {
   );
 };
 
+/* each memory lights the room with its own photograph, blurred and dimmed behind the pile */
+const Glow = ({ d, k, a }) => {
+  const o = useTransform(a, (v) => clamp(1 - Math.abs(v - k)));
+  return <motion.img className="glow" src={d.img} alt="" aria-hidden="true" style={{ opacity: o, objectPosition: d.pos }} />;
+};
+
 const Leaf = ({ d, k, a }) => {
   const o = useTransform(a, (v) => clamp(1 - Math.abs(v - k) * 3.2));
   const y = useTransform(a, (v) => (v - k) * -40);
@@ -46,6 +52,17 @@ export const Album = ({ items, label }) => {
   const a = useTransform(p, (v) => Math.min(n - 1, v * (n - 1) * 1.15));
   const [cur, setCur] = useState(0);
   useMotionValueEvent(a, "change", (v) => setCur(Math.min(n - 1, Math.max(0, Math.round(v)))));
+  /* the pile leans towards the mouse, like prints on a table */
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rx = useSpring(useTransform(my, (v) => -v * 10), { stiffness: 110, damping: 18 });
+  const ry = useSpring(useTransform(mx, (v) => v * 14), { stiffness: 110, damping: 18 });
+  const move = (ev) => {
+    const b = ev.currentTarget.getBoundingClientRect();
+    mx.set((ev.clientX - b.left) / b.width - 0.5);
+    my.set((ev.clientY - b.top) / b.height - 0.5);
+  };
+  const leave = () => { mx.set(0); my.set(0); };
   if (m)
     return (
       <section className="album-m">
@@ -60,10 +77,11 @@ export const Album = ({ items, label }) => {
   return (
     <section className="album" style={{ height: `${n * 110 + 100}vh` }}>
       <div className="album-run" ref={ref} style={{ height: `${n * 110}vh` }} aria-hidden="true" />
-      <div className="album-pin">
+      <div className="album-pin" onPointerMove={move} onPointerLeave={leave}>
+        <div className="album-glow">{items.map((d, k) => <Glow key={k} d={d} k={k} a={a} />)}</div>
         <div className="album-label"><span className="guide-y">{label}</span><span>{String(cur + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span></div>
         <div className="album-text">{items.map((d, k) => <Leaf key={k} d={d} k={k} a={a} />)}</div>
-        <div className="album-pile">{items.map((d, k) => <Print key={k} d={d} k={k} a={a} />)}</div>
+        <div className="album-pile"><motion.div className="album-tilt" style={{ rotateX: rx, rotateY: ry }}>{items.map((d, k) => <Print key={k} d={d} k={k} a={a} />)}</motion.div></div>
       </div>
     </section>
   );

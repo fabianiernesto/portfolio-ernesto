@@ -26,7 +26,7 @@ const ALBUM = [
 
 const WhyPage = () => (
   <Wing>
-    <Cover s={CARS} />
+    <Cover s={CARS} hold />
     <Album items={ALBUM} label="Where it comes from" />
     <End title={["Some things", "you choose,", "this one chose first"]} links={[["Building now", "/building-now"], ["Let's talk", "/contact"]]} />
   </Wing>

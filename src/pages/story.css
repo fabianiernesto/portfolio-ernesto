@@ -401,3 +401,31 @@ html:has(.story), body:has(.story) { overflow-x:clip; }
 .bay.k-photo .bay-photo video { display:block; object-fit:cover; width:calc(100% + 60px); height:calc(100% + 40px); margin:-20px 0 0 -30px; max-width:none; will-change:transform; }
 /* the closing section covers the tabs of the scenes it slides over */
 @media (min-width:768px) { .bays.hold + .s-end { z-index:25; } }
+
+/* Why motorsport: the album lives in a dark room lit by the memory on top of the pile,
+   the pile leans towards the mouse, and the album slides over its cover. */
+.album { z-index:6; }
+@media (min-width:768px) {
+  .cover.hold + .album { margin-top:-100vh; }
+  .cover.hold + .album .album-pin { box-shadow:0 -26px 60px rgba(0,0,0,.25); }
+}
+.album-pin { background:#0f0f0f; color:#f9f9f9; }
+.album-glow { position:absolute; inset:-60px; z-index:0; pointer-events:none; }
+.album-glow .glow { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:blur(46px) brightness(.36) saturate(1.15); transform:scale(1.12); will-change:opacity; }
+.album-pin::after { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(90% 80% at 68% 50%, rgba(15,15,15,0) 0%, rgba(15,15,15,.55) 100%), linear-gradient(90deg, rgba(15,15,15,.7) 0%, rgba(15,15,15,0) 48%); }
+.album-text, .album-pile, .album-label { z-index:2; }
+.album-label { color:#f9f9f9; } .album .album-label .guide-y { color:#bdbdbd; }
+.album .leaf .tt { color:#f9f9f9; }
+.album .leaf .meta-w { color:#c4c4c4; }
+.album .leaf p { color:rgba(249,249,249,.8); }
+.album .leaf .hl { color:#fff; }
+.album-tilt { position:absolute; inset:0; transform-style:preserve-3d; will-change:transform; }
+.album-pile { perspective:1500px; }
+.album .print { box-shadow:0 40px 80px rgba(0,0,0,.55), 0 3px 10px rgba(0,0,0,.35); }
+@media (max-width:767px) {
+  .album-m { background:#0f0f0f; color:#f9f9f9; padding-top:56px; }
+  .album-m .tt { color:#f9f9f9 !important; }
+  .album-m .meta-w { color:#c4c4c4; }
+  .album-m p { color:rgba(249,249,249,.8); }
+  .album-m .hl { color:#fff; }
+}
