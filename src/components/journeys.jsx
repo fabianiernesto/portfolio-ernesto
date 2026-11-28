@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Fragment, useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent, useMotionValue, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
 import { Anchor, Go, Lines, Media, Meta, Paras, Rich } from "./scenes";
@@ -361,27 +361,36 @@ export const Talk = ({ img, alt, pos, title, left, right, email, subject, linked
 
 /* BUILDING NOW. One full screen per project, each in its own light, and the next one slides over it.
    kind: photo (the picture fills the screen), object (the picture floats like a piece), stack (posts fanned like cards). */
-const BayArt = ({ d, e }) => {
+const BayArt = ({ d, e, mx, my }) => {
   const y = useTransform(e, (v) => `${(1 - v) * 70}px`);
   const r = useTransform(e, (v) => (d.tilt || 0) * (1 + (1 - v) * 2.5));
   const sc = useTransform(e, (v) => 1.08 - 0.08 * v);
+  /* the piece leans towards the mouse, the photo drifts with it */
+  const rx = useSpring(useTransform(my, (v) => -v * 9), { stiffness: 120, damping: 18 });
+  const ry = useSpring(useTransform(mx, (v) => v * 13), { stiffness: 120, damping: 18 });
+  const px = useSpring(useTransform(mx, (v) => v * -26), { stiffness: 90, damping: 20 });
+  const py = useSpring(useTransform(my, (v) => v * -18), { stiffness: 90, damping: 20 });
   if (d.kind === "photo")
     return (
       <Go to={d.link[1]} className="bay-photo" cursor>
-        <motion.img src={d.img} alt={d.alt} style={{ objectPosition: d.pos, scale: sc }} loading="lazy" decoding="async" />
+        <motion.img src={d.img} alt={d.alt} style={{ objectPosition: d.pos, scale: sc, x: px, y: py }} loading="lazy" decoding="async" />
       </Go>
     );
   if (d.kind === "stack")
     return (
       <Go to={d.link[1]} className="bay-art" cursor>
-        <motion.div className="bay-stack" style={{ y }}>
-          {d.stack.map(([src, alt], k) => <img key={src} src={src} alt={alt} loading="lazy" decoding="async" className={"c" + k} />)}
+        <motion.div className="bay-tilt" style={{ rotateX: rx, rotateY: ry }}>
+          <motion.div className="bay-stack" style={{ y }}>
+            {d.stack.map(([src, alt], k) => <img key={src} src={src} alt={alt} loading="lazy" decoding="async" className={"c" + k} />)}
+          </motion.div>
         </motion.div>
       </Go>
     );
   return (
     <Go to={d.link[1]} className="bay-art" cursor>
-      <motion.img className="bay-object" src={d.img} alt={d.alt} style={{ y, rotate: r, aspectRatio: d.ratio }} loading="lazy" decoding="async" />
+      <motion.div className="bay-tilt" style={{ rotateX: rx, rotateY: ry }}>
+        <motion.img className="bay-object" src={d.img} alt={d.alt} style={{ y, rotate: r, aspectRatio: d.ratio }} loading="lazy" decoding="async" />
+      </motion.div>
     </Go>
   );
 };
@@ -389,17 +398,35 @@ const BayArt = ({ d, e }) => {
 const Bay = ({ d, i, hold, m }) => {
   const ref = useRef(null);
   const { scrollYProgress: e } = useScroll({ target: ref, offset: ["start end", "start start"] });
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  /* the words rise into place as the scene finishes arriving */
+  const ty = useTransform(e, [0.45, 0.95], [60, 0], { clamp: true });
+  const to = useTransform(e, [0.45, 0.9], [0, 1], { clamp: true });
+  const cy = useTransform(e, [0.55, 1], [40, 0], { clamp: true });
+  const co = useTransform(e, [0.55, 1], [0, 1], { clamp: true });
+  const move = (ev) => {
+    if (m) return;
+    const b = ev.currentTarget.getBoundingClientRect();
+    mx.set((ev.clientX - b.left) / b.width - 0.5);
+    my.set((ev.clientY - b.top) / b.height - 0.5);
+  };
+  const leave = () => { mx.set(0); my.set(0); };
   return (
     <section ref={ref} className={`bay t-${d.tone} side-${d.side} k-${d.kind}` + (d.dim ? " dim" : "") + (hold ? " hold" : "")} id={"bay-" + i} data-tone={d.tone}>
-      <div className="bay-pin">
-        <BayArt d={d} e={e} />
+      <div className="bay-pin" onPointerMove={move} onPointerLeave={leave}>
+        <BayArt d={d} e={e} mx={mx} my={my} />
         <div className="bay-copy">
-          <span className="bay-when">{d.when}</span>
-          <h2 className="tt">{d.title}</h2>
-          <p className="bay-what">{d.what}</p>
-          <Paras t={d.text} />
-          {d.stat && <div className="bay-stat"><span className="tt">{d.stat[0]}</span><span>{d.stat[1]}</span></div>}
-          <Go to={d.link[1]} className="btn">{d.link[0]}</Go>
+          <motion.div style={{ y: ty, opacity: to }}>
+            <span className="bay-when">{d.when}</span>
+            <h2 className="tt">{d.title}</h2>
+          </motion.div>
+          <motion.div style={{ y: cy, opacity: co }}>
+            <p className="bay-what">{d.what}</p>
+            <Paras t={d.text} />
+            {d.stat && <div className="bay-stat"><span className="tt">{d.stat[0]}</span><span>{d.stat[1]}</span></div>}
+            <Go to={d.link[1]} className="btn">{d.link[0]}</Go>
+          </motion.div>
         </div>
       </div>
     </section>
