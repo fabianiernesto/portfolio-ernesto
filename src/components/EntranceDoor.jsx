@@ -96,7 +96,7 @@ const EntranceDoor = ({ onOpen }) => {
         >
           <motion.span
             className="font-body"
-            style={{ fontSize: 11, color: "rgba(255,252,232,0.9)", letterSpacing: "0.15em", fontWeight: 700 }}
+            style={{ fontSize: 11, color: "rgba(249,249,249,0.9)", letterSpacing: "0.15em", fontWeight: 700 }}
             animate={{ opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -107,7 +107,7 @@ const EntranceDoor = ({ onOpen }) => {
             animate={{ y: [0, 4, 0], opacity: [0.35, 0.65, 0.35] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
           >
-            <path d="M1 1L6 7L11 1" stroke="rgba(255,252,232,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M1 1L6 7L11 1" stroke="rgba(249,249,249,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </motion.svg>
         </motion.div>
       )}
@@ -120,7 +120,7 @@ const EntranceDoor = ({ onOpen }) => {
           left: 0,
           right: 0,
           height: "3px",
-          background: "rgba(255, 252, 232, 0.15)",
+          background: "rgba(249, 249, 249, 0.15)",
           pointerEvents: "none",
         }}
         initial={{ opacity: 0 }}

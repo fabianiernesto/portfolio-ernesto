@@ -11,10 +11,10 @@
 }
 
 :root {
-  --bg-base: #fffce8;
+  --bg-base: #f9f9f9;
   --ink: #000000;
   --ink-soft: #ffffff;
-  --signal: #a9170b;
+  --signal: #111111;
   --spine-left: 48px;
 }
 

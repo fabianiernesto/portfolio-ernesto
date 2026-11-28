@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
 
-const CREAM = "#fffce8";
-const RED = "#a9170b";
+/* Since 28 November 2026 the hub is white #f9f9f9 on near black, like the wings. */
+const WHITE = "#f9f9f9";
+
 
 const ITEMS = [
   {
@@ -59,8 +60,8 @@ const Panel = ({ item, i, entered, isMobile, hovered, setHovered }) => {
         flexBasis: 0,
         minHeight: isMobile ? "25dvh" : "auto",
         transition: "flex-grow 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
-        borderRight: isMobile ? "none" : i < 3 ? "1px solid #0d0d0b" : "none",
-        borderBottom: isMobile ? (i < 3 ? "1px solid #0d0d0b" : "none") : "none",
+        borderRight: isMobile ? "none" : i < 3 ? "1px solid #111111" : "none",
+        borderBottom: isMobile ? (i < 3 ? "1px solid #111111" : "none") : "none",
       }}
     >
       <Link
@@ -103,7 +104,7 @@ const Panel = ({ item, i, entered, isMobile, hovered, setHovered }) => {
             left: isMobile ? 20 : 24,
             fontSize: 12,
             letterSpacing: "0.1em",
-            color: isHovered ? RED : "rgba(255,252,232,0.55)",
+            color: isHovered ? WHITE : "rgba(249,249,249,0.55)",
             transition: "color 0.3s ease",
           }}
         >
@@ -123,7 +124,7 @@ const Panel = ({ item, i, entered, isMobile, hovered, setHovered }) => {
             className="font-display"
             style={{
               display: "block",
-              color: CREAM,
+              color: WHITE,
               fontSize: isMobile ? 30 : "clamp(24px, 2.4vw, 40px)",
               lineHeight: 0.95,
               textWrap: "balance",
@@ -135,7 +136,7 @@ const Panel = ({ item, i, entered, isMobile, hovered, setHovered }) => {
             className="font-body"
             style={{
               display: "block",
-              color: "rgba(255,252,232,0.75)",
+              color: "rgba(249,249,249,0.75)",
               fontSize: 13,
               lineHeight: 1.5,
               marginTop: 10,
@@ -161,7 +162,7 @@ const GarageHub = ({ entered }) => {
     <div
       style={{
         height: "100dvh",
-        backgroundColor: "#0d0d0b",
+        backgroundColor: "#111111",
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
         overflow: "hidden",
